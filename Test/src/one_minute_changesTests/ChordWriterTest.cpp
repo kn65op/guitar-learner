@@ -18,12 +18,13 @@ struct ChordWriterTest : public Test
 TEST_F(ChordWriterTest, WriterVer1ShouldWriteChordsToOStream)
 {
   const std::string format_header = "Ver: 1\n";
+  const std::string format_size = "2\n";
   const std::string format_chord1 = "A\n";
   const std::string format_tab1 = "tabformat1\n";
   const std::string format_chord2 = "B\n";
   const std::string format_tab2 = "tabformat2\n";
   
-  const std::string format = format_header + format_chord1 + format_tab1 + format_chord2 + format_tab2;
+  const std::string format = format_header + format_size + format_chord1 + format_tab1 + format_chord2 + format_tab2;
   
   TabMock tab1;
   Chord::add("A", tab1);
