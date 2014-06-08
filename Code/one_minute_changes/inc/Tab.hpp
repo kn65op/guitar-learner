@@ -2,6 +2,7 @@
 #define TAB_H
 
 #include <ostream>
+#include <istream>
 #include <array>
 
 namespace Guitar
@@ -16,10 +17,13 @@ class Tab : public ITab
 public:
   Tab();
   explicit Tab(int fret1, int fret2, int fret3, int fret4, int fret5, int fret6);
+  Tab(std::istream & in);
 private:
   friend std::ostream & operator<<(std::ostream & out, const Tab &tab);
+  static const int stream_count = 6;
   
-  std::array<int, 6> frets;
+  std::array<int, stream_count> frets;
+  void parseInputStream(std::istream &in);
 };
 
 std::ostream & operator<<(std::ostream & out, const Tab &tab);
