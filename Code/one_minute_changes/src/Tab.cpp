@@ -53,17 +53,21 @@ std::string stringString(const std::string & string, int pos, int n = 10)
   return ret + "\n";;
 }
 
-std::ostream & Guitar::operator<<(std::ostream & out, const Tab &tab)
+std::ostream & Guitar::operator<<(std::ostream & out, const ITab &tab)
 {
-  
-  out << headerString();
-  out << stringString("E", tab.frets[0]);
-  out << stringString("H", tab.frets[1]);
-  out << stringString("G", tab.frets[2]);
-  out << stringString("D", tab.frets[3]);
-  out << stringString("A", tab.frets[4]);
-  out << stringString("E", tab.frets[5]);
+  out << tab.print();
   return out;
+}
+
+std::string Tab::print() const
+{
+  return headerString()
+    + stringString("E", frets[0])
+    + stringString("H", frets[1])
+    + stringString("G", frets[2])
+    + stringString("D", frets[3])
+    + stringString("A", frets[4])
+    + stringString("E", frets[5]);
 }
 
 void Tab::parseInputStream(std::istream & in)

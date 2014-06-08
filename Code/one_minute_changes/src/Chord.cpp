@@ -5,8 +5,9 @@ using Guitar::ITab;
 
 Chord::Chords Chord::chords;
 
-Chord::Chord(const std::string & chord, const ITab &tab) :
-  name{chord}
+Chord::Chord(const std::string & chord, ITab &chord_tab) :
+  name{chord},
+  tab(chord_tab)
 {
 }
 
@@ -15,7 +16,7 @@ size_t Chord::size()
   return chords.size();
 }
 
-void Chord::add(const std::string &name, const ITab &tab)
+void Chord::add(const std::string &name, ITab &tab)
 {
   if (chords.find(name) != chords.end())
   {
@@ -37,4 +38,16 @@ void Chord::clear()
 std::string Chord::getName() const
 {
   return name;
+}
+
+std::ostream& Guitar::operator<<(std::ostream &out, const Chord & chord)
+{
+  out << chord.getName() << "\n";
+  out << chord.getTab();
+  return out;
+}
+
+const ITab & Chord::getTab() const
+{
+  return tab;
 }

@@ -17,19 +17,23 @@ public:
   };
   
   static size_t size();
-  static void add(const std::string &name, const ITab & tab);
+  static void add(const std::string &name, ITab & tab);
   static const Chords& getChords();
   static void clear();
   
   Chord() = delete;
   std::string getName() const;
+  const ITab& getTab() const;
 private:
-  Chord(const std::string & chord, const ITab &tab);
+  Chord(const std::string & chord, ITab &tab);
   
   static Chords chords;
   
   std::string name;
+  ITab & tab;
 };
+
+std::ostream& operator<<(std::ostream &out, const Chord & chord);
 
 }
 

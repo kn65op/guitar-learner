@@ -54,3 +54,25 @@ TEST_F(ChordTest, AddingAlreadyAddedChordShouldThrow)
   Chord::add("A", tab);
   ASSERT_THROW(Chord::add("A", tab), Chord::AlreadyAdded);
 }
+
+TEST_F(ChordTest, GetTabShouldReturnTab)
+{
+  TabMock tab;
+  Chord::add("A", tab);
+  EXPECT_EQ(&tab, &Chord::getChords().at("A").getTab());
+}
+
+TEST_F(ChordTest, ChordShouldPrintItself)
+{
+  const std::string format_tab = "format_tab\n";
+  const std::string format_chord = "A\n";       
+  const std::string format = format_chord + format_tab;
+  TabMock tab;
+  Chord::add("A", tab);
+  Chord A = Chord::getChords().at("A");
+  std::stringstream ss;
+  EXPECT_CALL(tab, print()).WillOnce(Return(format_tab));
+  ss << A;
+  EXPECT_EQ(format, ss.str());
+}
+  
