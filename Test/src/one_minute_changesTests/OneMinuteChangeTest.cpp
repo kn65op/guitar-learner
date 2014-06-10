@@ -38,3 +38,26 @@ TEST_F(OneMinuteChangeTest, AfterAddedOneResultBestResultShouldBeThisResult)
   omc.addResult(bestRes);
   EXPECT_EQ(bestRes, omc.bestResult());
 }
+
+TEST_F(OneMinuteChangeTest, AfterAddedTwoResultsBestResultShouldBeHighestNumber)
+{
+  const int lowRes = 10;
+  const int bestRes = 42;
+  omc.addResult(bestRes);
+  omc.addResult(lowRes);
+  
+  EXPECT_EQ(bestRes, omc.bestResult());
+}
+
+TEST_F(OneMinuteChangeTest, AfterAddedTwoResultAllResultsShouldReturnChronolgicalResultList)
+{
+  const int firstRes = 1;
+  const int secondRes = 2;
+  omc.addResult(firstRes);
+  omc.addResult(secondRes);
+  
+  OneMinuteChange::Results results = omc.getResults();
+  
+  EXPECT_EQ(firstRes, results[0]);
+  EXPECT_EQ(secondRes, results[1]);
+}

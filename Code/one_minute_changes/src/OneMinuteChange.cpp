@@ -35,3 +35,8 @@ int OneMinuteChange::bestResult() const
   }
   return 0;
 }
+
+const OneMinuteChange::Results& OneMinuteChange::getResults() const
+{
+  return results;
+}

@@ -9,14 +9,15 @@ namespace OneMinuteChanges
 class OneMinuteChange
 {
 public:
+  typedef std::vector<int> Results;
+  
   OneMinuteChange(const std::string & chordA, const std::string & chordB);
   
   bool operator==(const OneMinuteChange &other) const;
   void addResult(int result);
   int bestResult() const;
+  const Results& getResults() const;
 private:
-  typedef std::vector<int> Results;
-  
   std::string first;
   std::string second;
   Results results;
