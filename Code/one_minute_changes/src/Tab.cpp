@@ -26,14 +26,17 @@ std::string headerString(int n = 10)
 
 std::string stringString(const std::string & string, int pos, int n = 10)
 {
+  static const std::string emptyFret = "|---";
+  static const std::string pushedFret = "|-0-";
+  static const std::string silentFret = "|-X-";
   std::string ret = string;
   ret += " ";
   if (pos == -1)
   {
-    ret += "|-X-";
+    ret += silentFret;
     for (int i = 1; i < n; ++i)
     {
-      ret += "|---";
+      ret += emptyFret;
     }
   }
   else
@@ -42,11 +45,11 @@ std::string stringString(const std::string & string, int pos, int n = 10)
     {
       if (pos == i)
       {
-        ret += "|-0-";
+        ret += pushedFret;
       }
       else
       {
-        ret += "|---";
+        ret += emptyFret;
       }
     }
   }
