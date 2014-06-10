@@ -7,7 +7,7 @@ using Guitar::DatabaseFileReader;
 using Guitar::Chord;
 using Guitar::ut::TabMock;
 
-struct ChordWriterTest : public Test
+struct DatabaseFileReaderTest : public Test
 {
   void TearDown() override
   {
@@ -15,7 +15,7 @@ struct ChordWriterTest : public Test
   }
 };
 
-TEST_F(ChordWriterTest, DatabaseFileReaderShouldReadVer1File)
+TEST_F(DatabaseFileReaderTest, DatabaseFileReaderShouldReadVer1File)
 {
   const std::string format_header = "Ver: 1\n";
   const std::string format_size = "2\n";
