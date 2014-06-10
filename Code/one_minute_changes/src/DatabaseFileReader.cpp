@@ -1,18 +1,18 @@
-#include "../inc/ChordReader.hpp"
+#include "../inc/DatabaseFileReader.hpp"
 #include <memory>
 
-using Guitar::ChordReader;
-using Guitar::ChordReaderVer1;
+using Guitar::DatabaseFileReader;
+using Guitar::DatabaseFileReaderVer1;
 using Guitar::Chord;
 
-void ChordReader::read(std::istream &in)
+void DatabaseFileReader::read(std::istream &in)
 {
   std::string version;
   std::getline(in, version);
-  std::unique_ptr<ChordReader> reader;
+  std::unique_ptr<DatabaseFileReader> reader;
   if (version == "Ver: 1")
   {
-    reader = std::unique_ptr<ChordReader>(new ChordReaderVer1());
+    reader = std::unique_ptr<DatabaseFileReader>(new DatabaseFileReaderVer1());
   }
   if (reader)
   {
@@ -25,7 +25,7 @@ void ChordReader::read(std::istream &in)
     
 }
 
-void ChordReaderVer1::readChords(std::istream &in) const
+void DatabaseFileReaderVer1::readChords(std::istream &in) const
 {
   std::string chords_str;
   std::getline(in, chords_str);

@@ -1,13 +1,13 @@
-#include "one_minute_changes/inc/ChordWriter.hpp"       
+#include "one_minute_changes/inc/DatabaseFileWriter.hpp"
 #include "TabMock.hpp"
 #include <gtest/gtest.h>
 
 using namespace ::testing;
-using Guitar::ChordWriterVer1;
+using Guitar::DatabaseFileWriterVer1;
 using Guitar::Chord;
 using Guitar::ut::TabMock;
 
-struct ChordWriterTest : public Test
+struct DatabaseFileWriterTest : public Test
 {
   void TearDown() override
   {
@@ -15,7 +15,7 @@ struct ChordWriterTest : public Test
   }
 };
 
-TEST_F(ChordWriterTest, WriterVer1ShouldWriteChordsToOStream)
+TEST_F(DatabaseFileWriterTest, WriterVer1ShouldWriteChordsToOStream)
 {
   const std::string format_header = "Ver: 1\n";
   const std::string format_size = "2\n";
@@ -31,7 +31,7 @@ TEST_F(ChordWriterTest, WriterVer1ShouldWriteChordsToOStream)
   TabMock tab2;
   Chord::add("B", tab2);
   
-  ChordWriterVer1 writer;
+  DatabaseFileWriterVer1 writer;
   std::stringstream oss;
   
   EXPECT_CALL(tab1, print()).WillOnce(Return(format_tab1));

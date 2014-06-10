@@ -1,9 +1,9 @@
-#include "one_minute_changes/inc/ChordReader.hpp"       
+#include "one_minute_changes/inc/DatabaseFileReader.hpp"       
 #include "TabMock.hpp"
 #include <gtest/gtest.h>
 
 using namespace ::testing;
-using Guitar::ChordReader;
+using Guitar::DatabaseFileReader;
 using Guitar::Chord;
 using Guitar::ut::TabMock;
 
@@ -15,7 +15,7 @@ struct ChordWriterTest : public Test
   }
 };
 
-TEST_F(ChordWriterTest, ChordReaderShouldReadVer1File)
+TEST_F(ChordWriterTest, DatabaseFileReaderShouldReadVer1File)
 {
   const std::string format_header = "Ver: 1\n";
   const std::string format_size = "2\n";
@@ -41,7 +41,7 @@ TEST_F(ChordWriterTest, ChordReaderShouldReadVer1File)
   std::stringstream oss;
   oss << format;
   
-  ChordReader::read(oss);
+  DatabaseFileReader::read(oss);
   
   EXPECT_EQ(2, Chord::size());
   EXPECT_NO_THROW(Chord::getChords().at("A"));

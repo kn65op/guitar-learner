@@ -6,15 +6,15 @@
 
 namespace Guitar
 {
-class ChordWriter
+class DatabaseFileWriter
 {
 public:
-  virtual ~ChordWriter() {}
+  virtual ~DatabaseFileWriter() {}
   virtual void write(const Chord::Chords & chords, std::ostream &out) = 0;
 };
 
 
-class ChordWriterVer1 : public ChordWriter
+class DatabaseFileWriterVer1 : public DatabaseFileWriter
 {
 public:
   void write(const Chord::Chords &chords, std::ostream &out);

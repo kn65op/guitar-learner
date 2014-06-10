@@ -7,7 +7,7 @@
 namespace Guitar
 {
   
-class ChordReader
+class DatabaseFileReader
 {
 public:
   class VersionNotSupported
@@ -19,7 +19,7 @@ protected:
   virtual void readChords(std::istream &in) const = 0;
 };
 
-class ChordReaderVer1 : public ChordReader
+class DatabaseFileReaderVer1 : public DatabaseFileReader
 {
 protected:
   void readChords(std::istream &in) const override;
