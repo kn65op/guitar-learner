@@ -8,6 +8,14 @@
 namespace OneMinuteChanges
 {
   
+namespace Exceptions
+{
+  struct NoElements
+  {
+    
+  };
+}
+  
 class OneMinuteChangesSet
 {
 public:
@@ -18,7 +26,11 @@ public:
   void add(Element omcMock);
   size_type size() const noexcept;
   
+  Element findWorstChord() const;
+  Element findLastWorstChord() const;
+  
 private:
+  typedef SetType::iterator SetIterator;
   static SetType changes;
 };
 
