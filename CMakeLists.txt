@@ -15,7 +15,7 @@ project (guitar-learner)
 
 #compiler options
 set(CMAKE_CXX_FLAGS "-std=c++1y")
-set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall -fprofile-arcs -ftest-coverage")
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall -Weffc++ -Wextra -fprofile-arcs -ftest-coverage")
 
 set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -Wall")
 
