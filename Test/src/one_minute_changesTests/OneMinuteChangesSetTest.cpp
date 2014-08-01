@@ -19,9 +19,21 @@ TEST_F(OneMinuteChangesSetTest, ChangeCanBeAdded)
 {
   OneMinuteChangeMock *omcMock = new OneMinuteChangeMock();
   OneMinuteChangesSet::Element omc{omcMock};
-  ASSERT_EQ(0, omcs.size());
+  ASSERT_EQ(0U, omcs.size());
   
   omcs.add(omc);
   
-  EXPECT_EQ(1, omcs.size());
+  EXPECT_EQ(1U, omcs.size());
+}
+
+TEST_F(OneMinuteChangesSetTest, AfterClearSizeShouldReturn0Elements)
+{
+  OneMinuteChangeMock *omcMock = new OneMinuteChangeMock();
+  OneMinuteChangesSet::Element omc{omcMock};
+  omcs.add(omc);
+  ASSERT_NE(0U, omcs.size());
+  
+  omcs.clear();
+  
+  EXPECT_EQ(0U, omcs.size());
 }

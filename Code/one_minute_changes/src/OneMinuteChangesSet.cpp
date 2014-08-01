@@ -6,6 +6,7 @@ OneMinuteChangesSet::SetType OneMinuteChangesSet::changes;
 
 void OneMinuteChangesSet::clear() noexcept
 {
+  changes.clear();
 }
 
 OneMinuteChangesSet::size_type OneMinuteChangesSet::size() const noexcept
