@@ -61,3 +61,13 @@ TEST_F(OneMinuteChangeTest, AfterAddedTwoResultAllResultsShouldReturnChronolgica
   EXPECT_EQ(firstRes, results[0]);
   EXPECT_EQ(secondRes, results[1]);
 }
+
+TEST_F(OneMinuteChangeTest, GetLastResultShouldReturnLastResult)
+{
+  const int lowRes = 10;
+  const int bestRes = 42;
+  omc.addResult(bestRes);
+  omc.addResult(lowRes);
+  
+  EXPECT_EQ(lowRes, omc.lastResult());
+}

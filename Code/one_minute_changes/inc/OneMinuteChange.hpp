@@ -15,6 +15,7 @@ public:
   
   virtual void addResult(int result) = 0;
   virtual int bestResult() const = 0;
+  virtual int lastResult() const = 0;
   virtual const Results& getResults() const = 0;
 };
 
@@ -26,6 +27,7 @@ public:
   bool operator==(const OneMinuteChange &other) const;
   void addResult(int result);
   int bestResult() const;
+  int lastResult() const;
   const Results& getResults() const;
 private:
   std::string first;

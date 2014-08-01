@@ -13,6 +13,8 @@ class OneMinuteChangeMock : public IOneMinuteChange {
       void(int result));
   MOCK_CONST_METHOD0(bestResult,
       int());
+  MOCK_CONST_METHOD0(lastResult,
+      int());
   MOCK_CONST_METHOD0(getResults,
       const Results&());
 };

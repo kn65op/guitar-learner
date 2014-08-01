@@ -40,3 +40,8 @@ const OneMinuteChange::Results& OneMinuteChange::getResults() const
 {
   return results;
 }
+
+int OneMinuteChange::lastResult() const
+{
+  return results.back();
+}
