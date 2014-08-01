@@ -1,6 +1,8 @@
 #include "../inc/Tab.hpp"
 
 #include <string>
+#include <sstream>
+#include <iomanip>
 
 using Guitar::Tab;
 
@@ -21,7 +23,14 @@ Tab::Tab(std::istream & in) :Tab()
 
 std::string headerString(int n = 10)
 {
-  return "    1   2   3   4   5   6   7   8   9  10 \n";
+  std::stringstream ss;
+  ss << "  ";
+  for (int i=1; i < n + 1; ++i)
+  {
+    ss << std::setw(3) << std::setfill(' ') << std::to_string(i) << " ";
+  }
+  ss << "\n";
+  return ss.str();
 }
 
 std::string stringString(const std::string & string, int pos, int n = 10)

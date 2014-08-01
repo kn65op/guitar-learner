@@ -11,7 +11,7 @@ class IOneMinuteChange
 {
 public:
   typedef std::vector<int> Results;
-  ~IOneMinuteChange() {}
+  virtual ~IOneMinuteChange() {}
   
   virtual void addResult(int result) = 0;
   virtual int bestResult() const = 0;

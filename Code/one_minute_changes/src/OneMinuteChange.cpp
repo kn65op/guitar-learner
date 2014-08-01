@@ -5,7 +5,8 @@ using OneMinuteChanges::OneMinuteChange;
 
 OneMinuteChange::OneMinuteChange(const std::string &chordA, const std::string &chordB) :
   first(chordA),
-  second(chordB)
+  second(chordB),
+  results()
 {
   
 }

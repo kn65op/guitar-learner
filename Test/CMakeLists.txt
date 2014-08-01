@@ -24,8 +24,12 @@ include_directories(${TEST_INC_DIR}/${ONE_MINUTE_CHANGES_MOCKS_DIR}/)
 
 #externial libs
 
+set(CMAKE_CXX_FLAGS_DEBUG "${NORMAL_WARNING_FLAGS}")
+
 include_directories(${GTEST_DIR})
 add_subdirectory(${GMOCK_DIR} gmock)
+
+set(CMAKE_CXX_FLAGS_DEBUG "${EXTRA_WARNING_FLAGS}")
 
 #test files
 file(GLOB MAIN_TEST_FILES ${TEST_SRC_DIR}/*.cpp)

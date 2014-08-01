@@ -8,6 +8,12 @@ using OneMinuteChanges::ut::OneMinuteChangeMock;
 
 struct OneMinuteChangesSetTest : public Test
 {
+  OneMinuteChangesSetTest() :
+    omcs()
+  {
+    
+  }
+  
   OneMinuteChangesSet omcs;
   virtual void TearDown()
   {

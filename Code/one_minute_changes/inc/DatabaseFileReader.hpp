@@ -10,6 +10,8 @@ namespace Guitar
 class DatabaseFileReader
 {
 public:
+  virtual ~DatabaseFileReader() {};
+  
   class VersionNotSupported
   {
   };
