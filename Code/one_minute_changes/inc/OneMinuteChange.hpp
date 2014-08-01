@@ -6,11 +6,21 @@
 
 namespace OneMinuteChanges
 {
-class OneMinuteChange
+  
+class IOneMinuteChange
 {
 public:
   typedef std::vector<int> Results;
+  ~IOneMinuteChange() {}
   
+  virtual void addResult(int result) = 0;
+  virtual int bestResult() const = 0;
+  virtual const Results& getResults() const = 0;
+};
+
+class OneMinuteChange : public IOneMinuteChange 
+{
+public:
   OneMinuteChange(const std::string & chordA, const std::string & chordB);
   
   bool operator==(const OneMinuteChange &other) const;

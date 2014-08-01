@@ -2,8 +2,18 @@
 
 using OneMinuteChanges::OneMinuteChangesSet;
 
-OneMinuteChangesSet::SetType changes;
+OneMinuteChangesSet::SetType OneMinuteChangesSet::changes;
 
-void OneMinuteChangesSet::clear()
+void OneMinuteChangesSet::clear() noexcept
 {
+}
+
+OneMinuteChangesSet::size_type OneMinuteChangesSet::size() const noexcept
+{
+  return changes.size();
+}
+
+void OneMinuteChangesSet::add(Element element)
+{
+  changes.insert(element);
 }
