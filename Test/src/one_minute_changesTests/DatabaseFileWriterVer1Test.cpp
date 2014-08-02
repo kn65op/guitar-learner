@@ -1,4 +1,4 @@
-#include "one_minute_changes/inc/DatabaseFileWriter.hpp"
+#include "one_minute_changes/inc/DatabaseFileWriterVer1.hpp"
 #include "TabMock.hpp"
 #include <gtest/gtest.h>
 
@@ -7,7 +7,7 @@ using Guitar::DatabaseFileWriterVer1;
 using Guitar::Chord;
 using Guitar::ut::TabMock;
 
-struct DatabaseFileWriterTest : public Test
+struct DatabaseFileWriterVer1Test : public Test
 {
   void TearDown() override
   {
@@ -15,7 +15,7 @@ struct DatabaseFileWriterTest : public Test
   }
 };
 
-TEST_F(DatabaseFileWriterTest, WriterVer1ShouldWriteChordsToOStream)
+TEST_F(DatabaseFileWriterVer1Test, WriterVer1ShouldWriteChordsToOStream)
 {
   const std::string format_header = "Ver: 1\n";
   const std::string format_size = "2\n";

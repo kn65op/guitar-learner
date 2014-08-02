@@ -1,5 +1,4 @@
-#ifndef CHORDWRITER_H
-#define CHORDWRITER_H
+#pragma once
 
 #include "Chord.hpp"
 #include <ostream>
@@ -13,12 +12,4 @@ public:
   virtual void write(const Chord::Chords & chords, std::ostream &out) = 0;
 };
 
-
-class DatabaseFileWriterVer1 : public DatabaseFileWriter
-{
-public:
-  void write(const Chord::Chords &chords, std::ostream &out);
-};
 }
-
-#endif // CHORDWRITER_H
