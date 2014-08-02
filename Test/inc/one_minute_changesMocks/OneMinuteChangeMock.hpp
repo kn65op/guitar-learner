@@ -1,5 +1,8 @@
 #pragma once
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Weffc++"
+
 #include <gmock/gmock.h>
 #include "one_minute_changes/inc/OneMinuteChange.hpp"
 
@@ -19,5 +22,6 @@ class OneMinuteChangeMock : public IOneMinuteChange {
       const Results&());
 };
 
+#pragma GCC diagnostic pop
 }
 }
