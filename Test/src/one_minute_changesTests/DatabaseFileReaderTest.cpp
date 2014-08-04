@@ -15,6 +15,15 @@ struct DatabaseFileReaderTest : public Test
   }
 };
 
+TEST_F(DatabaseFileReaderTest, DatabaseFileReaderShouldThrowIfNotSupportedVersion)
+{
+  const std::string format_header = "Ver: -1\n";
+  std::stringstream oss;
+  oss << format_header;
+  
+  EXPECT_THROW(DatabaseFileReader::read(oss), DatabaseFileReader::VersionNotSupported);
+}
+
 TEST_F(DatabaseFileReaderTest, DatabaseFileReaderShouldReadVer1File)
 {
   const std::string format_header = "Ver: 1\n";
