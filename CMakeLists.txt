@@ -43,6 +43,9 @@ if (${CMAKE_BUILD_TYPE} STREQUAL "Debug")
 	add_definitions(--coverage)
 	file(MAKE_DIRECTORY ${DEBUG_BIN_DIR})
 	set(EXE_FILE ${DEBUG_BIN_DIR}/${PROJECT_NAME})
+
+	#test
+	add_subdirectory(Test)
 elseif (${CMAKE_BUILD_TYPE} STREQUAL "Release")
 	file(MAKE_DIRECTORY ${RELEASE_BIN_DIR})
         set(EXE_FILE ${RELEASE_BIN_DIR}/${PROJECT_NAME})
@@ -53,5 +56,3 @@ add_executable(${EXE_FILE} ${MAIN_FILE})
 #libraries
 TARGET_LINK_LIBRARIES(${EXE_FILE} ${Boost_LIBRARIES} )
 
-#test
-add_subdirectory(Test)

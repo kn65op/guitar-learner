@@ -45,3 +45,26 @@ add_executable(${TEST_EXE} ${MAIN_TEST_FILES} ${ONE_MINUTE_CHANGES_FILES} ${ONE_
 target_link_libraries(${TEST_EXE} ${LIB_GMOCK})
 TARGET_LINK_LIBRARIES(${TEST_EXE} ${Boost_LIBRARIES} )
 add_test(gtests ${TEST_EXE}) 
+
+set(COVERAGE_DIR coverage)
+set(ONE_MINUTE_CHANGES_COVERAGE_RAW_FILES_DIR "${CMAKE_BINARY_DIR}/Test/CMakeFiles/Exe/Tester.dir/__/Code/one_minute_changes/src")
+set(ONE_MINUTE_CHANGES_COVERAGE_RAW_FILES "${CMAKE_BINARY_DIR}/Test/CMakeFiles/Exe/Tester.dir/__/Code/one_minute_changes/src/*.gcda")
+set(ONE_MINUTE_CHANGES_O_FILES "${ONE_MINUTE_CHANGES_COVERAGE_RAW_FILES_DIR}/*.o")
+
+add_custom_target(coverage)
+add_custom_command(TARGET coverage
+	COMMAND mkdir -p ${COVERAGE_DIR}
+	WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
+
+add_custom_command(TARGET coverage
+	COMMAND rm -rf ${ONE_MINUTE_CHANGES_COVERAGE_RAW_FILES} && ../${TEST_EXE}  && lcov -d  ${ONE_MINUTE_CHANGES_COVERAGE_RAW_FILES_DIR} --capture --output-file one_minute_changes.info && genhtml one_minute_changes.info 
+	WORKING_DIRECTORY ${COVERAGE_DIR})
+
+add_dependencies(coverage ${TEST_EXE})
+
+add_custom_target(coverage_view)
+add_custom_command(TARGET coverage_view
+	COMMAND x-www-browser index.html
+	WORKING_DIRECTORY ${COVERAGE_DIR})
+
+add_dependencies(coverage_view coverage)
