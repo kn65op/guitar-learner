@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include <iostream>
 
 namespace OneMinuteChanges
 {
@@ -17,6 +18,8 @@ public:
   virtual int bestResult() const = 0;
   virtual int lastResult() const = 0;
   virtual const Results& getResults() const = 0;
+  virtual std::string getFirstChord() const = 0;
+  virtual std::string getSecondChord() const = 0;
 };
 
 class OneMinuteChange : public IOneMinuteChange 
@@ -29,6 +32,8 @@ public:
   int bestResult() const;
   int lastResult() const;
   const Results& getResults() const;
+  std::string getFirstChord() const;
+  std::string getSecondChord() const;
 private:
   std::string first;
   std::string second;
@@ -36,6 +41,7 @@ private:
 };
 
 bool operator!=(const OneMinuteChange &first, const OneMinuteChange &other);
+std::ostream & operator<<(std::ostream & os, const OneMinuteChange &omc);
 }
 
 #endif // ONEMINUTECHANGE_H

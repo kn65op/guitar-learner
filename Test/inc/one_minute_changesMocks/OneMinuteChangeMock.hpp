@@ -20,6 +20,11 @@ class OneMinuteChangeMock : public IOneMinuteChange {
       int());
   MOCK_CONST_METHOD0(getResults,
       const Results&());
+  MOCK_CONST_METHOD0(getFirstChord,
+      std::string());
+  MOCK_CONST_METHOD0(getSecondChord,
+      std::string());
+
 };
 
 #pragma GCC diagnostic pop
