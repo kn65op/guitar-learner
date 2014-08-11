@@ -4,6 +4,15 @@ set(TEST_SRC_DIR "${TEST_DIR}/src")
 set(TEST_INC_DIR "${TEST_DIR}/inc")
 set(TEST_EXE ${TEST_EXE_DIR}/Tester)
 
+find_library(GTEST_LIBRARY 
+                NAMES gtest 
+                      libgtest 
+                      libgtest.a 
+                PATHS "${GTEST_DIR}"
+                PATH_SUFFIXES lib)
+
+message(STATUS GTEST_LIBRARY ${GTEST_LIBRARY})
+
 set(GMOCK_DIR /usr/src/gmock)
 set(GTEST_DIR /usr/src/gtest)
 set(GMOCK_SOURCE_DIR ${GMOCK_DIR}/src)
