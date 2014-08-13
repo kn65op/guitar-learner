@@ -49,6 +49,8 @@ if (${CMAKE_BUILD_TYPE} STREQUAL "Debug")
 elseif (${CMAKE_BUILD_TYPE} STREQUAL "Release")
 	file(MAKE_DIRECTORY ${RELEASE_BIN_DIR})
         set(EXE_FILE ${RELEASE_BIN_DIR}/${PROJECT_NAME})
+else (${CMAKE_BUILD_TYPE} STREQUAL "Debug")
+	message(FATAL_ERROR "Invalid build type. Can be Debug | Release")
 endif (${CMAKE_BUILD_TYPE} STREQUAL "Debug")
 
 add_executable(${EXE_FILE} ${MAIN_FILE})
