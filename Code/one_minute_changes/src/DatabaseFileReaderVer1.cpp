@@ -1,6 +1,7 @@
 #include "../inc/DatabaseFileReaderVer1.hpp"
 #include <one_minute_changes/inc/OneMinuteChangesSet.hpp>
 #include <memory>
+#include <cstdlib>
 
 using Guitar::DatabaseFileReaderVer1;
 using Guitar::Chord;

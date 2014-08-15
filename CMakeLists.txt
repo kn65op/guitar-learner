@@ -15,7 +15,12 @@ project (guitar-learner)
 
 #compiler options
 set(CMAKE_CXX_FLAGS "-std=gnu++1y")
-set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -fprofile-arcs -ftest-coverage")
+
+if ("${NO_COVERAGE}" STREQUAL "true")
+	set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG}")
+else ("${NO_COVERAGE}" STREQUAL "true")
+	set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -fprofile-arcs -ftest-coverage")
+endif ("${NO_COVERAGE}" STREQUAL "true")
 
 set(NORMAL_WARNING_FLAGS "${CMAKE_CXX_FLAGS_DEBUG}")
 set(EXTRA_WARNING_FLAGS "${CMAKE_CXX_FLAGS_DEBUG} -Wall -Weffc++ -Wextra")
@@ -40,7 +45,10 @@ file(GLOB ONE_MINUTE_CHANGES_FILES ${SRC_DIR}/one_minute_changes/src/*.cpp)
 
 #executables
 if (${CMAKE_BUILD_TYPE} STREQUAL "Debug")
-	add_definitions(--coverage)
+	if ("${NO_COVERAGE}" STREQUAL "true")
+	else ("${NO_COVERAGE}" STREQUAL "true")
+		add_definitions(--coverage)
+	endif ("${NO_COVERAGE}" STREQUAL "true")
 	file(MAKE_DIRECTORY ${DEBUG_BIN_DIR})
 	set(EXE_FILE ${DEBUG_BIN_DIR}/${PROJECT_NAME})
 
