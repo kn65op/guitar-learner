@@ -24,6 +24,8 @@ class OneMinuteChangeMock : public IOneMinuteChange {
       std::string());
   MOCK_CONST_METHOD0(getSecondChord,
       std::string());
+  MOCK_CONST_METHOD0(print,
+      std::string());
 
 };
 

@@ -20,6 +20,7 @@ public:
   virtual const Results& getResults() const = 0;
   virtual std::string getFirstChord() const = 0;
   virtual std::string getSecondChord() const = 0;
+  virtual std::string print() const = 0;
 };
 
 class OneMinuteChange : public IOneMinuteChange 
@@ -29,12 +30,13 @@ public:
   OneMinuteChange(std::istream &is);
   
   bool operator==(const OneMinuteChange &other) const;
-  void addResult(int result);
-  int bestResult() const;
-  int lastResult() const;
-  const Results& getResults() const;
-  std::string getFirstChord() const;
-  std::string getSecondChord() const;
+  void addResult(int result) override;
+  int bestResult() const override;
+  int lastResult() const override;
+  const Results& getResults() const override;
+  std::string getFirstChord() const override;
+  std::string getSecondChord() const override;
+  std::string print() const override;
 private:
   std::string first;
   std::string second;

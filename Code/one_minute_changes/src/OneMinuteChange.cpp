@@ -1,5 +1,6 @@
 #include "../inc/OneMinuteChange.hpp"
 #include <algorithm>
+#include <sstream>
 
 using OneMinuteChanges::OneMinuteChange;
 
@@ -74,14 +75,21 @@ std::string OneMinuteChange::getSecondChord() const
   return second;
 }
 
+std::string OneMinuteChange::print() const
+{
+  std::stringstream ss;
+  ss << first << "\n";
+  ss << second << "\n";
+  ss << results.size() << "\n";
+  for (auto res : results)
+  {
+    ss << res << "\n";
+  }
+  return ss.str();
+}
+
 std::ostream& OneMinuteChanges::operator<<(std::ostream &os, const OneMinuteChange& omc)
 {
-  os << omc.getFirstChord() << "\n";
-  os << omc.getSecondChord() << "\n";
-  os << omc.getResults().size() << "\n";
-  for (auto res : omc.getResults())
-  {
-    os << res << "\n";
-  }
+  os << omc.print();
   return os;
 }
