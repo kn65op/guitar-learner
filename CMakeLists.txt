@@ -14,7 +14,7 @@ project (guitar-learner)
 #FIND_PACKAGE( Boost 1.54 COMPONENTS date_time REQUIRED )
 
 #compiler options
-set(CMAKE_CXX_FLAGS "-std=c++1y")
+set(CMAKE_CXX_FLAGS "-std=gnu++1y")
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -fprofile-arcs -ftest-coverage")
 
 set(NORMAL_WARNING_FLAGS "${CMAKE_CXX_FLAGS_DEBUG}")
@@ -49,6 +49,8 @@ if (${CMAKE_BUILD_TYPE} STREQUAL "Debug")
 elseif (${CMAKE_BUILD_TYPE} STREQUAL "Release")
 	file(MAKE_DIRECTORY ${RELEASE_BIN_DIR})
         set(EXE_FILE ${RELEASE_BIN_DIR}/${PROJECT_NAME})
+else (${CMAKE_BUILD_TYPE} STREQUAL "Debug")
+	message(FATAL_ERROR "Invalid build type. Can be Debug | Release")
 endif (${CMAKE_BUILD_TYPE} STREQUAL "Debug")
 
 add_executable(${EXE_FILE} ${MAIN_FILE})

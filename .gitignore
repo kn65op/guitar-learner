@@ -19,6 +19,9 @@ cmake_install.cmake
 install_manifest.txt
 *.cmake
 *.kate-swp
+.*.swp
+*.stackdump
+
 
 Test/Exe
 Debug

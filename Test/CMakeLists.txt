@@ -4,12 +4,59 @@ set(TEST_SRC_DIR "${TEST_DIR}/src")
 set(TEST_INC_DIR "${TEST_DIR}/inc")
 set(TEST_EXE ${TEST_EXE_DIR}/Tester)
 
-set(GMOCK_DIR /usr/src/gmock)
-set(GTEST_DIR /usr/src/gtest)
-set(GMOCK_SOURCE_DIR ${GMOCK_DIR}/src)
-set(GTEST_SOURCE_DIR ${GTEST_DIR}/src)
+if ("${GMOCK_DIR}" STREQUAL "")
+	message(STATUS "No GMOCK_DIR variable set, trying to use system gmock")
+	set(GMOCK_DIR "/usr/src")
+	set(GMOCK_INCLUDE_DIR /usr/include/gmock)
+	set(GMOCK_SUB_DIR /usr/src/gmock)
+else ("${GMOCK_DIR}" STREQUAL "")
+	set(GMOCK_SUB_DIR "../${GMOCK_DIR}")
+	set(GMOCK_INCLUDE_DIR "${GMOCK_DIR}/include/gmock")
+endif ("${GMOCK_DIR}" STREQUAL "")
 
+set(GMOCK_INCLUDE "${GMOCK_INCLUDE_DIR}/gmock.h")
 set(LIB_GMOCK gmock)
+endif ("${GTEST_DIR}" STREQUAL "")
+
+if (EXISTS "${GMOCK_INCLUDE}")
+	message(STATUS "Using gmock from ${GMOCK_SUB_DIR}")
+else (EXISTS "${GMOCK_INCLUDE}")
+	message(FATAL_ERROR "Could not find googlemock in ${GMOCK_DIR}")
+endif (EXISTS "${GMOCK_INCLUDE}")
+endif ("${GMOCK_DIR}" STREQUAL "")
+
+set(GTEST_INCLUDE "include/gtest/gtest.h")
+set(GMOCK_INCLUDE_DIR "${GMOCK_DIR}/include/gmock")
+set(GMOCK_INCLUDE "${GMOCK_INCLUDE_DIR}/gmock.h")
+
+message(STATUS ${GMOCK_INCLUDE})
+if (EXISTS "${GMOCK_INCLUDE}")
+  message(STATUS found)
+else (EXISTS "${GMOCK_INCLUDE}")
+  message(STATUS not)
+endif (EXISTS "${GMOCK_INCLUDE}")
+
+
+
+find_path(GTEST_FOUND 
+          GTEST_INCLUDE
+          HINTS "${GTEST_DIR}")
+
+find_file(GMOCK_FOUND 
+          GMOCK_INCLUDE
+          PATHS "${GMOCK_INCLUDE_DIR}")
+
+
+find_file(FILE_FOUND 
+          ${GMOCK_INCLUDE}
+          PATHS "."
+          NO_DEFAULT_PATH)
+
+message(STATUS ${FILE_FOUND})
+message(STATUS ${GTEST_FOUND})
+message(STATUS ${GMOCK_FOUND})
+message(STATUS ${GMOCK_INCLUDE_DIR})
+message(STATUS ${GMOCK_DIR})
 
 #projects parts
 set(TESTS_POSTFIX Tests)
@@ -26,8 +73,7 @@ include_directories(${TEST_INC_DIR}/${ONE_MINUTE_CHANGES_MOCKS_DIR}/)
 
 set(CMAKE_CXX_FLAGS_DEBUG "${NORMAL_WARNING_FLAGS}")
 
-include_directories(${GTEST_DIR})
-add_subdirectory(${GMOCK_DIR} gmock)
+add_subdirectory(${GMOCK_SUB_DIR} gmock)
 
 set(CMAKE_CXX_FLAGS_DEBUG "${EXTRA_WARNING_FLAGS}")
 
