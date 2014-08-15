@@ -10,6 +10,21 @@ OneMinuteChange::OneMinuteChange(const std::string &chordA, const std::string &c
 {
 }
 
+OneMinuteChange::OneMinuteChange(std::istream &is)
+{
+  is >> first;
+  is >> second;
+  Results::size_type size;
+  is >> size;
+  for (Results::size_type i = 0; i < size; ++i)
+  {
+    Results::value_type res;
+    is >> res;
+    results.push_back(res);
+  }
+  
+}
+
 bool OneMinuteChange::operator==(const OneMinuteChange &other) const
 {
   return first == other.first && second == other.second;
@@ -42,6 +57,10 @@ const OneMinuteChange::Results& OneMinuteChange::getResults() const
 
 int OneMinuteChange::lastResult() const
 {
+  if (results.empty())
+  {
+    return 0;
+  }
   return results.back();
 }               
 
@@ -59,6 +78,7 @@ std::ostream& OneMinuteChanges::operator<<(std::ostream &os, const OneMinuteChan
 {
   os << omc.getFirstChord() << "\n";
   os << omc.getSecondChord() << "\n";
+  os << omc.getResults().size() << "\n";
   for (auto res : omc.getResults())
   {
     os << res << "\n";

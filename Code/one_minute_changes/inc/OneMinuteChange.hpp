@@ -26,6 +26,7 @@ class OneMinuteChange : public IOneMinuteChange
 {
 public:
   OneMinuteChange(const std::string & chordA, const std::string & chordB);
+  OneMinuteChange(std::istream &is);
   
   bool operator==(const OneMinuteChange &other) const;
   void addResult(int result);
