@@ -7,6 +7,6 @@ namespace Guitar
 class DatabaseFileWriterVer1 : public DatabaseFileWriter
 {
 public:
-  void write(const Chord::Chords &chords, std::ostream &out);
+  void write(const Chord::Chords &chords, const OneMinuteChanges::OneMinuteChangesSet &omcs, std::ostream &out) const override;
 };
 }

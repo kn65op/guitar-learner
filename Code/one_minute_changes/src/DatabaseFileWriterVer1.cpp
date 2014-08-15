@@ -3,7 +3,7 @@
 using Guitar::DatabaseFileWriterVer1;
 using Guitar::Chord;
 
-void DatabaseFileWriterVer1::write(const Chord::Chords &chords, std::ostream &out)
+void DatabaseFileWriterVer1::write(const Chord::Chords &chords, const OneMinuteChanges::OneMinuteChangesSet &omcs, std::ostream &out) const
 {
   out << "Ver: 1\n";
   out << chords.size() << "\n";
@@ -11,4 +11,5 @@ void DatabaseFileWriterVer1::write(const Chord::Chords &chords, std::ostream &ou
   {
     out << chord.second;
   }
+  out << omcs.print();
 }
