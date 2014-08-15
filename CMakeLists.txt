@@ -14,7 +14,7 @@ project (guitar-learner)
 #FIND_PACKAGE( Boost 1.54 COMPONENTS date_time REQUIRED )
 
 #compiler options
-set(CMAKE_CXX_FLAGS "-std=c++1y")
+set(CMAKE_CXX_FLAGS "-std=gnu++1y")
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -fprofile-arcs -ftest-coverage")
 
 set(NORMAL_WARNING_FLAGS "${CMAKE_CXX_FLAGS_DEBUG}")
