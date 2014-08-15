@@ -6,6 +6,7 @@ set(TEST_EXE ${TEST_EXE_DIR}/Tester)
 
 if ("${GMOCK_DIR}" STREQUAL "")
 	message(STATUS "No GMOCK_DIR variable set, trying to use system gmock")
+	set(GMOCK_DIR "/usr/src")
 	set(GMOCK_INCLUDE_DIR /usr/include/gmock)
 	set(GMOCK_SUB_DIR /usr/src/gmock)
 else ("${GMOCK_DIR}" STREQUAL "")
