@@ -20,6 +20,7 @@ install_manifest.txt
 *.cmake
 *.kate-swp
 .*.swp
+*.stackdump
 
 
 Test/Exe
