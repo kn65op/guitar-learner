@@ -1,4 +1,5 @@
 #include "../inc/DatabaseFileReaderVer1.hpp"
+#include <one_minute_changes/inc/OneMinuteChangesSet.hpp>
 #include <memory>
 
 using Guitar::DatabaseFileReaderVer1;
@@ -16,4 +17,9 @@ void DatabaseFileReaderVer1::readChords(std::istream &in) const
     Guitar::Tab tab{in};
     Chord::add(chord_line, tab);
   }
+}
+
+void DatabaseFileReaderVer1::readOneMinuteChanges(std::istream &in) const
+{
+  OneMinuteChanges::OneMinuteChangesSet omcs(in);
 }

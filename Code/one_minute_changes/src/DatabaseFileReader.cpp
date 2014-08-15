@@ -18,6 +18,7 @@ void DatabaseFileReader::read(std::istream &in)
   if (reader)
   {
     reader->readChords(in);
+    reader->readOneMinuteChanges(in);
   }
   else
   {

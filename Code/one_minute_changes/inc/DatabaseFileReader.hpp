@@ -18,6 +18,7 @@ public:
   static void read(std::istream &in);
 protected:
   virtual void readChords(std::istream &in) const = 0;
+  virtual void readOneMinuteChanges(std::istream &in) const = 0;
 };
 
 }
