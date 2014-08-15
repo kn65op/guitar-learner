@@ -4,6 +4,7 @@
 #include "OneMinuteChange.hpp"
 #include <set>
 #include <memory>
+#include <istream>
 
 namespace OneMinuteChanges
 {
@@ -22,6 +23,10 @@ public:
   typedef std::shared_ptr<IOneMinuteChange> Element;
   typedef std::set<Element> SetType;
   typedef SetType::size_type size_type;
+  
+  OneMinuteChangesSet();
+  OneMinuteChangesSet(std::istream & in);
+  
   void clear() noexcept;
   void add(Element omcMock);
   size_type size() const noexcept;

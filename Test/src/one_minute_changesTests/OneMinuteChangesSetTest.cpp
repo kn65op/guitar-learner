@@ -124,11 +124,26 @@ TEST_F(OneMinuteChangesSetTest, PrintShouldPrintAllChanges)
   omcs.add(omc1);
   omcs.add(omc2);
   
+  const std::string omcsHeaeder = std::to_string(omcs.size()) + "\n";
   const std::string omc1String = "omc1string";
   const std::string omc2String = "omc2string";
   
   EXPECT_CALL(*omc1Mock, print()).WillOnce(Return(omc1String));
   EXPECT_CALL(*omc2Mock, print()).WillOnce(Return(omc2String));
   
-  EXPECT_EQ(omc1String + omc2String, omcs.print());
+  EXPECT_EQ(omcsHeaeder + omc1String + omc2String, omcs.print());
+}
+
+TEST_F(OneMinuteChangesSetTest, ChangesShoulBeRead)
+{
+  std::string input = "2\n"
+                      "A\nD\n"
+                      "2\n1\n2\n"
+                      "A\nE\n"
+                      "3\n5\n2\n1\n";
+  std::stringstream ss;
+  ss << input;
+  OneMinuteChangesSet omcs(ss);
+  EXPECT_EQ(omcs.findWorstChord()->bestResult(), 2);
+  EXPECT_EQ(omcs.findLastWorstChord()->lastResult(), 1);
 }
