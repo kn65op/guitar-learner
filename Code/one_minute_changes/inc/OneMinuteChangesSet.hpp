@@ -28,6 +28,7 @@ public:
   
   Element findWorstChord() const;
   Element findLastWorstChord() const;
+  std::string print() const;
   
 private:
   typedef SetType::iterator SetIterator;

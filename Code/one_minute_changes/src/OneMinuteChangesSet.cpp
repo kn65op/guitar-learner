@@ -48,3 +48,13 @@ OneMinuteChangesSet::Element OneMinuteChangesSet::findLastWorstChord() const
   }
   );
 }
+
+std::string OneMinuteChangesSet::print() const
+{
+  std::string ret;
+  for (auto c: changes)
+  {
+    ret += c->print();
+  }
+  return ret;
+}

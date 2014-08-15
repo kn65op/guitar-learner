@@ -113,3 +113,22 @@ TEST_F(OneMinuteChangesSetTest, FindLastWorstChordShouldReturnElementWithLowestM
   
   EXPECT_EQ(min_result, omcs.findLastWorstChord()->lastResult());
 }
+
+TEST_F(OneMinuteChangesSetTest, PrintShouldPrintAllChanges)
+{
+  OneMinuteChangeMock *omc1Mock = new OneMinuteChangeMock();
+  OneMinuteChangesSet::Element omc1{omc1Mock};
+  OneMinuteChangeMock *omc2Mock = new OneMinuteChangeMock();
+  OneMinuteChangesSet::Element omc2{omc2Mock};
+  
+  omcs.add(omc1);
+  omcs.add(omc2);
+  
+  const std::string omc1String = "omc1string";
+  const std::string omc2String = "omc2string";
+  
+  EXPECT_CALL(*omc1Mock, print()).WillOnce(Return(omc1String));
+  EXPECT_CALL(*omc2Mock, print()).WillOnce(Return(omc2String));
+  
+  EXPECT_EQ(omc1String + omc2String, omcs.print());
+}
