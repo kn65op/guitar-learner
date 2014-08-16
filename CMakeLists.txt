@@ -2,7 +2,7 @@ cmake_minimum_required (VERSION 2.8.4)
 
 #variables
 set(SRC_DIR "Code")
-set(MAIN_SRC_DIR "${SRC_DIR}/Main/src")
+set(MAIN_SRC_DIR "${SRC_DIR}/Main")
 set(MAIN_FILE "${MAIN_SRC_DIR}/main.cpp")
 set(DEBUG_BIN_DIR "Debug")
 set(RELEASE_BIN_DIR "Release")
@@ -12,6 +12,7 @@ project (guitar-learner)
 
 #externial libs
 #FIND_PACKAGE( Boost 1.54 COMPONENTS date_time REQUIRED )
+FIND_PACKAGE( Boost 1.55 COMPONENTS program_options REQUIRED )
 
 #compiler options
 set(CMAKE_CXX_FLAGS "-std=gnu++1y")
@@ -42,6 +43,7 @@ include_directories(${SRC_DIR})
 
 #files
 file(GLOB ONE_MINUTE_CHANGES_FILES ${SRC_DIR}/one_minute_changes/src/*.cpp)
+file(GLOB MAIN_FILES ONE_MINUTE_CHANGES_FILES ${SRC_DIR}/Main/src/*.cpp)
 
 #executables
 if (${CMAKE_BUILD_TYPE} STREQUAL "Debug")
@@ -61,7 +63,7 @@ else (${CMAKE_BUILD_TYPE} STREQUAL "Debug")
 	message(FATAL_ERROR "Invalid build type. Can be Debug | Release")
 endif (${CMAKE_BUILD_TYPE} STREQUAL "Debug")
 
-add_executable(${EXE_FILE} ${MAIN_FILE})
+add_executable(${EXE_FILE} ${MAIN_FILE} ${ONE_MINUTE_CHANGES_FILES})
 
 #libraries
 TARGET_LINK_LIBRARIES(${EXE_FILE} ${Boost_LIBRARIES} )

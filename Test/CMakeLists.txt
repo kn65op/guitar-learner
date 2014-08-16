@@ -37,6 +37,7 @@ set(MOCKS_POSTFIX Mocks)
 
 set(ONE_MINUTE_CHANGES_TESTS_DIR one_minute_changes${TESTS_POSTFIX})
 set(ONE_MINUTE_CHANGES_MOCKS_DIR one_minute_changes${MOCKS_POSTFIX})
+set(MAIN_TESTS_DIR Main${TESTS_POSTFIX})
 
 #project includes
 include_directories(${PROJECT_SOURCE_DIR}/${SRC2_DIR}/GmockTest)
@@ -51,7 +52,8 @@ add_subdirectory(${GMOCK_SUB_DIR} gmock)
 set(CMAKE_CXX_FLAGS_DEBUG "${EXTRA_WARNING_FLAGS}")
 
 #test files
-file(GLOB MAIN_TEST_FILES ${TEST_SRC_DIR}/*.cpp)
+file(GLOB MAIN_TEST_FILES ${TEST_SRC_DIR}/${MAIN_TESTS_DIR}/*.cpp)
+file(GLOB TEST_MAIN ${TEST_SRC_DIR}/*.cpp)
 
 file(GLOB ONE_MINUTE_CHANGES_TEST_FILES ${TEST_SRC_DIR}/${ONE_MINUTE_CHANGES_TESTS_DIR}/*.cpp)
 
@@ -60,7 +62,7 @@ enable_testing()
 
 file(MAKE_DIRECTORY ${TEST_EXE_DIR})
 
-add_executable(${TEST_EXE} ${MAIN_TEST_FILES} ${ONE_MINUTE_CHANGES_FILES} ${ONE_MINUTE_CHANGES_TEST_FILES})
+add_executable(${TEST_EXE} ${TEST_MAIN} ${MAIN_FILES} ${MAIN_TEST_FILES} ${ONE_MINUTE_CHANGES_FILES} ${ONE_MINUTE_CHANGES_TEST_FILES})
 target_link_libraries(${TEST_EXE} ${LIB_GMOCK})
 TARGET_LINK_LIBRARIES(${TEST_EXE} ${Boost_LIBRARIES} )
 add_test(gtests ${TEST_EXE}) 
