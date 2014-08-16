@@ -10,6 +10,8 @@ class ProgramOptions
 public:
   ProgramOptions(int argc, char *argv[]);
   boost::program_options::variables_map vm;
+  
+  bool isHelp() const noexcept;
 private:
   boost::program_options::options_description description;
 };
