@@ -12,10 +12,10 @@ project (guitar-learner)
 
 #externial libs
 #FIND_PACKAGE( Boost 1.54 COMPONENTS date_time REQUIRED )
-FIND_PACKAGE( Boost 1.55 COMPONENTS program_options REQUIRED )
+FIND_PACKAGE( Boost 1.53 COMPONENTS program_options REQUIRED )
 
 #compiler options
-set(CMAKE_CXX_FLAGS "-std=gnu++1y")
+set(CMAKE_CXX_FLAGS "-std=c++1y")
 
 if ("${NO_COVERAGE}" STREQUAL "true")
 	set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG}")

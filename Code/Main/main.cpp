@@ -1,10 +1,11 @@
 #include <one_minute_changes/inc/DatabaseFileReader.hpp>
 #include <one_minute_changes/inc/DatabaseFileWriterVer1.hpp>
 #include <fstream>
+#include <cstdlib>
 
 int main()
 {
-  const std::string default_name = std::string(getenv("HOME")) + "/.guitar_learner/default.glearn";
+  const std::string default_name = std::string(std::getenv("HOME")) + "/.guitar_learner/default.glearn";
   std::cout << default_name << "\n";
   try
   {
