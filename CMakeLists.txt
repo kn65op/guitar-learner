@@ -63,7 +63,7 @@ else (${CMAKE_BUILD_TYPE} STREQUAL "Debug")
 	message(FATAL_ERROR "Invalid build type. Can be Debug | Release")
 endif (${CMAKE_BUILD_TYPE} STREQUAL "Debug")
 
-add_executable(${EXE_FILE} ${MAIN_FILE} ${ONE_MINUTE_CHANGES_FILES})
+add_executable(${EXE_FILE} ${MAIN_FILE} ${MAIN_FILES} ${ONE_MINUTE_CHANGES_FILES})
 
 #libraries
 TARGET_LINK_LIBRARIES(${EXE_FILE} ${Boost_LIBRARIES} )

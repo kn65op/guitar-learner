@@ -2,9 +2,18 @@
 #include <one_minute_changes/inc/DatabaseFileWriterVer1.hpp>
 #include <fstream>
 #include <cstdlib>
+#include "Main/inc/ProgramOptions.h"
 
-int main()
+int main(int argc, const char *argv[])
 {
+  Main::ProgramOptions po(argc, argv);
+  
+  if (po.isHelp())
+  {
+    std::cout << po.help();
+    return 0;
+  }
+  
   const std::string default_name = std::string(std::getenv("HOME")) + "/.guitar_learner/default.glearn";
   std::cout << default_name << "\n";
   try
