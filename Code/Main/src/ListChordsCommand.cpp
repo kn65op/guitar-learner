@@ -4,7 +4,7 @@
 
 using namespace Main;
 
-void ListChordsCommand::process(const Main::Command::CommandOptions& options    )
+void ListChordsCommand::process(const Main::Command::CommandOptions& options)
 {
   using Guitar::Chord;
   std::cout << "Number of chords: " << Chord::size() << "\n"; 
