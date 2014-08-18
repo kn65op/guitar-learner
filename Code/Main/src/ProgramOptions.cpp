@@ -6,10 +6,13 @@ using namespace Main;
 using namespace boost::program_options;
 
 ProgramOptions::ProgramOptions(int argc, const char *argv[]) :
-  description("Options")
+  description("Options"),
+  command(CommandType::Nothing)
 {
   description.add_options()
-    ("help,h", "Shows help");
+    ("help,h", "Shows help")
+    ("add_chord", "Adds chord. Specify chord when prompted one string at time.")
+    ("list_chords", "List chords");
   try
   {
     store(parse_command_line(argc, argv, description), vm);
@@ -19,6 +22,7 @@ ProgramOptions::ProgramOptions(int argc, const char *argv[]) :
     error_string = ex.what();
   }
   notify(vm);
+  findFirstCommand();
 }
 
 bool ProgramOptions::isHelp() const noexcept
@@ -35,4 +39,21 @@ std::string ProgramOptions::help() const noexcept
   }
   ss << description;
   return ss.str();
+}
+
+CommandType ProgramOptions::getCommand() const noexcept
+{
+  return command;
+}
+
+void ProgramOptions::findFirstCommand()
+{
+  if (vm.count("add_chord") != 0)
+  {
+    command = CommandType::AddChord;
+  }
+  if (vm.count("list_chords") != 0)
+  {
+    command = CommandType::ListChords;
+  }
 }

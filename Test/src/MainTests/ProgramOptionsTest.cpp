@@ -47,3 +47,19 @@ TEST_F(ProgramOptionsTest, ForUnrecognizedOptionPrintHelpShouldBeTrue)
   ProgramOptions po(argc, args);
   EXPECT_TRUE(po.isHelp());
 }
+
+TEST_F(ProgramOptionsTest, ForAddChordOptionGetCommandShouldReturnAddChordCommand)
+{
+  int argc = 2;
+  const char *args[] = {"program", "--add_chord"};
+  ProgramOptions po(argc, args);
+  EXPECT_EQ(CommandType::AddChord, po.getCommand());
+}
+
+TEST_F(ProgramOptionsTest, ForListChordsOptionGetCommandShouldReturnListCommand)
+{
+  int argc = 2;
+  const char *args[] = {"program", "--list_chords"};
+  ProgramOptions po(argc, args);
+  EXPECT_EQ(CommandType::ListChords, po.getCommand());
+}

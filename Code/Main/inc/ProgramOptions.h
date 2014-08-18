@@ -4,6 +4,14 @@
 
 namespace Main
 {
+  
+enum class CommandType
+{
+  Nothing,
+  AddChord,
+  ListChords
+};
+  
 class ProgramOptions
 {
 public:
@@ -12,8 +20,12 @@ public:
   
   std::string help() const noexcept;
   bool isHelp() const noexcept;
+  CommandType getCommand() const noexcept;
 private:
   boost::program_options::options_description description;
   std::string error_string;
+  CommandType command;
+  
+  void findFirstCommand();
 };
 }

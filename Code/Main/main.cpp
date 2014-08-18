@@ -3,6 +3,7 @@
 #include <fstream>
 #include <cstdlib>
 #include "Main/inc/ProgramOptions.h"
+#include "inc/CommandFactory.h"
 
 int main(int argc, const char *argv[])
 {
@@ -13,6 +14,18 @@ int main(int argc, const char *argv[])
     std::cout << po.help();
     return 0;
   }
+  
+  try
+  {
+    Main::CommandFactory::createCommand(po.getCommand())->process(Main::Command::CommandOptions());
+  }
+  catch (Main::CommandFactory::InvalidCommand &ex)
+  {
+    std::cout << po.help();
+    return 1;
+  }
+  
+  return 0;
   
   const std::string default_name = std::string(std::getenv("HOME")) + "/.guitar_learner/default.glearn";
   std::cout << default_name << "\n";
