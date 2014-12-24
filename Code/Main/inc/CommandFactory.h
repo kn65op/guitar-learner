@@ -2,6 +2,7 @@
 #include "ProgramOptions.h"
 #include "Command.h"
 #include "ListChordsCommand.h"
+#include "AddChordCommand.h"
 #include <memory>
 
 namespace Main
@@ -22,7 +23,7 @@ public:
       case CommandType::Nothing:
         throw InvalidCommand();   
       case CommandType::AddChord:
-        throw InvalidCommand();         
+        return std::make_shared<Main::AddChordCommand>();
       case CommandType::ListChords:
         return std::make_shared<Main::ListChordsCommand>();
     }

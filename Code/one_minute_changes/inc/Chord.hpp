@@ -11,6 +11,7 @@ namespace Guitar
 class Chord
 {
 public:
+  typedef std::string ChordNameType;
   typedef std::map<std::string, Chord> Chords;
   class AlreadyAdded
   {
@@ -29,7 +30,7 @@ private:
   
   static Chords chords;
   
-  std::string name;
+  ChordNameType name;
   ITab & tab;
 };
 

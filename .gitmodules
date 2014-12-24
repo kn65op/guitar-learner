@@ -1,0 +1,3 @@
+[submodule "TLogger"]
+	path = TLogger
+	url = git@github.com:kn65op/TLogger.git

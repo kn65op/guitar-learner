@@ -4,9 +4,24 @@
 #include <cstdlib>
 #include "Main/inc/ProgramOptions.h"
 #include "inc/CommandFactory.h"
+#include <TLogger.h>
 
 int main(int argc, const char *argv[])
 {
+  
+  TLogger::LoggerFacade logger(TLogger::LogFileOnEntry::OVERRIDE);
+  const std::string default_name = std::string(std::getenv("HOME")) + "/.guitar_learner/default.glearn";
+//  std::cout << default_name << "\n";
+  try
+  {
+    std::ifstream in(default_name);
+    Guitar::DatabaseFileReader::read(in);
+  }
+  catch (Guitar::DatabaseFileReader::VersionNotSupported version)
+  {
+    std::cerr << "Unable to read database file\n";
+  }
+  
   Main::ProgramOptions po(argc, argv);
   
   if (po.isHelp())
@@ -25,19 +40,6 @@ int main(int argc, const char *argv[])
     return 1;
   }
   
-  return 0;
-  
-  const std::string default_name = std::string(std::getenv("HOME")) + "/.guitar_learner/default.glearn";
-  std::cout << default_name << "\n";
-  try
-  {
-    std::ifstream in(default_name);
-    Guitar::DatabaseFileReader::read(in);
-  }
-  catch (Guitar::DatabaseFileReader::VersionNotSupported version)
-  {
-    std::cerr << "Unable to read file\n";
-  }
   Guitar::DatabaseFileWriterVer1 writer;
   std::ofstream out(default_name);
   OneMinuteChanges::OneMinuteChangesSet omc;

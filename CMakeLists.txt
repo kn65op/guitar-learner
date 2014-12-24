@@ -13,6 +13,7 @@ project (guitar-learner)
 #externial libs
 #FIND_PACKAGE( Boost 1.54 COMPONENTS date_time REQUIRED )
 FIND_PACKAGE( Boost 1.53 COMPONENTS program_options REQUIRED )
+FIND_PACKAGE( TLogger REQUIRED PATHS TLogger)
 
 #compiler options
 set(CMAKE_CXX_FLAGS "-std=c++1y")
@@ -38,8 +39,14 @@ set(CTEST_MEMORYCHECK_COMMAND_OPTIONS "--trace-children=yes --quiet
 --tool=memcheck --leak-check=yes --show-reachable=yes
 --num-callers=100 --verbose --demangle=yes")
 
+##submodules
+add_subdirectory(TLogger)
+link_directories(${TLOGGER_LIBRARIES_DIR})
+
 #includes
 include_directories(${SRC_DIR})
+include_directories(${TLOGGER_INCLUDE_DIRS})
+
 
 #files
 file(GLOB ONE_MINUTE_CHANGES_FILES ${SRC_DIR}/one_minute_changes/src/*.cpp)
@@ -66,5 +73,5 @@ endif (${CMAKE_BUILD_TYPE} STREQUAL "Debug")
 add_executable(${EXE_FILE} ${MAIN_FILE} ${MAIN_FILES} ${ONE_MINUTE_CHANGES_FILES})
 
 #libraries
-TARGET_LINK_LIBRARIES(${EXE_FILE} ${Boost_LIBRARIES} )
+TARGET_LINK_LIBRARIES(${EXE_FILE} ${Boost_LIBRARIES} ${TLOGGER_LIBRARIES} )
 
