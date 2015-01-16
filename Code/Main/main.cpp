@@ -13,7 +13,6 @@ int main(int argc, const char *argv[])
   LOG << "TEST LOG";
   const std::string default_name = std::string(std::getenv("HOME")) + "/.guitar_learner/default.glearn";
   LOG << "Using default file name: " << default_name;
-  //  std::cout << default_name << "\n";
   try
   {
     std::ifstream in(default_name);
