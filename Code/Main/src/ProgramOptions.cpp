@@ -1,5 +1,6 @@
 #include "../inc/ProgramOptions.h"
 #include <sstream>
+#include <TLogger.h>
 
 using namespace Main;
 
@@ -9,6 +10,7 @@ ProgramOptions::ProgramOptions(int argc, const char *argv[]) :
   description("Options"),
   command(CommandType::Nothing)
 {
+  LOG << "Start options parsing";
   description.add_options()
     ("help,h", "Shows help")
     ("add_chord", "Adds chord. Specify chord when prompted one string at time.")

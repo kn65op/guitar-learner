@@ -25,7 +25,8 @@ else ("${NO_COVERAGE}" STREQUAL "true")
 endif ("${NO_COVERAGE}" STREQUAL "true")
 
 set(NORMAL_WARNING_FLAGS "${CMAKE_CXX_FLAGS_DEBUG}")
-set(EXTRA_WARNING_FLAGS "${CMAKE_CXX_FLAGS_DEBUG} -Wall -Weffc++ -Wextra")
+set(EXTRA_WARNING_FLAGS "${CMAKE_CXX_FLAGS_DEBUG} -Wall -Wextra")
+#set(EXTRA_WARNING_FLAGS "${CMAKE_CXX_FLAGS_DEBUG} -Wall -Weffc++ -Wextra")
 
 set(CMAKE_CXX_FLAGS_DEBUG "${EXTRA_WARNING_FLAGS}")
 
@@ -40,7 +41,6 @@ set(CTEST_MEMORYCHECK_COMMAND_OPTIONS "--trace-children=yes --quiet
 --num-callers=100 --verbose --demangle=yes")
 
 ##submodules
-add_subdirectory(TLogger)
 link_directories(${TLOGGER_LIBRARIES_DIR})
 
 #includes

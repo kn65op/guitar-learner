@@ -2,10 +2,11 @@
 
 using Guitar::Chord;
 using Guitar::ITab;
+using Guitar::Tab;
 
 Chord::Chords Chord::chords;
 
-Chord::Chord(const std::string & chord, ITab &chord_tab) :
+Chord::Chord(const std::string & chord, const Tab &chord_tab) :
   name{chord},
   tab(chord_tab)
 {
@@ -16,7 +17,7 @@ size_t Chord::size()
   return chords.size();
 }
 
-void Chord::add(const std::string &name, ITab &tab)
+void Chord::add(const std::string &name, const Tab &tab)
 {
   if (chords.find(name) != chords.end())
   {

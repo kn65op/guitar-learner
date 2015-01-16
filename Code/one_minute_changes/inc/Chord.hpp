@@ -18,7 +18,7 @@ public:
   };
   
   static size_t size();
-  static void add(const std::string &name, ITab & tab);
+  static void add(const std::string &name, const Tab & tab);
   static const Chords& getChords();
   static void clear();
   
@@ -26,12 +26,12 @@ public:
   std::string getName() const;
   const ITab& getTab() const;
 private:
-  Chord(const std::string & chord, ITab &tab);
+  Chord(const std::string & chord, const Tab &tab);
   
   static Chords chords;
   
   ChordNameType name;
-  ITab & tab;
+  Tab tab;
 };
 
 std::ostream& operator<<(std::ostream &out, const Chord & chord);
