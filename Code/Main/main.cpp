@@ -12,6 +12,7 @@ int main(int argc, const char *argv[])
   TLogger::LoggerFacade logger(TLogger::LoggerType::FILE);
   LOG << "TEST LOG";
   const std::string default_name = std::string(std::getenv("HOME")) + "/.guitar_learner/default.glearn";
+  LOG << "Using default file name: " << default_name;
 //  std::cout << default_name << "\n";
   try
   {
