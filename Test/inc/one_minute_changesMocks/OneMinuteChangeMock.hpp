@@ -10,22 +10,24 @@ namespace OneMinuteChanges
 {
 namespace ut
 {
-class OneMinuteChangeMock : public IOneMinuteChange {
- public:
+
+class OneMinuteChangeMock : public IOneMinuteChange
+{
+public:
   MOCK_METHOD1(addResult,
-      void(int result));
+               void(int result));
   MOCK_CONST_METHOD0(bestResult,
-      int());
+                     int());
   MOCK_CONST_METHOD0(lastResult,
-      int());
+                     int());
   MOCK_CONST_METHOD0(getResults,
-      const Results&());
+                     const Results&());
   MOCK_CONST_METHOD0(getFirstChord,
-      std::string());
+                     std::string());
   MOCK_CONST_METHOD0(getSecondChord,
-      std::string());
+                     std::string());
   MOCK_CONST_METHOD0(print,
-      std::string());
+                     std::string());
 
 };
 

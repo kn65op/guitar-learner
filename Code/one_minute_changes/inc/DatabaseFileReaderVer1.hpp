@@ -4,7 +4,7 @@
 
 namespace Guitar
 {
-  
+
 class DatabaseFileReaderVer1 : public DatabaseFileReader
 {
 protected:

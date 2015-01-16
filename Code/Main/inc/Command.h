@@ -4,13 +4,16 @@
 
 namespace Main
 {
-  
+
 class Command
 {
 public:
-  virtual ~Command() {}
+
+  virtual ~Command()
+  {
+  }
   typedef std::vector<std::string> CommandOptions;
-  
+
   virtual void process(const CommandOptions &) = 0;
 };
 

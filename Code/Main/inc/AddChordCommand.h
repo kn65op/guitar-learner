@@ -4,6 +4,7 @@
 
 namespace Main
 {
+
 class AddChordCommand : public Command
 {
 public:

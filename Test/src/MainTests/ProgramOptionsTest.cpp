@@ -6,6 +6,7 @@ using namespace Main;
 
 struct ProgramOptionsTest : public Test
 {
+
 };
 
 TEST_F(ProgramOptionsTest, DefaultOptionsDontShowHelp)

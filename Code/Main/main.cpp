@@ -8,12 +8,12 @@
 
 int main(int argc, const char *argv[])
 {
-  
+
   TLogger::LoggerFacade logger(TLogger::LoggerType::FILE);
   LOG << "TEST LOG";
   const std::string default_name = std::string(std::getenv("HOME")) + "/.guitar_learner/default.glearn";
   LOG << "Using default file name: " << default_name;
-//  std::cout << default_name << "\n";
+  //  std::cout << default_name << "\n";
   try
   {
     std::ifstream in(default_name);
@@ -23,15 +23,15 @@ int main(int argc, const char *argv[])
   {
     std::cerr << "Unable to read database file\n";
   }
-  
+
   Main::ProgramOptions po(argc, argv);
-  
+
   if (po.isHelp())
   {
     std::cout << po.help();
     return 0;
   }
-  
+
   try
   {
     Main::CommandFactory::createCommand(po.getCommand())->process(Main::Command::CommandOptions());
@@ -42,7 +42,7 @@ int main(int argc, const char *argv[])
     std::cout << po.help();
     return 1;
   }
-  
+
   LOG << "Creating DatabaseFileWriter";
   Guitar::DatabaseFileWriterVer1 writer;
   LOG << "Created DatabaseFileWriter";

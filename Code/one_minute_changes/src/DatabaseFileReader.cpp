@@ -24,5 +24,5 @@ void DatabaseFileReader::read(std::istream &in)
   {
     throw VersionNotSupported();
   }
-    
+
 }

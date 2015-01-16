@@ -6,9 +6,7 @@ using OneMinuteChanges::OneMinuteChangesSet;
 
 OneMinuteChangesSet::SetType OneMinuteChangesSet::changes;
 
-OneMinuteChangesSet::OneMinuteChangesSet()
-{
-}
+OneMinuteChangesSet::OneMinuteChangesSet() { }
 
 OneMinuteChangesSet::OneMinuteChangesSet(std::istream &in)
 {
@@ -36,38 +34,38 @@ void OneMinuteChangesSet::add(Element element)
   changes.insert(element);
 }
 
-OneMinuteChangesSet::Element OneMinuteChangesSet::findWorstChord() const        
+OneMinuteChangesSet::Element OneMinuteChangesSet::findWorstChord() const
 {
   if (!size())
   {
     throw Exceptions::NoElements();
   }
-  
-  return *std::min_element(changes.begin(), changes.end(), [](const Element &first, const Element &second) -> bool
+
+  return *std::min_element(changes.begin(), changes.end(), [](const Element &first, const Element & second) -> bool
   {
     return first->bestResult() < second->bestResult();
   }
-  );
+                           );
 }
 
-OneMinuteChangesSet::Element OneMinuteChangesSet::findLastWorstChord() const        
+OneMinuteChangesSet::Element OneMinuteChangesSet::findLastWorstChord() const
 {
   if (!size())
   {
     throw Exceptions::NoElements();
   }
-  
-  return *std::min_element(changes.begin(), changes.end(), [](const Element &first, const Element &second) -> bool
+
+  return *std::min_element(changes.begin(), changes.end(), [](const Element &first, const Element & second) -> bool
   {
     return first->lastResult() < second->lastResult();
   }
-  );
+                           );
 }
 
 std::string OneMinuteChangesSet::print() const
 {
   std::string ret = std::to_string(changes.size()) + "\n";
-  for (auto c: changes)
+  for (auto c : changes)
   {
     ret += c->print();
   }

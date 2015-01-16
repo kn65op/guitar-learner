@@ -7,10 +7,12 @@ using Guitar::Tab;
 Chord::Chords Chord::chords;
 
 Chord::Chord(const std::string & chord, const Tab &chord_tab) :
-  name{chord},
-  tab(chord_tab)
+    name
 {
+  chord
 }
+,
+tab(chord_tab) { }
 
 size_t Chord::size()
 {

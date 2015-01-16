@@ -7,16 +7,22 @@
 using Guitar::Tab;
 
 Tab::Tab() :
-  frets{0, 0, 0, 0, 0, 0}
+    frets
+{
+  0, 0, 0, 0, 0, 0
+}
 {
 }
 
 Tab::Tab(int fret1, int fret2, int fret3, int fret4, int fret5, int fret6) :
-  frets{fret1, fret2, fret3, fret4, fret5, fret6}
+    frets
+{
+  fret1, fret2, fret3, fret4, fret5, fret6
+}
 {
 }
 
-Tab::Tab(std::istream & in) :Tab()
+Tab::Tab(std::istream & in) : Tab()
 {
   parseInputStream(in);
 }
@@ -25,7 +31,7 @@ std::string headerString(int n = 10)
 {
   std::stringstream ss;
   ss << "  ";
-  for (int i=1; i < n + 1; ++i)
+  for (int i = 1; i < n + 1; ++i)
   {
     ss << std::setw(3) << std::setfill(' ') << std::to_string(i) << " ";
   }
@@ -62,7 +68,7 @@ std::string stringString(const std::string & string, int pos, int n = 10)
       }
     }
   }
-  return ret + "\n";;
+  return ret + "\n";
 }
 
 std::ostream & Guitar::operator<<(std::ostream & out, const ITab &tab)
@@ -74,12 +80,12 @@ std::ostream & Guitar::operator<<(std::ostream & out, const ITab &tab)
 std::string Tab::print() const
 {
   return headerString()
-    + stringString("E", frets[0])
-    + stringString("H", frets[1])
-    + stringString("G", frets[2])
-    + stringString("D", frets[3])
-    + stringString("A", frets[4])
-    + stringString("E", frets[5]);
+      + stringString("E", frets[0])
+      + stringString("H", frets[1])
+      + stringString("G", frets[2])
+      + stringString("D", frets[3])
+      + stringString("A", frets[4])
+      + stringString("E", frets[5]);
 }
 
 void Tab::parseInputStream(std::istream & in)
@@ -88,7 +94,7 @@ void Tab::parseInputStream(std::istream & in)
   std::getline(in, line);
   std::string::size_type num_start = line.rfind(' ', line.size() - 2);
   int frets_count = std::atoi(line.substr(num_start).c_str());
-  
+
   for (size_t string = 0; string < frets.size(); ++string)
   {
     std::getline(in, line);

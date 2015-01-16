@@ -7,13 +7,16 @@
 
 namespace OneMinuteChanges
 {
-  
+
 class IOneMinuteChange
 {
 public:
   typedef std::vector<int> Results;
-  virtual ~IOneMinuteChange() {}
-  
+
+  virtual ~IOneMinuteChange()
+  {
+  }
+
   virtual void addResult(int result) = 0;
   virtual int bestResult() const = 0;
   virtual int lastResult() const = 0;
@@ -23,12 +26,12 @@ public:
   virtual std::string print() const = 0;
 };
 
-class OneMinuteChange : public IOneMinuteChange 
+class OneMinuteChange : public IOneMinuteChange
 {
 public:
   OneMinuteChange(const std::string & chordA, const std::string & chordB);
   OneMinuteChange(std::istream &is);
-  
+
   bool operator==(const OneMinuteChange &other) const;
   void addResult(int result) override;
   int bestResult() const override;

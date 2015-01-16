@@ -5,11 +5,9 @@
 using OneMinuteChanges::OneMinuteChange;
 
 OneMinuteChange::OneMinuteChange(const std::string &chordA, const std::string &chordB) :
-  first(std::min(chordA, chordB)),
-  second(std::max(chordA, chordB)),
-  results()
-{
-}
+    first(std::min(chordA, chordB)),
+    second(std::max(chordA, chordB)),
+    results() { }
 
 OneMinuteChange::OneMinuteChange(std::istream &is)
 {
@@ -23,7 +21,7 @@ OneMinuteChange::OneMinuteChange(std::istream &is)
     is >> res;
     results.push_back(res);
   }
-  
+
 }
 
 bool OneMinuteChange::operator==(const OneMinuteChange &other) const
@@ -63,7 +61,7 @@ int OneMinuteChange::lastResult() const
     return 0;
   }
   return results.back();
-}               
+}
 
 std::string OneMinuteChange::getFirstChord() const
 {

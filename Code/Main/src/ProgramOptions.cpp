@@ -7,14 +7,14 @@ using namespace Main;
 using namespace boost::program_options;
 
 ProgramOptions::ProgramOptions(int argc, const char *argv[]) :
-  description("Options"),
-  command(CommandType::Nothing)
+    description("Options"),
+    command(CommandType::Nothing)
 {
   LOG << "Start options parsing";
   description.add_options()
-    ("help,h", "Shows help")
-    ("add_chord", "Adds chord. Specify chord when prompted one string at time.")
-    ("list_chords", "List chords");
+      ("help,h", "Shows help")
+      ("add_chord", "Adds chord. Specify chord when prompted one string at time.")
+      ("list_chords", "List chords");
   try
   {
     store(parse_command_line(argc, argv, description), vm);

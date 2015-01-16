@@ -7,6 +7,7 @@ using OneMinuteChanges::OneMinuteChange;
 
 struct OneMinuteChangeTest : public Test
 {
+
   OneMinuteChange omc{"A", "D"};
 };
 
@@ -19,7 +20,7 @@ TEST_F(OneMinuteChangeTest, OneMinuteChangeShouldReturnChords)
 TEST_F(OneMinuteChangeTest, OneMinuteChangeShouldReturnChordsAlphabetical)
 {
   OneMinuteChange omc2{"D", "A"};
-  
+
   EXPECT_EQ("A", omc2.getFirstChord());
   EXPECT_EQ("D", omc2.getSecondChord());
 }
@@ -35,7 +36,7 @@ TEST_F(OneMinuteChangeTest, OneMinuteChangesShouldBeEuaqlWithSwappedChords)
   OneMinuteChange omc2{"D", "A"};
   EXPECT_EQ(omc, omc2);
 }
-  
+
 TEST_F(OneMinuteChangeTest, OneMinuteChangesShouldBeNotEqualWithDifferentChords)
 {
   OneMinuteChange omc2{"A", "B"};
@@ -60,7 +61,7 @@ TEST_F(OneMinuteChangeTest, AfterAddedTwoResultsBestResultShouldBeHighestNumber)
   const int bestRes = 42;
   omc.addResult(bestRes);
   omc.addResult(lowRes);
-  
+
   EXPECT_EQ(bestRes, omc.bestResult());
 }
 
@@ -70,9 +71,9 @@ TEST_F(OneMinuteChangeTest, AfterAddedTwoResultAllResultsShouldReturnChronolgica
   const int secondRes = 2;
   omc.addResult(firstRes);
   omc.addResult(secondRes);
-  
+
   OneMinuteChange::Results results = omc.getResults();
-  
+
   EXPECT_EQ(firstRes, results[0]);
   EXPECT_EQ(secondRes, results[1]);
 }
@@ -88,7 +89,7 @@ TEST_F(OneMinuteChangeTest, GetLastResultShouldReturnLastResult)
   const int bestRes = 42;
   omc.addResult(bestRes);
   omc.addResult(lowRes);
-  
+
   EXPECT_EQ(lowRes, omc.lastResult());
 }
 
@@ -99,24 +100,24 @@ TEST_F(OneMinuteChangeTest, OneMinuteChangeShouldBePrinted)
   const int bestRes = 5;
   const int fourthRes = 3;
   const int resSize = 4;
-  
+
   omc.addResult(firstRes);
   omc.addResult(secondRes);
   omc.addResult(bestRes);
   omc.addResult(fourthRes);
-  
+
   std::stringstream ss;
-  
+
   ss << omc;
-  
+
   std::string resultString = omc.getFirstChord() + "\n" +
-                             omc.getSecondChord() + "\n" +
-                             std::to_string(resSize) + "\n" + 
-                             std::to_string(firstRes) + "\n" +
-                             std::to_string(secondRes) + "\n" +
-                             std::to_string(bestRes) + "\n" +
-                             std::to_string(fourthRes) + "\n";
-                             
+      omc.getSecondChord() + "\n" +
+      std::to_string(resSize) + "\n" +
+      std::to_string(firstRes) + "\n" +
+      std::to_string(secondRes) + "\n" +
+      std::to_string(bestRes) + "\n" +
+      std::to_string(fourthRes) + "\n";
+
   EXPECT_EQ(resultString, ss.str());
 }
 
@@ -129,7 +130,7 @@ TEST_F(OneMinuteChangeTest, OneMinuteChangeCanBeReaded)
   std::vector<int> results{firstRes, secondRes, bestRes, fourthRes};
   const std::string chordA = "A";
   const std::string chordB = "B";
-  
+
   std::stringstream ss;
   ss << chordA << "\n";
   ss << chordB << "\n";
@@ -138,9 +139,9 @@ TEST_F(OneMinuteChangeTest, OneMinuteChangeCanBeReaded)
   ss << secondRes << "\n";
   ss << bestRes << "\n";
   ss << fourthRes << "\n";
-  
+
   OneMinuteChange omc2{ss};
-  
+
   EXPECT_EQ(chordA, omc2.getFirstChord());
   EXPECT_EQ(chordB, omc2.getSecondChord());
   OneMinuteChange::Results results_got = omc2.getResults();

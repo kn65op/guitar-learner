@@ -4,6 +4,7 @@
 
 namespace Guitar
 {
+
 class DatabaseFileWriterVer1 : public DatabaseFileWriter
 {
 public:

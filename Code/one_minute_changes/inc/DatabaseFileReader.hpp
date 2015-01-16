@@ -5,16 +5,19 @@
 
 namespace Guitar
 {
-  
+
 class DatabaseFileReader
 {
 public:
-  virtual ~DatabaseFileReader() {};
-  
+
+  virtual ~DatabaseFileReader()
+  {
+  };
+
   class VersionNotSupported
   {
   };
-  
+
   static void read(std::istream &in);
 protected:
   virtual void readChords(std::istream &in) const = 0;
