@@ -13,8 +13,9 @@ ProgramOptions::ProgramOptions(int argc, const char *argv[]) :
   LOG << "Start options parsing";
   description.add_options()
       ("help,h", "Shows help")
-      ("add_chord", "Adds chord. Specify chord when prompted one string at time.")
-      ("list_chords", "List chords");
+      ("add_chord", "Adds chord. Specify chord when prompted and one string at time.")
+      ("list_chords", "List chords")
+      ("remove_chord", "Remove chord");
   try
   {
     store(parse_command_line(argc, argv, description), vm);
@@ -57,5 +58,9 @@ void ProgramOptions::findFirstCommand()
   if (vm.count("list_chords") != 0)
   {
     command = CommandType::ListChords;
+  }
+  if (vm.count("remove_chord") != 0)
+  {
+    command = CommandType::RemoveChord;
   }
 }

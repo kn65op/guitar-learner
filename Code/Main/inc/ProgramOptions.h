@@ -9,7 +9,8 @@ enum class CommandType
 {
   Nothing,
   AddChord,
-  ListChords
+  ListChords,
+  RemoveChord
 };
 
 class ProgramOptions

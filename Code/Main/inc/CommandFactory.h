@@ -3,6 +3,7 @@
 #include "Command.h"
 #include "ListChordsCommand.h"
 #include "AddChordCommand.h"
+#include "RemoveChordCommand.h"
 #include <memory>
 
 namespace Main
@@ -28,6 +29,8 @@ public:
       return std::make_shared<Main::AddChordCommand>();
     case CommandType::ListChords:
       return std::make_shared<Main::ListChordsCommand>();
+    case CommandType::RemoveChord:
+      return std::make_shared<Main::RemoveChordCommand>();
     }
     throw InvalidCommand();
   }

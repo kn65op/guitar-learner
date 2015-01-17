@@ -64,3 +64,11 @@ TEST_F(ProgramOptionsTest, ForListChordsOptionGetCommandShouldReturnListCommand)
   ProgramOptions po(argc, args);
   EXPECT_EQ(CommandType::ListChords, po.getCommand());
 }
+
+TEST_F(ProgramOptionsTest, ForRemoveChordOptionGetCommandShouldReturnRemoveChordCommand)
+{
+  int argc = 2;
+  const char *args[] = {"program", "--remove_chord"};
+  ProgramOptions po(argc, args);
+  EXPECT_EQ(CommandType::RemoveChord, po.getCommand());
+}
