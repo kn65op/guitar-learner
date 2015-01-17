@@ -14,7 +14,7 @@ void Main::AddChordCommand::process(const Main::Command::CommandOptions& options
   std::cin >> chord_name;
   std::cout << "State tab from up, write fret number:\n";
   const unsigned fret_count = 6;
-  std::array<unsigned, fret_count> frets;
+  std::array<int, fret_count> frets;
   for (unsigned i = 0; i < fret_count; ++i)
   {
     std::cin >> frets[i];

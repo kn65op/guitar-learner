@@ -28,9 +28,9 @@ public:
   std::string print() const override;
 private:
 
-  static const int stream_count = 6;
+  static const int frets_count = 6;
 
-  std::array<int, stream_count> frets;
+  std::array<int, frets_count> frets;
   void parseInputStream(std::istream &in);
 };
 
