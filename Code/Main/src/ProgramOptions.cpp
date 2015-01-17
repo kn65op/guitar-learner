@@ -6,16 +6,20 @@ using namespace Main;
 
 using namespace boost::program_options;
 
+const std::string ProgramOptions::REMOVE_CHORD_STRING = "remove_chord";
+const std::string ProgramOptions::ADD_CHORD_STRING = "add_chord";
+const std::string ProgramOptions::LIST_CHORDS_STRING = "list_chords";
+
 ProgramOptions::ProgramOptions(int argc, const char *argv[]) :
     description("Options"),
-    command(CommandType::Nothing)
+        command(CommandType::Nothing)
 {
-  LOG << "Start options parsing";
+  LOG<< "Start options parsing";
   description.add_options()
-      ("help,h", "Shows help")
-      ("add_chord", "Adds chord. Specify chord when prompted and one string at time.")
-      ("list_chords", "List chords")
-      ("remove_chord", "Remove chord");
+  ("help,h", "Shows help")
+  (ADD_CHORD_STRING.c_str(), "Adds chord. Specify chord when prompted and one string at time.")
+  (LIST_CHORDS_STRING.c_str(), "List chords")
+  (REMOVE_CHORD_STRING.c_str(), "Remove chord");
   try
   {
     store(parse_command_line(argc, argv, description), vm);
@@ -51,15 +55,15 @@ CommandType ProgramOptions::getCommand() const noexcept
 
 void ProgramOptions::findFirstCommand()
 {
-  if (vm.count("add_chord") != 0)
+  if (vm.count(ADD_CHORD_STRING) != 0)
   {
     command = CommandType::AddChord;
   }
-  if (vm.count("list_chords") != 0)
+  if (vm.count(LIST_CHORDS_STRING) != 0)
   {
     command = CommandType::ListChords;
   }
-  if (vm.count("remove_chord") != 0)
+  if (vm.count(REMOVE_CHORD_STRING) != 0)
   {
     command = CommandType::RemoveChord;
   }

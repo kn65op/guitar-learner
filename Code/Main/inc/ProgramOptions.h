@@ -1,6 +1,7 @@
 #pragma once
 
 #include <boost/program_options.hpp>
+#include <string>
 
 namespace Main
 {
@@ -28,5 +29,9 @@ private:
   CommandType command;
 
   void findFirstCommand();
+
+  const static std::string ADD_CHORD_STRING;
+  const static std::string LIST_CHORDS_STRING;
+  const static std::string REMOVE_CHORD_STRING;
 };
 }
