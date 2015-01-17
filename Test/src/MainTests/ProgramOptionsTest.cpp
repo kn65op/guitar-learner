@@ -33,7 +33,7 @@ TEST_F(ProgramOptionsTest, WithhelpOptionsPrintHelpShouldBeTrue)
   EXPECT_TRUE(po.isHelp());
 }
 
-TEST_F(ProgramOptionsTest, HelpShouldRetunHelp)
+TEST_F(ProgramOptionsTest, HelpShouldRetunNotEmptyHelp)
 {
   int argc = 1;
   const char *args[] = {"program"};
