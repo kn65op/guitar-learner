@@ -12,11 +12,7 @@ void DatabaseFileWriterVer1::write(const Chord::Chords &chords, const OneMinuteC
   LOG << "Chodrs size" << chords.size();
   for (auto &chord : chords)
   {
-    LOG << "Saving chord " << chord.first;
-    LOG << "Saving chord " << chord.second;
     out << chord.second;
-    LOG << "Saved chord" << chord.second;
   }
-  LOG << "Saving omc";
   out << omcs.print();
 }

@@ -5,7 +5,7 @@
 namespace Main
 {
 
-class RemoveChordCommand : public Command
+class ChangeChordCommand : public Command
 {
 public:
   void process(const CommandOptions &) override;
