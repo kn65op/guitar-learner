@@ -1,5 +1,4 @@
-#ifndef CHORD_H
-#define CHORD_H
+#pragma once
 
 #include <string>
 #include <map>
@@ -42,5 +41,3 @@ private:
 std::ostream& operator<<(std::ostream &out, const Chord & chord);
 
 }
-
-#endif // CHORD_H

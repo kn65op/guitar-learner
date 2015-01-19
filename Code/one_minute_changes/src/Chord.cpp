@@ -53,5 +53,12 @@ const ITab & Chord::getTab() const
 
 void Chord::change(const std::string &name, const Tab &tab)
 {
-  throw NotExist{};
+  try
+  {
+    Chord chord = chords.at(name);
+  }
+  catch (std::out_of_range &)
+  {
+    throw NotExist {};
+  }
 }

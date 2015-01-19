@@ -80,3 +80,8 @@ TEST_F(ChordTest, ChordShouldNotChangeNotexistingElements)
   EXPECT_THROW(Chord::change("A", Tab{}), Chord::NotExist);
 }
 
+TEST_F(ChordTest, ChordShouldChangeTab)
+{
+  Chord::add("A", Tab{});
+  Chord::change("A", Tab{});
+}
