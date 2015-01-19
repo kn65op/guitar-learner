@@ -75,3 +75,8 @@ TEST_F(ChordTest, ChordShouldPrintItself)
   EXPECT_EQ(format, ss.str());
 }
 
+TEST_F(ChordTest, ChordShouldNotChangeNotexistingElements)
+{
+  EXPECT_THROW(Chord::change("A", Tab{}), Chord::NotExist);
+}
+

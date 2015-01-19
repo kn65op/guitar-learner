@@ -7,12 +7,8 @@ using Guitar::Tab;
 Chord::Chords Chord::chords;
 
 Chord::Chord(const std::string & chord, const Tab &chord_tab) :
-    name
-{
-  chord
-}
-,
-tab(chord_tab) { }
+    name {chord} ,
+    tab(chord_tab) { }
 
 size_t Chord::size()
 {
@@ -53,4 +49,9 @@ std::ostream& Guitar::operator<<(std::ostream &out, const Chord & chord)
 const ITab & Chord::getTab() const
 {
   return tab;
+}
+
+void Chord::change(const std::string &name, const Tab &tab)
+{
+  throw NotExist{};
 }

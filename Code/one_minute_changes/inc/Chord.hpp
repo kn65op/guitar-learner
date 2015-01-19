@@ -17,11 +17,15 @@ public:
   class AlreadyAdded
   {
   };
+  class NotExist
+  {
+  };
 
   static size_t size();
-  static void add(const std::string &name, const Tab & tab);
+  static void add(const std::string &name, const Tab &tab);
   static const Chords& getChords();
   static void clear();
+  static void change(const std::string &name, const Tab &tab);
 
   Chord() = delete;
   std::string getName() const;
