@@ -75,13 +75,29 @@ TEST_F(ChordTest, ChordShouldPrintItself)
   EXPECT_EQ(format, ss.str());
 }
 
+TEST_F(ChordTest, GetChordShouldThrowNotExistWhenGetNotExistedChord)
+{
+  EXPECT_THROW(Chord::getChord("A"), Chord::NotExist);
+}
+
+TEST_F(ChordTest, GetChordShouldReturnChordWithSameTab)
+{
+  Tab tab{1, 2, 3, 4, 5, 6};
+  Chord::add("B", tab);
+  EXPECT_EQ(tab.print(), Chord::getChord("B").getTab().print());
+}
+
 TEST_F(ChordTest, ChordShouldNotChangeNotexistingElements)
 {
-  EXPECT_THROW(Chord::change("A", Tab{}), Chord::NotExist);
+  EXPECT_THROW(Chord::changeChords("A", Tab{}), Chord::NotExist);
 }
 
 TEST_F(ChordTest, ChordShouldChangeTab)
 {
-  Chord::add("A", Tab{});
-  Chord::change("A", Tab{});
+  Tab old_tab;
+  Tab new_tab{1, 2, 3, 4, 5, 6};
+  Chord::add("A", old_tab);
+  Chord::changeChords("A", new_tab);
+  EXPECT_NE(old_tab.print(), Chord::getChord("A").getTab().print());
+  EXPECT_EQ(new_tab.print(), Chord::getChord("A").getTab().print());
 }

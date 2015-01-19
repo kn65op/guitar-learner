@@ -46,16 +46,28 @@ std::ostream& Guitar::operator<<(std::ostream &out, const Chord & chord)
   return out;
 }
 
-const ITab & Chord::getTab() const
+const Tab & Chord::getTab() const
 {
   return tab;
 }
 
-void Chord::change(const std::string &name, const Tab &tab)
+const Chord& Chord::getChord(const std::string &name)
 {
   try
   {
-    Chord chord = chords.at(name);
+    return chords.at(name);
+  }
+  catch (std::out_of_range &)
+  {
+    throw NotExist {};
+  }
+}
+
+void Chord::changeChords(const std::string &name, const Tab &tab)
+{
+  try
+  {
+    chords.at(name) = Chord {name, tab};
   }
   catch (std::out_of_range &)
   {

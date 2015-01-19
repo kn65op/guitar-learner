@@ -24,11 +24,12 @@ public:
   static void add(const std::string &name, const Tab &tab);
   static const Chords& getChords();
   static void clear();
-  static void change(const std::string &name, const Tab &tab);
+  static void changeChords(const std::string &name, const Tab &tab);
+  static const Chord& getChord(const std::string &name);
 
   Chord() = delete;
   std::string getName() const;
-  const ITab& getTab() const;
+  const Tab& getTab() const;
 private:
   Chord(const std::string & chord, const Tab &tab);
 
