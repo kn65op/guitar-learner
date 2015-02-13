@@ -21,7 +21,6 @@ endif ("${GMOCK_DIR}" STREQUAL "")
 set(GMOCK_INCLUDE "${GMOCK_H_INCLUDE_DIR}/gmock.h")
 set(LIB_GMOCK gmock)
 
-
 if (EXISTS "${GMOCK_INCLUDE}")
 	message(STATUS "Using gmock from ${GMOCK_SUB_DIR}")
 else (EXISTS "${GMOCK_INCLUDE}")

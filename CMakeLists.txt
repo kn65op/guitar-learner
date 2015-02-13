@@ -46,6 +46,7 @@ link_directories(${TLOGGER_LIBRARIES_DIR})
 #includes
 include_directories(${SRC_DIR})
 include_directories(${TLOGGER_INCLUDE_DIRS})
+include_directories(${Boost_INCLUDE_DIR})
 
 
 #files
