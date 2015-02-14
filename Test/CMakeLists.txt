@@ -63,6 +63,7 @@ enable_testing()
 file(MAKE_DIRECTORY ${TEST_EXE_DIR})
 
 add_executable(${TEST_EXE} ${TEST_MAIN} ${MAIN_FILES} ${MAIN_TEST_FILES} ${ONE_MINUTE_CHANGES_FILES} ${ONE_MINUTE_CHANGES_TEST_FILES})
+add_dependencies(${TEST_EXE} ${TLOGGER_TARGET})
 target_link_libraries(${TEST_EXE} ${LIB_GMOCK})
 TARGET_LINK_LIBRARIES(${TEST_EXE} ${Boost_LIBRARIES} ${TLOGGER_LIBRARIES})
 add_test(gtests ${TEST_EXE}) 
@@ -83,6 +84,7 @@ add_custom_command(TARGET coverage
 	WORKING_DIRECTORY ${COVERAGE_DIR})
 
 add_dependencies(coverage ${TEST_EXE})
+
 
 add_custom_target(coverage_view)
 add_custom_command(TARGET coverage_view

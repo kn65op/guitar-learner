@@ -11,7 +11,6 @@ set(RELEASE_BIN_DIR "Release")
 project (guitar-learner)
 
 #externial libs
-#FIND_PACKAGE( Boost 1.54 COMPONENTS date_time REQUIRED )
 FIND_PACKAGE( Boost 1.53 COMPONENTS program_options REQUIRED )
 FIND_PACKAGE( TLogger REQUIRED PATHS TLogger)
 
@@ -47,6 +46,9 @@ link_directories(${TLOGGER_LIBRARIES_DIR})
 include_directories(${SRC_DIR})
 include_directories(${TLOGGER_INCLUDE_DIRS})
 
+set(NO_TESTS "YES")
+add_subdirectory(TLogger)
+set(NO_TESTS "")
 
 #files
 file(GLOB ONE_MINUTE_CHANGES_FILES ${SRC_DIR}/one_minute_changes/src/*.cpp)
@@ -71,6 +73,9 @@ else (${CMAKE_BUILD_TYPE} STREQUAL "Debug")
 endif (${CMAKE_BUILD_TYPE} STREQUAL "Debug")
 
 add_executable(${EXE_FILE} ${MAIN_FILE} ${MAIN_FILES} ${ONE_MINUTE_CHANGES_FILES})
+
+#dependencies
+add_dependencies(${EXE_FILE} ${TLOGGER_TARGET})
 
 #libraries
 TARGET_LINK_LIBRARIES(${EXE_FILE} ${Boost_LIBRARIES} ${TLOGGER_LIBRARIES} )
