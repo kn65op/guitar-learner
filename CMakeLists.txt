@@ -40,7 +40,7 @@ set(CTEST_MEMORYCHECK_COMMAND_OPTIONS "--trace-children=yes --quiet
 --num-callers=100 --verbose --demangle=yes")
 
 ##submodules
-link_directories(${TLOGGER_LIBRARIES_DIR})
+link_directories(${CMAKE_BINARY_DIR}/${TLOGGER_LIBRARIES_DIR})
 
 #includes
 include_directories(${SRC_DIR})
