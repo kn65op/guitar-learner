@@ -1,5 +1,5 @@
 set(TEST_DIR ".")
-set(TEST_EXE_DIR "${TEST_DIR}/Exe")
+set(TEST_EXE_DIR "${TEST_DIR}")
 set(TEST_SRC_DIR "${TEST_DIR}/src")
 set(TEST_INC_DIR "${TEST_DIR}/inc")
 set(TEST_EXE ${TEST_EXE_DIR}/Tester)
