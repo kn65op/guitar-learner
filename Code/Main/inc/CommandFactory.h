@@ -17,7 +17,7 @@ public:
   {
   public:
   };
-  using CommandPtr = std::shared_ptr<GuitarLearnerCommand>;
+  using CommandPtr = std::unique_ptr<GuitarLearnerCommand>;
 
   static CommandPtr createCommand(CommandType command)
   {
@@ -26,11 +26,11 @@ public:
     case CommandType::Nothing:
       throw InvalidCommand();
     case CommandType::AddChord:
-      return std::make_shared<Main::AddChordCommand>();
+      return std::make_unique<Main::AddChordCommand>();
     case CommandType::ListChords:
-      return std::make_shared<Main::ListChordsCommand>();
+      return std::make_unique<Main::ListChordsCommand>();
     case CommandType::ChangeChord:
-      return std::make_shared<Main::ChangeChordCommand>();
+      return std::make_unique<Main::ChangeChordCommand>();
     }
     throw InvalidCommand();
   }

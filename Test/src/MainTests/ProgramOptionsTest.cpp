@@ -68,7 +68,7 @@ TEST_F(ProgramOptionsTest, ForListChordsOptionGetCommandShouldReturnListCommand)
 TEST_F(ProgramOptionsTest, ForRemoveChordOptionGetCommandShouldReturnRemoveChordCommand)
 {
   int argc = 2;
-  const char *args[] = {"program", "--remove_chord"};
+  const char *args[] = {"program", "--change_chord"};
   ProgramOptions po(argc, args);
   EXPECT_EQ(CommandType::ChangeChord, po.getCommand());
 }
