@@ -10,8 +10,8 @@ void ChangeChordCommand::process(const CommandOptions &argumets)
 {
   using Guitar::Chord;
   LOG<< "Entering ChangeChordCommand";
-  bool removed = false;
-  while (!removed)
+  bool changed = false;
+  while (!changed)
   {
     LOG << "Changing loop";
     std::cout << "What chord to remove (EOF to cancel)? ";
@@ -41,6 +41,6 @@ void ChangeChordCommand::process(const CommandOptions &argumets)
       continue;
     }
 
-    removed = true;
+    changed = true;
   }
 }
