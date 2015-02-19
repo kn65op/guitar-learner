@@ -24,7 +24,7 @@ public:
 protected:
   using Tab = Guitar::Tab;
 
-  Tab getTabFromInput(std::ostream &ostream, std::istream & istream) const
+  Tab getTabFromInput(std::ostream &ostream = std::cout, std::istream & istream = std::cin) const
   {
     ostream << "State tab from up, write fret number:\n";
     const unsigned fret_count = 6;

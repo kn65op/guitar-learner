@@ -15,11 +15,11 @@ void ChangeChordCommand::process(const CommandOptions &argumets)
   {
     LOG << "Changing loop";
     std::cout << "What chord to remove (EOF to cancel)? ";
-    Chord::ChordNameType chord_to_remove;
-    std::cin >> chord_to_remove;
-    LOG << "Chord to remove: " << chord_to_remove;
+    Chord::ChordNameType chord_to_change;
+    std::cin >> chord_to_change;
+    LOG << "Chord to remove: " << chord_to_change;
 
-    if (chord_to_remove == "\0")
+    if (chord_to_change == "\0")
     {
       std::cout << "\nNo chord removed\n";
       LOG << "Not removing any chord";
@@ -28,14 +28,16 @@ void ChangeChordCommand::process(const CommandOptions &argumets)
 
     try
     {
-      Chord::getChord(chord_to_remove);
-      std::cout << "State tab from up, write fret number:\n";
-
+      Chord::getChord(chord_to_change);
+      Tab changed_tab = getTabFromInput();
+      Chord::changeChords(chord_to_change, changed_tab);
+      std::cout << "Chord changed\n";
+      LOG << "Chord changed";
     }
     catch (Chord::NotExist &ex)
     {
       LOG << "Not found chord";
-      std::cout << "Not existing chord: " << chord_to_remove << "\n";
+      std::cout << "Not existing chord: " << chord_to_change << "\n";
       continue;
     }
 
