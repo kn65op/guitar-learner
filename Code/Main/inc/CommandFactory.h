@@ -31,6 +31,9 @@ public:
       return std::make_unique<Main::ListChordsCommand>();
     case CommandType::ChangeChord:
       return std::make_unique<Main::ChangeChordCommand>();
+    case CommandType::RemoveChord:
+    throw InvalidCommand();
+
     }
     throw InvalidCommand();
   }
