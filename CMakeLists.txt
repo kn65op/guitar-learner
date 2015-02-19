@@ -40,11 +40,12 @@ set(CTEST_MEMORYCHECK_COMMAND_OPTIONS "--trace-children=yes --quiet
 --num-callers=100 --verbose --demangle=yes")
 
 ##submodules
-link_directories(${TLOGGER_LIBRARIES_DIR})
+link_directories(${CMAKE_BINARY_DIR}/${TLOGGER_LIBRARIES_DIR})
 
 #includes
 include_directories(${SRC_DIR})
 include_directories(${TLOGGER_INCLUDE_DIRS})
+include_directories(${Boost_INCLUDE_DIR})
 
 set(NO_TESTS "YES")
 add_subdirectory(TLogger)
@@ -60,17 +61,14 @@ if (${CMAKE_BUILD_TYPE} STREQUAL "Debug")
 	else ("${NO_COVERAGE}" STREQUAL "true")
 		add_definitions(--coverage)
 	endif ("${NO_COVERAGE}" STREQUAL "true")
-	file(MAKE_DIRECTORY ${DEBUG_BIN_DIR})
-	set(EXE_FILE ${DEBUG_BIN_DIR}/${PROJECT_NAME})
-
 	#test
 	add_subdirectory(Test)
 elseif (${CMAKE_BUILD_TYPE} STREQUAL "Release")
-	file(MAKE_DIRECTORY ${RELEASE_BIN_DIR})
-        set(EXE_FILE ${RELEASE_BIN_DIR}/${PROJECT_NAME})
 else (${CMAKE_BUILD_TYPE} STREQUAL "Debug")
 	message(FATAL_ERROR "Invalid build type. Can be Debug | Release")
 endif (${CMAKE_BUILD_TYPE} STREQUAL "Debug")
+
+set(EXE_FILE ${PROJECT_NAME})
 
 add_executable(${EXE_FILE} ${MAIN_FILE} ${MAIN_FILES} ${ONE_MINUTE_CHANGES_FILES})
 

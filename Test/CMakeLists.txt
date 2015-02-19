@@ -1,5 +1,5 @@
 set(TEST_DIR ".")
-set(TEST_EXE_DIR "${TEST_DIR}/Exe")
+set(TEST_EXE_DIR "${TEST_DIR}")
 set(TEST_SRC_DIR "${TEST_DIR}/src")
 set(TEST_INC_DIR "${TEST_DIR}/inc")
 set(TEST_EXE ${TEST_EXE_DIR}/Tester)
@@ -20,7 +20,6 @@ endif ("${GMOCK_DIR}" STREQUAL "")
 
 set(GMOCK_INCLUDE "${GMOCK_H_INCLUDE_DIR}/gmock.h")
 set(LIB_GMOCK gmock)
-
 
 if (EXISTS "${GMOCK_INCLUDE}")
 	message(STATUS "Using gmock from ${GMOCK_SUB_DIR}")
