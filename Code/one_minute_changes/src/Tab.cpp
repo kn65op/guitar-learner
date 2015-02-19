@@ -7,18 +7,12 @@
 using Guitar::Tab;
 
 Tab::Tab() :
-    frets
-{
-  0, 0, 0, 0, 0, 0
-}
+    frets{0, 0, 0, 0, 0, 0}
 {
 }
 
 Tab::Tab(int fret1, int fret2, int fret3, int fret4, int fret5, int fret6) :
-    frets
-{
-  fret1, fret2, fret3, fret4, fret5, fret6
-}
+    frets{fret1, fret2, fret3, fret4, fret5, fret6}
 {
 }
 
