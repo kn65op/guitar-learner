@@ -68,9 +68,9 @@ TARGET_LINK_LIBRARIES(${TEST_EXE} ${Boost_LIBRARIES} ${TLOGGER_LIBRARIES})
 add_test(gtests ${TEST_EXE}) 
 
 set(COVERAGE_DIR coverage)
-set(SOURCE_RAW_FILES_DIR "${CMAKE_BINARY_DIR}/Test/CMakeFiles/Exe/Tester.dir/__/Code")
-set(ONE_MINUTE_CHANGES_COVERAGE_RAW_FILES_DIR "${CMAKE_BINARY_DIR}/Test/CMakeFiles/Exe/Tester.dir/__/Code/one_minute_changes/src")
-set(ONE_MINUTE_CHANGES_COVERAGE_RAW_FILES "${CMAKE_BINARY_DIR}/Test/CMakeFiles/Exe/Tester.dir/__/Code/one_minute_changes/src/*.gcda")
+set(SOURCE_RAW_FILES_DIR "${CMAKE_BINARY_DIR}/Test/CMakeFiles/Tester.dir/__/Code")
+set(ONE_MINUTE_CHANGES_COVERAGE_RAW_FILES_DIR "${CMAKE_BINARY_DIR}/Test/CMakeFiles/Tester.dir/__/Code/one_minute_changes/src")
+set(ONE_MINUTE_CHANGES_COVERAGE_RAW_FILES "${CMAKE_BINARY_DIR}/Test/CMakeFiles/Tester.dir/__/Code/one_minute_changes/src/*.gcda")
 set(ONE_MINUTE_CHANGES_O_FILES "${ONE_MINUTE_CHANGES_COVERAGE_RAW_FILES_DIR}/*.o")
 
 add_custom_target(coverage)
