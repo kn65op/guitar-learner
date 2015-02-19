@@ -17,7 +17,7 @@ public:
   {
   public:
   };
-  using CommandPtr = std::shared_ptr<Command>;
+  using CommandPtr = std::shared_ptr<GuitarLearnerCommand>;
 
   static CommandPtr createCommand(CommandType command)
   {

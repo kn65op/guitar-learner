@@ -4,9 +4,9 @@
 namespace Main
 {
 
-class ListChordsCommand : public Command
+class ListChordsCommand : public GuitarLearnerCommand
 {
 public:
-  void process(const Main::Command::CommandOptions& options);
+  void process(const Main::GuitarLearnerCommand::CommandOptions& options);
 };
 }

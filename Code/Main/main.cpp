@@ -33,7 +33,7 @@ int main(int argc, const char *argv[])
 
   try
   {
-    Main::CommandFactory::createCommand(po.getCommand())->process(Main::Command::CommandOptions());
+    Main::CommandFactory::createCommand(po.getCommand())->process(Main::GuitarLearnerCommand::CommandOptions());
     LOG << "Command executed";
   }
   catch (Main::CommandFactory::InvalidCommand &ex)

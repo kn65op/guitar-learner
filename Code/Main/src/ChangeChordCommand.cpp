@@ -29,6 +29,8 @@ void ChangeChordCommand::process(const CommandOptions &argumets)
     try
     {
       Chord::getChord(chord_to_remove);
+      std::cout << "State tab from up, write fret number:\n";
+
     }
     catch (Chord::NotExist &ex)
     {

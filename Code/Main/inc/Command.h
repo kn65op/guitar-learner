@@ -5,11 +5,11 @@
 namespace Main
 {
 
-class Command
+class GuitarLearnerCommand
 {
 public:
 
-  virtual ~Command()
+  virtual ~GuitarLearnerCommand()
   {
   }
   typedef std::vector<std::string> CommandOptions;

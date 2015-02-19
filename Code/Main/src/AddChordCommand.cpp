@@ -6,7 +6,7 @@
 
 using namespace Main;
 
-void Main::AddChordCommand::process(const Main::Command::CommandOptions& options)
+void Main::AddChordCommand::process(const Main::GuitarLearnerCommand::CommandOptions& options)
 {
   LOG << "Add chord command";
   std::cout << "State symbol for chord: ";

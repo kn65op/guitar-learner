@@ -5,7 +5,7 @@
 namespace Main
 {
 
-class ChangeChordCommand : public Command
+class ChangeChordCommand : public GuitarLearnerCommand
 {
 public:
   void process(const CommandOptions &) override;
