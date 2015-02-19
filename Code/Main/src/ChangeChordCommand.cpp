@@ -9,11 +9,11 @@ using namespace Main;
 void ChangeChordCommand::process(const CommandOptions &argumets)
 {
   using Guitar::Chord;
-  LOG<< "Entering RemoveChordCommand";
+  LOG<< "Entering ChangeChordCommand";
   bool removed = false;
   while (!removed)
   {
-    LOG << "Removing loop";
+    LOG << "Changing loop";
     std::cout << "What chord to remove (EOF to cancel)? ";
     Chord::ChordNameType chord_to_remove;
     std::cin >> chord_to_remove;
@@ -21,10 +21,22 @@ void ChangeChordCommand::process(const CommandOptions &argumets)
 
     if (chord_to_remove == "\0")
     {
-      std::cout << "No chord removed";
+      std::cout << "\nNo chord removed\n";
       LOG << "Not removing any chord";
       return;
     }
+
+    try
+    {
+      Chord::getChord(chord_to_remove);
+    }
+    catch (Chord::NotExist &ex)
+    {
+      LOG << "Not found chord";
+      std::cout << "Not existing chord: " << chord_to_remove << "\n";
+      continue;
+    }
+
     removed = true;
   }
 }

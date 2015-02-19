@@ -6,7 +6,7 @@ using namespace Main;
 
 using namespace boost::program_options;
 
-const std::string ProgramOptions::CHANGE_CHORD_STRING = "remove_chord";
+const std::string ProgramOptions::CHANGE_CHORD_STRING = "change_chord";
 const std::string ProgramOptions::ADD_CHORD_STRING = "add_chord";
 const std::string ProgramOptions::LIST_CHORDS_STRING = "list_chords";
 
@@ -19,7 +19,9 @@ ProgramOptions::ProgramOptions(int argc, const char *argv[]) :
   ("help,h", "Shows help")
   (ADD_CHORD_STRING.c_str(), "Adds chord. Specify chord when prompted and one string at time.")
   (LIST_CHORDS_STRING.c_str(), "List chords")
-  (CHANGE_CHORD_STRING.c_str(), "Remove chord");
+  (CHANGE_CHORD_STRING.c_str(), "Change chord");
+
+//  (CHANGE_CHORD_STRING.c_str(), "Remove chord");
   try
   {
     store(parse_command_line(argc, argv, description), vm);
