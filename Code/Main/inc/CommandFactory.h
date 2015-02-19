@@ -1,10 +1,10 @@
 #pragma once
 #include "ProgramOptions.h"
-#include "Command.h"
 #include "ListChordsCommand.h"
 #include "AddChordCommand.h"
 #include <memory>
 #include "ChangeChordCommand.h"
+#include "GuitarLearnerCommand.h"
 
 namespace Main
 {

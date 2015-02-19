@@ -12,15 +12,7 @@ void Main::AddChordCommand::process(const Main::GuitarLearnerCommand::CommandOpt
   std::cout << "State symbol for chord: ";
   Guitar::Chord::ChordNameType chord_name;
   std::cin >> chord_name;
-  std::cout << "State tab from up, write fret number:\n";
-  const unsigned fret_count = 6;
-  std::array<int, fret_count> frets;
-  for (unsigned i = 0; i < fret_count; ++i)
-  {
-    std::cin >> frets[i];
-    LOG << "read frets[" << i << "] = " << frets[i];
-  }
-  Guitar::Tab chord_tab{frets[0], frets[1], frets[2], frets[3], frets[4], frets[5]};
+  Guitar::Tab chord_tab = getTabFromInput(std::cout, std::cin);
   LOG << "Tab from frets created";
   Guitar::Chord::add(chord_name, chord_tab);
   LOG << "Adding chord";
