@@ -22,12 +22,13 @@ void ChangeChordCommand::process(const CommandOptions &)
       Chord::changeChords(chord_to_change, changed_tab);
       std::cout << "Chord changed\n";
       LOG << "Chord changed";
+
+      changed = true;
     }
     catch (Chord::NotExist &ex)
     {
-      LOG << "Not found chord";
+      LOG << "Not found chord: " << ex.getChord();
       std::cout << "Not existing chord: " << ex.getChord() << "\n";
-      continue;
     }
     catch(NoChordPassed &)
     {
@@ -35,7 +36,5 @@ void ChangeChordCommand::process(const CommandOptions &)
       LOG << "Not changing any chord";
       return;
     }
-
-    changed = true;
   }
 }

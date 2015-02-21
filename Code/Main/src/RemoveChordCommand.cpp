@@ -3,7 +3,7 @@
 
 using namespace Main;
 
-void RemoveChordCommand::process(const GuitarLearnerCommand::CommandOptions& options)
+void RemoveChordCommand::process(const GuitarLearnerCommand::CommandOptions& )
 {
   LOG << "entry";
 
@@ -16,13 +16,20 @@ void RemoveChordCommand::process(const GuitarLearnerCommand::CommandOptions& opt
     try
     {
       Chord::ChordNameType chord_to_change = getChordFromInput("remove");
-      Chord::getChord(chord_to_change);
+      Chord::removeChord(chord_to_change);
+
+      removed = true;
     }
     catch (NoChordPassed &)
     {
       std::cout << "\nNo chord removed\n";
       LOG << "Not removing any chord";
       return;
+    }
+    catch (Chord::NotExist &ex)
+    {
+      std::cout << "Trying to remove not existing chord: " << ex.getChord() << "\n";
+      LOG << "Trying to remove not existing chord: " << ex.getChord();
     }
   }
 
