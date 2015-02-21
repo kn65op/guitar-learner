@@ -6,7 +6,7 @@ using Guitar::Tab;
 
 Chord::Chords Chord::chords;
 
-Chord::Chord(const std::string & chord, const Tab &chord_tab) :
+Chord::Chord(const ChordNameType & chord, const Tab &chord_tab) :
     name {chord} ,
     tab(chord_tab) { }
 
@@ -15,7 +15,7 @@ size_t Chord::size()
   return chords.size();
 }
 
-void Chord::add(const std::string &name, const Tab &tab)
+void Chord::add(const ChordNameType &name, const Tab &tab)
 {
   if (chords.find(name) != chords.end())
   {
@@ -34,7 +34,7 @@ void Chord::clear()
   chords.clear();
 }
 
-std::string Chord::getName() const
+Chord::ChordNameType Chord::getName() const
 {
   return name;
 }
@@ -51,7 +51,7 @@ const Tab & Chord::getTab() const
   return tab;
 }
 
-const Chord& Chord::getChord(const std::string &name)
+const Chord& Chord::getChord(const ChordNameType &name)
 {
   try
   {
@@ -63,7 +63,7 @@ const Chord& Chord::getChord(const std::string &name)
   }
 }
 
-void Chord::changeChords(const std::string &name, const Tab &tab)
+void Chord::changeChords(const ChordNameType &name, const Tab &tab)
 {
   try
   {

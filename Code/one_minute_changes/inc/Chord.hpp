@@ -11,7 +11,7 @@ class Chord
 {
 public:
   typedef std::string ChordNameType;
-  typedef std::map<std::string, Chord> Chords;
+  typedef std::map<ChordNameType, Chord> Chords;
 
   class AlreadyAdded
   {
@@ -31,17 +31,17 @@ public:
   };
 
   static size_t size();
-  static void add(const std::string &name, const Tab &tab);
+  static void add(const ChordNameType &name, const Tab &tab);
   static const Chords& getChords();
   static void clear();
-  static void changeChords(const std::string &name, const Tab &tab);
-  static const Chord& getChord(const std::string &name);
+  static void changeChords(const ChordNameType &name, const Tab &tab);
+  static const Chord& getChord(const ChordNameType &name);
 
   Chord() = delete;
-  std::string getName() const;
+  ChordNameType getName() const;
   const Tab& getTab() const;
 private:
-  Chord(const std::string & chord, const Tab &tab);
+  Chord(const ChordNameType & chord, const Tab &tab);
 
   static Chords chords;
 
