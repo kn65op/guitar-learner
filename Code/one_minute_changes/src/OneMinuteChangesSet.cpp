@@ -15,7 +15,7 @@ OneMinuteChangesSet::OneMinuteChangesSet(std::istream &in)
   for (SetType::size_type i = 0; i < size; ++i)
   {
     Element omc(new OneMinuteChanges::OneMinuteChange(in));
-    changes.insert(omc);
+    changes.push_back(omc);
   }
 }
 
@@ -31,7 +31,7 @@ OneMinuteChangesSet::size_type OneMinuteChangesSet::size() const noexcept
 
 void OneMinuteChangesSet::add(Element element)
 {
-  changes.insert(element);
+  changes.push_back(element);
 }
 
 OneMinuteChangesSet::Element OneMinuteChangesSet::findWorstChord() const
@@ -41,11 +41,10 @@ OneMinuteChangesSet::Element OneMinuteChangesSet::findWorstChord() const
     throw Exceptions::NoElements();
   }
 
-  return *std::min_element(changes.begin(), changes.end(), [](const Element &first, const Element & second) -> bool
+  return *std::min_element(changes.begin(), changes.end(), [](const Element &first, const Element & second)
   {
     return first->bestResult() < second->bestResult();
-  }
-                           );
+  });
 }
 
 OneMinuteChangesSet::Element OneMinuteChangesSet::findLastWorstChord() const
@@ -55,11 +54,10 @@ OneMinuteChangesSet::Element OneMinuteChangesSet::findLastWorstChord() const
     throw Exceptions::NoElements();
   }
 
-  return *std::min_element(changes.begin(), changes.end(), [](const Element &first, const Element & second) -> bool
+  return *std::min_element(changes.begin(), changes.end(), [](const Element &first, const Element & second)
   {
     return first->lastResult() < second->lastResult();
-  }
-                           );
+  });
 }
 
 std::string OneMinuteChangesSet::print() const

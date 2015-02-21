@@ -6,7 +6,7 @@
 
 using namespace Main;
 
-void ChangeChordCommand::process(const CommandOptions &argumets)
+void ChangeChordCommand::process(const CommandOptions &)
 {
   using Guitar::Chord;
   LOG<< "Entering ChangeChordCommand";
@@ -14,20 +14,9 @@ void ChangeChordCommand::process(const CommandOptions &argumets)
   while (!changed)
   {
     LOG << "Changing loop";
-    std::cout << "What chord to remove (EOF to cancel)? ";
-    Chord::ChordNameType chord_to_change;
-    std::cin >> chord_to_change;
-    LOG << "Chord to remove: " << chord_to_change;
-
-    if (chord_to_change == "\0")
-    {
-      std::cout << "\nNo chord removed\n";
-      LOG << "Not removing any chord";
-      return;
-    }
-
     try
     {
+      Chord::ChordNameType chord_to_change = getChordFromInput("change");
       Chord::getChord(chord_to_change);
       Tab changed_tab = getTabFromInput();
       Chord::changeChords(chord_to_change, changed_tab);
@@ -37,8 +26,14 @@ void ChangeChordCommand::process(const CommandOptions &argumets)
     catch (Chord::NotExist &ex)
     {
       LOG << "Not found chord";
-      std::cout << "Not existing chord: " << chord_to_change << "\n";
+      std::cout << "Not existing chord: " << ex.getChord() << "\n";
       continue;
+    }
+    catch(NoChordPassed &)
+    {
+      std::cout << "\nNo chord changed\n";
+      LOG << "Not changing any chord";
+      return;
     }
 
     changed = true;

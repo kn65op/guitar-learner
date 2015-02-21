@@ -18,6 +18,16 @@ public:
   };
   class NotExist
   {
+    ChordNameType chord;
+  public:
+    NotExist(const ChordNameType &name) :
+        chord(name)
+    {
+    }
+    ChordNameType getChord() const noexcept
+    {
+      return chord;
+    }
   };
 
   static size_t size();

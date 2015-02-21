@@ -5,6 +5,7 @@
 #include <memory>
 #include "ChangeChordCommand.h"
 #include "GuitarLearnerCommand.h"
+#include "RemoveChordCommand.h"
 
 namespace Main
 {
@@ -26,12 +27,13 @@ public:
     case CommandType::Nothing:
       throw InvalidCommand();
     case CommandType::AddChord:
-      return std::make_unique<Main::AddChordCommand>();
+      return std::make_unique<AddChordCommand>();
     case CommandType::ListChords:
-      return std::make_unique<Main::ListChordsCommand>();
+      return std::make_unique<ListChordsCommand>();
     case CommandType::ChangeChord:
-      return std::make_unique<Main::ChangeChordCommand>();
+      return std::make_unique<ChangeChordCommand>();
     case CommandType::RemoveChord:
+      return std::make_unique<RemoveChordCommand>();
     throw InvalidCommand();
 
     }

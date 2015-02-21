@@ -21,7 +21,7 @@ class OneMinuteChangesSet
 {
 public:
   typedef std::shared_ptr<IOneMinuteChange> Element;
-  typedef std::set<Element> SetType;
+  typedef std::vector<Element> SetType;
   typedef SetType::size_type size_type;
 
   OneMinuteChangesSet();

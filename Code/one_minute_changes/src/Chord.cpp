@@ -59,7 +59,7 @@ const Chord& Chord::getChord(const std::string &name)
   }
   catch (std::out_of_range &)
   {
-    throw NotExist {};
+    throw NotExist {name};
   }
 }
 
@@ -71,6 +71,6 @@ void Chord::changeChords(const std::string &name, const Tab &tab)
   }
   catch (std::out_of_range &)
   {
-    throw NotExist {};
+    throw NotExist {name};
   }
 }
