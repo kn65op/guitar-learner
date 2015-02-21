@@ -74,3 +74,11 @@ void Chord::changeChords(const ChordNameType &name, const Tab &tab)
     throw NotExist {name};
   }
 }
+
+void Chord::removeChord(const ChordNameType &name)
+{
+  if (!chords.erase(name))
+  {
+    throw NotExist{name};
+  }
+}

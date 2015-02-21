@@ -101,3 +101,26 @@ TEST_F(ChordTest, ChordShouldChangeTab)
   EXPECT_NE(old_tab.print(), Chord::getChord("A").getTab().print());
   EXPECT_EQ(new_tab.print(), Chord::getChord("A").getTab().print());
 }
+
+TEST_F(ChordTest, ChordShouldRemoveChordWhenPrompted)
+{
+  Tab tab;
+  Chord::add("A", tab);
+  ASSERT_EQ(1, Chord::size());
+  Chord::removeChord("A");
+  EXPECT_EQ(0, Chord::size());
+}
+
+TEST_F(ChordTest, ChordShouldThrowWhenTryToRemoveNotExistingChord)
+{
+  EXPECT_THROW(Chord::removeChord("A"), Chord::NotExist);
+}
+
+TEST_F(ChordTest, ChordShouldThrowWhenTryToRemoveNotExistingChordAndSomeOtherChordsExixsts)
+{
+  Tab tab;
+  Chord::add("A", tab);
+  ASSERT_EQ(1, Chord::size());
+  EXPECT_THROW(Chord::removeChord("b"), Chord::NotExist);
+  ASSERT_EQ(1, Chord::size());
+}

@@ -36,6 +36,7 @@ public:
   static void clear();
   static void changeChords(const ChordNameType &name, const Tab &tab);
   static const Chord& getChord(const ChordNameType &name);
+  static void removeChord(const ChordNameType &name);
 
   Chord() = delete;
   ChordNameType getName() const;
