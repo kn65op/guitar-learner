@@ -28,7 +28,13 @@ public:
                      std::string());
   MOCK_CONST_METHOD0(print,
                      std::string());
+  MOCK_CONST_METHOD1(compare,
+                     bool(const IOneMinuteChange &));
 
+  bool operator==(const IOneMinuteChange &other) const override
+  {
+    return compare(other);
+  }
 };
 
 #pragma GCC diagnostic pop

@@ -15,14 +15,19 @@ namespace Exceptions
 struct NoElements
 {
 };
+
+struct NoChangeFound
+{
+};
+
 }
 
 class OneMinuteChangesSet
 {
 public:
   typedef std::shared_ptr<IOneMinuteChange> Element;
-  typedef std::vector<Element> SetType;
-  typedef SetType::size_type size_type;
+  typedef std::vector<Element> ContainerType;
+  typedef ContainerType::size_type size_type;
 
   OneMinuteChangesSet();
   OneMinuteChangesSet(std::istream & in);
@@ -33,11 +38,13 @@ public:
 
   Element findWorstChord() const;
   Element findLastWorstChord() const;
+  Element getChange(const Guitar::Chord::ChordNameType &first_chord,
+                    const Guitar::Chord::ChordNameType &second_chord) const;
   std::string print() const;
 
 private:
-  typedef SetType::iterator SetIterator;
-  static SetType changes;
+  typedef ContainerType::iterator SetIterator;
+  static ContainerType changes;
 };
 
 }

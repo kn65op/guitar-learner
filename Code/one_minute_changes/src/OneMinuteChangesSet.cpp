@@ -1,18 +1,19 @@
 #include "../inc/OneMinuteChangesSet.hpp"
 
 #include <algorithm>
+#include <tuple>
 
 using OneMinuteChanges::OneMinuteChangesSet;
 
-OneMinuteChangesSet::SetType OneMinuteChangesSet::changes;
+OneMinuteChangesSet::ContainerType OneMinuteChangesSet::changes;
 
 OneMinuteChangesSet::OneMinuteChangesSet() { }
 
 OneMinuteChangesSet::OneMinuteChangesSet(std::istream &in)
 {
-  SetType::size_type size;
+  ContainerType::size_type size;
   in >> size;
-  for (SetType::size_type i = 0; i < size; ++i)
+  for (ContainerType::size_type i = 0; i < size; ++i)
   {
     Element omc(new OneMinuteChanges::OneMinuteChange(in));
     changes.push_back(omc);
@@ -68,4 +69,20 @@ std::string OneMinuteChangesSet::print() const
     ret += c->print();
   }
   return ret;
+}
+
+OneMinuteChangesSet::Element OneMinuteChangesSet::getChange(const Guitar::Chord::ChordNameType &first_chord,
+                                                            const Guitar::Chord::ChordNameType &second_chord) const
+{
+  Guitar::Chord::ChordNameType chord_min, chord_max;
+  std::tie(chord_min, chord_max) = std::minmax(first_chord, second_chord);
+  auto change = std::find_if(changes.begin(), changes.end(), [&chord_min, &chord_max] (const Element & element)
+  {
+     return chord_min == element->getFirstChord() && chord_max == element->getSecondChord();
+  });
+  if (change == changes.end())
+  {
+    throw Exceptions::NoChangeFound();
+  }
+  return *change;
 }

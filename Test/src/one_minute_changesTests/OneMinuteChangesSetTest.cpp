@@ -79,6 +79,78 @@ TEST_F(OneMinuteChangesSetTest, FindWorstChordShouldReturnElementWithLowestMaxVa
   EXPECT_EQ(min_result, omcs.findWorstChord()->bestResult());
 }
 
+TEST_F(OneMinuteChangesSetTest, WhenChangeWasAddedShouldBePosibilityToAddNewResult)
+{
+  OneMinuteChangeMock *omcMockLowest = new OneMinuteChangeMock();
+  OneMinuteChangesSet::Element omcLowest{omcMockLowest};
+  OneMinuteChangeMock *omcMock = new OneMinuteChangeMock();
+  OneMinuteChangesSet::Element omc{omcMock};
+
+  omcs.add(omcLowest);
+  omcs.add(omc);
+  int min_result = 1;
+
+  EXPECT_CALL(*omcMockLowest, bestResult()).WillRepeatedly(Return(min_result));
+  EXPECT_CALL(*omcMock, bestResult()).WillRepeatedly(Return(min_result + 1));
+
+  EXPECT_EQ(min_result, omcs.findWorstChord()->bestResult());
+
+  EXPECT_CALL(*omcMockLowest, getFirstChord()).WillRepeatedly(Return("A"));
+  EXPECT_CALL(*omcMockLowest, getSecondChord()).WillRepeatedly(Return("B"));
+  EXPECT_CALL(*omcMock, getFirstChord()).WillRepeatedly(Return("A"));
+  EXPECT_CALL(*omcMock, getSecondChord()).WillRepeatedly(Return("C"));
+  EXPECT_CALL(*omcMockLowest, addResult(min_result + 2)).Times(1);
+  omcs.getChange("A", "B")->addResult(min_result + 2);
+
+  EXPECT_CALL(*omcMockLowest, bestResult()).WillRepeatedly(Return(min_result + 2));
+  EXPECT_CALL(*omcMock, bestResult()).WillRepeatedly(Return(min_result + 1));
+  EXPECT_EQ(min_result + 1, omcs.findWorstChord()->bestResult());
+}
+
+TEST_F(OneMinuteChangesSetTest, WhenChangeWasAddedShouldBePosibilityToAddNewResultWithInvertedChords)
+{
+  OneMinuteChangeMock *omcMockLowest = new OneMinuteChangeMock();
+  OneMinuteChangesSet::Element omcLowest{omcMockLowest};
+  OneMinuteChangeMock *omcMock = new OneMinuteChangeMock();
+  OneMinuteChangesSet::Element omc{omcMock};
+
+  omcs.add(omcLowest);
+  omcs.add(omc);
+  int min_result = 1;
+
+  EXPECT_CALL(*omcMockLowest, bestResult()).WillRepeatedly(Return(min_result));
+  EXPECT_CALL(*omcMock, bestResult()).WillRepeatedly(Return(min_result + 1));
+
+  EXPECT_EQ(min_result, omcs.findWorstChord()->bestResult());
+
+  EXPECT_CALL(*omcMockLowest, getFirstChord()).WillRepeatedly(Return("A"));
+  EXPECT_CALL(*omcMockLowest, getSecondChord()).WillRepeatedly(Return("B"));
+  EXPECT_CALL(*omcMock, getFirstChord()).WillRepeatedly(Return("A"));
+  EXPECT_CALL(*omcMock, getSecondChord()).WillRepeatedly(Return("C"));
+  EXPECT_CALL(*omcMockLowest, addResult(min_result + 2)).Times(1);
+  omcs.getChange("B", "A")->addResult(min_result + 2);
+
+  EXPECT_CALL(*omcMockLowest, bestResult()).WillRepeatedly(Return(min_result + 2));
+  EXPECT_CALL(*omcMock, bestResult()).WillRepeatedly(Return(min_result + 1));
+  EXPECT_EQ(min_result + 1, omcs.findWorstChord()->bestResult());
+}
+
+TEST_F(OneMinuteChangesSetTest, GetChangeShouldThrowNoChangeFoundWhenSearchingForNotPresentChange)
+{
+  EXPECT_THROW(omcs.getChange("A", "B"), OneMinuteChanges::Exceptions::NoChangeFound);
+}
+
+TEST_F(OneMinuteChangesSetTest, GetChangeShouldThrowNoChangeFoundWhenSearchingForNotPresentChangeAndOtherChanges)
+{
+  OneMinuteChangeMock *omcMockLowest = new OneMinuteChangeMock();
+  OneMinuteChangesSet::Element omcLowest{omcMockLowest};
+
+  omcs.add(omcLowest);
+  EXPECT_CALL(*omcMockLowest, getFirstChord()).WillRepeatedly(Return("C"));
+  EXPECT_CALL(*omcMockLowest, getSecondChord()).WillRepeatedly(Return("B"));
+  EXPECT_THROW(omcs.getChange("A", "B"), OneMinuteChanges::Exceptions::NoChangeFound);
+}
+
 TEST_F(OneMinuteChangesSetTest, findLastWorstChordShouldThowNoElementsExceptionWhenNoElementsInSet)
 {
   EXPECT_THROW(omcs.findLastWorstChord(), OneMinuteChanges::Exceptions::NoElements);

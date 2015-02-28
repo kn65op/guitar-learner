@@ -5,6 +5,10 @@ using namespace Main;
 
 void RemoveChordCommand::process(const GuitarLearnerCommand::CommandOptions& )
 {
+  std::cout << "Remove currently not supported\n";
+  LOG << "Remove currently not supported\n";
+
+  return;
   LOG << "entry";
 
   bool removed = false;

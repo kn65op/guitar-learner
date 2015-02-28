@@ -5,6 +5,8 @@
 #include <vector>
 #include <iostream>
 
+#include "Chord.hpp"
+
 namespace OneMinuteChanges
 {
 
@@ -17,6 +19,7 @@ public:
   {
   }
 
+  virtual bool operator==(const IOneMinuteChange &other) const = 0;
   virtual void addResult(int result) = 0;
   virtual int bestResult() const = 0;
   virtual int lastResult() const = 0;
@@ -29,10 +32,10 @@ public:
 class OneMinuteChange : public IOneMinuteChange
 {
 public:
-  OneMinuteChange(const std::string & chordA, const std::string & chordB);
+  OneMinuteChange(const Guitar::Chord::ChordNameType & chordA, const Guitar::Chord::ChordNameType & chordB);
   OneMinuteChange(std::istream &is);
 
-  bool operator==(const OneMinuteChange &other) const;
+  bool operator==(const IOneMinuteChange &other) const override;
   void addResult(int result) override;
   int bestResult() const override;
   int lastResult() const override;

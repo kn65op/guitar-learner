@@ -4,7 +4,7 @@
 
 using OneMinuteChanges::OneMinuteChange;
 
-OneMinuteChange::OneMinuteChange(const std::string &chordA, const std::string &chordB) :
+OneMinuteChange::OneMinuteChange(const Guitar::Chord::ChordNameType &chordA, const Guitar::Chord::ChordNameType &chordB) :
     first(std::min(chordA, chordB)),
     second(std::max(chordA, chordB)),
     results() { }
@@ -24,9 +24,9 @@ OneMinuteChange::OneMinuteChange(std::istream &is)
 
 }
 
-bool OneMinuteChange::operator==(const OneMinuteChange &other) const
+bool OneMinuteChange::operator==(const IOneMinuteChange &other) const
 {
-  return first == other.first && second == other.second;
+  return first == other.getFirstChord() && second == other.getSecondChord();
 }
 
 bool OneMinuteChanges::operator!=(const OneMinuteChange &first, const OneMinuteChange &other)
