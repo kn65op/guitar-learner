@@ -33,7 +33,7 @@ public:
   OneMinuteChangesSet(std::istream & in);
 
   void clear() noexcept;
-  void add(Element omcMock);
+  void add(Element omc);
   size_type size() const noexcept;
 
   Element findWorstChord() const;

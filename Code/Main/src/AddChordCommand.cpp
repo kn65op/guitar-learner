@@ -1,6 +1,7 @@
 #include "../inc/AddChordCommand.h"
 #include <one_minute_changes/inc/Chord.hpp>
 #include <one_minute_changes/inc/Tab.hpp>
+#include <one_minute_changes/inc/OneMinuteChangesSet.hpp>
 #include <iostream>
 #include <TLogger.h>
 
@@ -14,6 +15,13 @@ void Main::AddChordCommand::process(const Main::GuitarLearnerCommand::CommandOpt
   std::cin >> chord_name;
   Guitar::Tab chord_tab = getTabFromInput(std::cout, std::cin);
   LOG << "Tab from frets created";
+
+  OneMinuteChanges::OneMinuteChangesSet omc_set;
+  for (const auto & chord : Guitar::Chord::getChords())
+  {
+    omc_set.add(std::make_shared<OneMinuteChanges::OneMinuteChange>(chord.first, chord_name));
+  }
+
   Guitar::Chord::add(chord_name, chord_tab);
   LOG << "Adding chord";
   std::cout << "Chord added\n";
