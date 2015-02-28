@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <tuple>
+#include <TLogger.h>
 
 using OneMinuteChanges::OneMinuteChangesSet;
 
@@ -85,4 +86,12 @@ OneMinuteChangesSet::Element OneMinuteChangesSet::getChange(const Guitar::Chord:
     throw Exceptions::NoChangeFound();
   }
   return *change;
+}
+
+void OneMinuteChangesSet::removeAllContainingChord(const Guitar::Chord::ChordNameType &chord)
+{
+  changes.erase(std::remove_if(changes.begin(), changes.end(), [&chord](const Element & element)
+  {
+    return element->getFirstChord() == chord || element->getSecondChord() == chord;
+  }) , changes.end());
 }

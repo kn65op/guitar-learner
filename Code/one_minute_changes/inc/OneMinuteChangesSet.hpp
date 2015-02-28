@@ -34,6 +34,7 @@ public:
 
   void clear() noexcept;
   void add(Element omc);
+  void removeAllContainingChord(const Guitar::Chord::ChordNameType &chord);
   size_type size() const noexcept;
 
   Element findWorstChord() const;

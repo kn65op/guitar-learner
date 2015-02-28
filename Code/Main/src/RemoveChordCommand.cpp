@@ -1,14 +1,11 @@
 #include "../inc/RemoveChordCommand.h"
+#include <one_minute_changes/inc/OneMinuteChangesSet.hpp>
 #include <TLogger.h>
 
 using namespace Main;
 
 void RemoveChordCommand::process(const GuitarLearnerCommand::CommandOptions& )
 {
-  std::cout << "Remove currently not supported\n";
-  LOG << "Remove currently not supported\n";
-
-  return;
   LOG << "entry";
 
   bool removed = false;
@@ -19,8 +16,11 @@ void RemoveChordCommand::process(const GuitarLearnerCommand::CommandOptions& )
     LOG << "Changing loop";
     try
     {
-      Chord::ChordNameType chord_to_change = getChordFromInput("remove");
-      Chord::removeChord(chord_to_change);
+      Chord::ChordNameType chord_to_remove = getChordFromInput("remove");
+      Chord::removeChord(chord_to_remove);
+
+      OneMinuteChanges::OneMinuteChangesSet omc_set;
+      omc_set.removeAllContainingChord(chord_to_remove);
 
       removed = true;
     }

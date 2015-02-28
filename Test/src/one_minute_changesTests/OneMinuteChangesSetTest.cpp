@@ -219,3 +219,35 @@ TEST_F(OneMinuteChangesSetTest, ChangesShoulBeRead)
   EXPECT_EQ(omcs.findWorstChord()->bestResult(), 2);
   EXPECT_EQ(omcs.findLastWorstChord()->lastResult(), 1);
 }
+
+TEST_F(OneMinuteChangesSetTest, RemoveAllContainingChordShouldRemoveAllAndOnlyChangesContainingChord)
+{
+  OneMinuteChangeMock *omc1Mock = new OneMinuteChangeMock();
+  OneMinuteChangesSet::Element omc1{omc1Mock};
+  OneMinuteChangeMock *omc2Mock = new OneMinuteChangeMock();
+  OneMinuteChangesSet::Element omc2{omc2Mock};
+  OneMinuteChangeMock *omc3Mock = new OneMinuteChangeMock();
+  OneMinuteChangesSet::Element omc3{omc3Mock};
+
+  EXPECT_CALL(*omc1Mock, getFirstChord()).WillRepeatedly(Return("A"));
+  EXPECT_CALL(*omc1Mock, getSecondChord()).WillRepeatedly(Return("B"));
+  EXPECT_CALL(*omc2Mock, getFirstChord()).WillRepeatedly(Return("B"));
+  EXPECT_CALL(*omc2Mock, getSecondChord()).WillRepeatedly(Return("C"));
+  EXPECT_CALL(*omc3Mock, getFirstChord()).WillRepeatedly(Return("C"));
+  EXPECT_CALL(*omc3Mock, getSecondChord()).WillRepeatedly(Return("A"));
+  EXPECT_CALL(*omc1Mock, lastResult()).WillRepeatedly(Return(1));
+  EXPECT_CALL(*omc2Mock, lastResult()).WillRepeatedly(Return(2));
+  EXPECT_CALL(*omc3Mock, lastResult()).WillRepeatedly(Return(3));
+
+  OneMinuteChangesSet omcs;
+  omcs.add(omc1);
+  omcs.add(omc2);
+  omcs.add(omc3);
+
+  ASSERT_EQ(3, omcs.size());
+
+  omcs.removeAllContainingChord("A");
+  EXPECT_EQ(1, omcs.size());
+
+  EXPECT_EQ(2, omcs.findLastWorstChord()->lastResult());
+}
