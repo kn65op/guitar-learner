@@ -33,6 +33,7 @@ int main(int argc, const char *argv[])
 
   try
   {
+    LOG << "Executing command";
     Main::CommandFactory::createCommand(po.getCommand())->process(Main::GuitarLearnerCommand::CommandOptions());
     LOG << "Command executed";
   }
