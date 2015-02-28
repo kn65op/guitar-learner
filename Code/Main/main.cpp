@@ -18,7 +18,7 @@ int main(int argc, const char *argv[])
     std::ifstream in(default_name);
     Guitar::DatabaseFileReader::read(in);
   }
-  catch (Guitar::DatabaseFileReader::VersionNotSupported version)
+  catch (Guitar::DatabaseFileReader::VersionNotSupported &version)
   {
     std::cerr << "Unable to read database file\n";
   }

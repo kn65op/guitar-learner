@@ -32,5 +32,4 @@ void RemoveChordCommand::process(const GuitarLearnerCommand::CommandOptions& )
       LOG << "Trying to remove not existing chord: " << ex.getChord();
     }
   }
-
 }
