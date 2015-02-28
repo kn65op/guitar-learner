@@ -80,3 +80,11 @@ TEST_F(ProgramOptionsTest, ForRemoveChordOptionGetCommandShouldReturnRemoveChord
   ProgramOptions po(argc, args);
   EXPECT_EQ(CommandType::RemoveChord, po.getCommand());
 }
+
+TEST_F(ProgramOptionsTest, ForAddOneMinuteChangeOptionGetCommandShouldReturnAddOneMinuteChnageCommand)
+{
+  int argc = 2;
+  const char *args[] = {"program", "--add_one_minute_change"};
+  ProgramOptions po(argc, args);
+  EXPECT_EQ(CommandType::AddOneMinuteChange, po.getCommand());
+}

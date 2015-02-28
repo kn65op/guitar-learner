@@ -10,6 +10,7 @@ const std::string ProgramOptions::CHANGE_CHORD_STRING = "change_chord";
 const std::string ProgramOptions::ADD_CHORD_STRING = "add_chord";
 const std::string ProgramOptions::LIST_CHORDS_STRING = "list_chords";
 const std::string ProgramOptions::REMOVE_CHORD_STRING = "remove_chord";
+const std::string ProgramOptions::ADD_ONE_MINUTE_CHANGE_STRING = "add_one_minute_change";
 
 ProgramOptions::ProgramOptions(int argc, const char *argv[]) :
     description("Options"),
@@ -21,7 +22,8 @@ ProgramOptions::ProgramOptions(int argc, const char *argv[]) :
   (ADD_CHORD_STRING.c_str(), "Adds chord. Specify chord when prompted.")
   (LIST_CHORDS_STRING.c_str(), "List chords")
   (CHANGE_CHORD_STRING.c_str(), "Change chord")
-  (REMOVE_CHORD_STRING.c_str(), "Remove chord. Specify chord when prompted.");
+  (REMOVE_CHORD_STRING.c_str(), "Remove chord. Specify chord when prompted.")
+  (ADD_ONE_MINUTE_CHANGE_STRING.c_str(), "Add one minute change. Specify chords and result when prompted");
   try
   {
     store(parse_command_line(argc, argv, description), vm);
@@ -72,5 +74,9 @@ void ProgramOptions::findFirstCommand()
   if (vm.count(REMOVE_CHORD_STRING) != 0)
   {
     command = CommandType::RemoveChord;
+  }
+  if(vm.count(ADD_ONE_MINUTE_CHANGE_STRING) != 0)
+  {
+    command = CommandType::AddOneMinuteChange;
   }
 }

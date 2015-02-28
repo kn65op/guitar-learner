@@ -6,6 +6,7 @@
 #include "ChangeChordCommand.h"
 #include "GuitarLearnerCommand.h"
 #include "RemoveChordCommand.h"
+#include "AddOneMinuteChangeCommand.h"
 
 namespace Main
 {
@@ -34,6 +35,8 @@ public:
       return std::make_unique<ChangeChordCommand>();
     case CommandType::RemoveChord:
       return std::make_unique<RemoveChordCommand>();
+    case CommandType::AddOneMinuteChange:
+      return std::make_unique<AddOneMinuteChangeCommand>();
     throw InvalidCommand();
 
     }
