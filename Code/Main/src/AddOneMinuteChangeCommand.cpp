@@ -16,14 +16,27 @@ void AddOneMinuteChangeCommand::process(const CommandOptions &)
     auto second_chord = getChordFromInput("be second");
 
     using OneMinuteChanges::OneMinuteChangesSet;
-    using OneMinuteChanges::OneMinuteChange;
     OneMinuteChangesSet omc_set;
 
-//    OneMinuteChangesSet::Element omc = std::make_shared<OneMinuteChange>();
+    OneMinuteChangesSet::Element omc = omc_set.getChange(first_chord, second_chord);
+
+    int result = getResultFromInput();
+
+    omc->addResult(result);
   }
   catch (NoChordPassed &)
   {
-    std::cout << "Not adding any one minute change";
+    std::cout << "Not adding any one minute change\n";
     LOG << "Not adding any one minute change";
+  }
+  catch (OneMinuteChanges::Exceptions::NoChangeFound &ex)
+  {
+    std::cout << "There is no such change. Did you add such chords?\n";
+    LOG << "Not found proper change, possibly written not existing chord";
+  }
+  catch (InvalidIntegerRead &)
+  {
+    std::cout << "Could not read result, not adding\n";
+    LOG << "Could not read integer, probably some letters passed";
   }
 }

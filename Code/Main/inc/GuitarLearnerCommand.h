@@ -44,6 +44,10 @@ protected:
   {
   };
 
+  class InvalidIntegerRead
+  {
+  };
+
   ChordName getChordFromInput(const std::string &operation, std::ostream &ostream = std::cout, std::istream &istream = std::cin) const
   {
     ChordName chord;
@@ -56,6 +60,21 @@ protected:
       throw NoChordPassed{};
     }
     return chord;
+  }
+
+  int getResultFromInput(std::ostream &ostream = std::cout, std::istream &istream = std::cin) const
+  {
+    ostream << "Write result: ";
+
+    int result;
+    istream >> result;
+    if (!istream.failbit)
+    {
+      istream.clear();
+      throw InvalidIntegerRead();
+    }
+
+    return result;
   }
 };
 
