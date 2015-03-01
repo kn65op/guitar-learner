@@ -30,3 +30,13 @@ Testing
 
 stats
 Test/coverage
+
+#From test_all.sh
+warnings.txt
+warnings_cmake.txt
+warnings_test.txt
+Debug-Clang
+Debug-GCC
+Release-Clang
+Release-GCC
+
