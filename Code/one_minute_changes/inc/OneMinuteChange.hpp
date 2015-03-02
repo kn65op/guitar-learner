@@ -13,16 +13,17 @@ namespace OneMinuteChanges
 class IOneMinuteChange
 {
 public:
-  typedef std::vector<int> Results;
+  using ResultType = int;
+  typedef std::vector<ResultType> Results;
 
   virtual ~IOneMinuteChange()
   {
   }
 
   virtual bool operator==(const IOneMinuteChange &other) const = 0;
-  virtual void addResult(int result) = 0;
-  virtual int bestResult() const = 0;
-  virtual int lastResult() const = 0;
+  virtual void addResult(ResultType result) = 0;
+  virtual ResultType bestResult() const = 0;
+  virtual ResultType lastResult() const = 0;
   virtual const Results& getResults() const = 0;
   virtual std::string getFirstChord() const = 0;
   virtual std::string getSecondChord() const = 0;
@@ -36,9 +37,9 @@ public:
   OneMinuteChange(std::istream &is);
 
   bool operator==(const IOneMinuteChange &other) const override;
-  void addResult(int result) override;
-  int bestResult() const override;
-  int lastResult() const override;
+  void addResult(ResultType result) override;
+  ResultType bestResult() const override;
+  ResultType lastResult() const override;
   const Results& getResults() const override;
   std::string getFirstChord() const override;
   std::string getSecondChord() const override;

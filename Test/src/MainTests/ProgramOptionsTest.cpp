@@ -89,10 +89,18 @@ TEST_F(ProgramOptionsTest, ForAddOneMinuteChangeOptionGetCommandShouldReturnAddO
   EXPECT_EQ(CommandType::AddOneMinuteChange, po.getCommand());
 }
 
-TEST_F(ProgramOptionsTest, ForListAllBestOneMinuteChnagesOptionGetCommandShouldReturnAllOneMinuteChnages)
+TEST_F(ProgramOptionsTest, ForListBestResultsOptionGetCommandShouldReturnListAllOneMinuteChnages)
 {
   int argc = 2;
   const char *args[] = {"program", "--list_best_results"};
   ProgramOptions po(argc, args);
   EXPECT_EQ(CommandType::ListBestResults, po.getCommand());
+}
+
+TEST_F(ProgramOptionsTest, ForListLastResultsOptionGetCommandShouldReturnListAllOneMinuteChnages)
+{
+  int argc = 2;
+  const char *args[] = {"program", "--list_last_results"};
+  ProgramOptions po(argc, args);
+  EXPECT_EQ(CommandType::ListLastResults, po.getCommand());
 }

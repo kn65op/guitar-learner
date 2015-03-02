@@ -7,7 +7,7 @@
 #include "GuitarLearnerCommand.h"
 #include "RemoveChordCommand.h"
 #include "AddOneMinuteChangeCommand.h"
-#include "ListBestResults.h"
+#include "ListOneMinuteChanges.h"
 
 namespace Main
 {
@@ -39,7 +39,9 @@ public:
     case CommandType::AddOneMinuteChange:
       return std::make_unique<AddOneMinuteChangeCommand>();
     case CommandType::ListBestResults:
-      return std::make_unique<ListBestOneMinuteChanges>();
+      return std::make_unique<ListOneMinuteChanges>(ListOneMinuteChanges::ResultType::BEST);
+    case CommandType::ListLastResults:
+      return std::make_unique<ListOneMinuteChanges>(ListOneMinuteChanges::ResultType::LAST);
     throw InvalidCommand();
 
     }

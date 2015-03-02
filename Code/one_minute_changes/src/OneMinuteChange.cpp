@@ -34,12 +34,12 @@ bool OneMinuteChanges::operator!=(const OneMinuteChange &first, const OneMinuteC
   return !(first == other);
 }
 
-void OneMinuteChange::addResult(int result)
+void OneMinuteChange::addResult(ResultType result)
 {
   results.push_back(result);
 }
 
-int OneMinuteChange::bestResult() const
+OneMinuteChange::ResultType OneMinuteChange::bestResult() const
 {
   auto max = std::max_element(results.begin(), results.end());
   if (max != results.end())
@@ -54,7 +54,7 @@ const OneMinuteChange::Results& OneMinuteChange::getResults() const
   return results;
 }
 
-int OneMinuteChange::lastResult() const
+OneMinuteChange::ResultType OneMinuteChange::lastResult() const
 {
   if (results.empty())
   {
