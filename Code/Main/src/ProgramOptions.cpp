@@ -11,6 +11,7 @@ const std::string ProgramOptions::ADD_CHORD_STRING = "add_chord";
 const std::string ProgramOptions::LIST_CHORDS_STRING = "list_chords";
 const std::string ProgramOptions::REMOVE_CHORD_STRING = "remove_chord";
 const std::string ProgramOptions::ADD_ONE_MINUTE_CHANGE_STRING = "add_one_minute_change";
+const std::string ProgramOptions::LIST_BEST_RESULTS_STRING = "list_best_results";
 
 ProgramOptions::ProgramOptions(int argc, const char *argv[]) :
     description("Options"),
@@ -23,7 +24,8 @@ ProgramOptions::ProgramOptions(int argc, const char *argv[]) :
   (LIST_CHORDS_STRING.c_str(), "List chords")
   (CHANGE_CHORD_STRING.c_str(), "Change chord")
   (REMOVE_CHORD_STRING.c_str(), "Remove chord. Specify chord when prompted.")
-  (ADD_ONE_MINUTE_CHANGE_STRING.c_str(), "Add one minute change. Specify chords and result when prompted");
+  (ADD_ONE_MINUTE_CHANGE_STRING.c_str(), "Add one minute change. Specify chords and result when prompted")
+  (LIST_BEST_RESULTS_STRING.c_str(), "List all one minute changes with best result");
   try
   {
     store(parse_command_line(argc, argv, description), vm);
@@ -59,24 +61,28 @@ CommandType ProgramOptions::getCommand() const noexcept
 
 void ProgramOptions::findFirstCommand()
 {
-  if (vm.count(ADD_CHORD_STRING) != 0)
+  if (vm.count(ADD_CHORD_STRING))
   {
     command = CommandType::AddChord;
   }
-  if (vm.count(LIST_CHORDS_STRING) != 0)
+  if (vm.count(LIST_CHORDS_STRING))
   {
     command = CommandType::ListChords;
   }
-  if (vm.count(CHANGE_CHORD_STRING) != 0)
+  if (vm.count(CHANGE_CHORD_STRING))
   {
     command = CommandType::ChangeChord;
   }
-  if (vm.count(REMOVE_CHORD_STRING) != 0)
+  if (vm.count(REMOVE_CHORD_STRING))
   {
     command = CommandType::RemoveChord;
   }
-  if(vm.count(ADD_ONE_MINUTE_CHANGE_STRING) != 0)
+  if(vm.count(ADD_ONE_MINUTE_CHANGE_STRING))
   {
     command = CommandType::AddOneMinuteChange;
+  }
+  if(vm.count(LIST_BEST_RESULTS_STRING))
+  {
+    command = CommandType::ListBestResults;
   }
 }

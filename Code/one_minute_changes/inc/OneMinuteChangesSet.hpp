@@ -27,6 +27,7 @@ class OneMinuteChangesSet
 public:
   typedef std::shared_ptr<IOneMinuteChange> Element;
   typedef std::vector<Element> ContainerType;
+  typedef ContainerType::iterator iterator_type;
   typedef ContainerType::size_type size_type;
 
   OneMinuteChangesSet();
@@ -42,6 +43,8 @@ public:
   Element getChange(const Guitar::Chord::ChordNameType &first_chord,
                     const Guitar::Chord::ChordNameType &second_chord) const;
   std::string print() const;
+  iterator_type begin() const;
+  iterator_type end() const;
 
 private:
   typedef ContainerType::iterator SetIterator;

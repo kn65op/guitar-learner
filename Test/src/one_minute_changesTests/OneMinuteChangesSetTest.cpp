@@ -251,3 +251,15 @@ TEST_F(OneMinuteChangesSetTest, RemoveAllContainingChordShouldRemoveAllAndOnlyCh
 
   EXPECT_EQ(2, omcs.findLastWorstChord()->lastResult());
 }
+
+TEST_F(OneMinuteChangesSetTest, BeginAndEndShouldBeValid)
+{
+  OneMinuteChangeMock *omc1Mock = new OneMinuteChangeMock();
+  OneMinuteChangesSet::Element omc1{omc1Mock};
+
+  OneMinuteChangesSet omcs;
+  EXPECT_EQ(omcs.end(), omcs.begin());
+
+  omcs.add(omc1);
+  EXPECT_NE(omcs.end(), omcs.begin());
+}

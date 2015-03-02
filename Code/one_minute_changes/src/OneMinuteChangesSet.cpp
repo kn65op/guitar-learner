@@ -95,3 +95,13 @@ void OneMinuteChangesSet::removeAllContainingChord(const Guitar::Chord::ChordNam
     return element->getFirstChord() == chord || element->getSecondChord() == chord;
   }) , changes.end());
 }
+
+OneMinuteChangesSet::iterator_type OneMinuteChangesSet::begin() const
+{
+  return changes.begin();
+}
+
+OneMinuteChangesSet::iterator_type OneMinuteChangesSet::end() const
+{
+  return changes.end();
+}
