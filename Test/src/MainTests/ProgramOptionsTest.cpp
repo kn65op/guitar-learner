@@ -104,3 +104,19 @@ TEST_F(ProgramOptionsTest, ForListLastResultsOptionGetCommandShouldReturnListAll
   ProgramOptions po(argc, args);
   EXPECT_EQ(CommandType::ListLastResults, po.getCommand());
 }
+
+TEST_F(ProgramOptionsTest, ForShowWorstChangeOptionGetCommandShouldReturnShowWorstChange)
+{
+  int argc = 2;
+  const char *args[] = {"program", "--show_worst_change"};
+  ProgramOptions po(argc, args);
+  EXPECT_EQ(CommandType::ShowWorstChange, po.getCommand());
+}
+
+TEST_F(ProgramOptionsTest, ForShowLastResultWorstChangeOptionGetCommandShouldReturnShowLastResultWorstChange)
+{
+  int argc = 2;
+  const char *args[] = {"program", "--show_last_result_worst_change"};
+  ProgramOptions po(argc, args);
+  EXPECT_EQ(CommandType::ShowLastResultWorstChange, po.getCommand());
+}

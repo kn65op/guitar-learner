@@ -18,7 +18,7 @@ public:
   {}
   virtual void process(const CommandOptions &) override;
 private:
-  ResultType result_type;
+  const ResultType result_type;
 
   OneMinuteChanges::OneMinuteChange::ResultType getResultFromChange(const OneMinuteChanges::OneMinuteChangesSet::Element& change) const;
 };

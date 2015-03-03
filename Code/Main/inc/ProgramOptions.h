@@ -15,7 +15,9 @@ enum class CommandType
   RemoveChord,
   AddOneMinuteChange,
   ListBestResults,
-  ListLastResults
+  ListLastResults,
+  ShowLastResultWorstChange,
+  ShowWorstChange
 };
 
 class ProgramOptions
@@ -41,5 +43,7 @@ private:
   const static std::string ADD_ONE_MINUTE_CHANGE_STRING;
   const static std::string LIST_BEST_RESULTS_STRING;
   const static std::string LIST_LAST_RESULTS_STRING;
+  const static std::string SHOW_WORST_CHANGE_STRING;
+  const static std::string SHOW_LAST_RESULT_WORST_CHANGE_STRING;
 };
 }

@@ -8,6 +8,7 @@
 #include "RemoveChordCommand.h"
 #include "AddOneMinuteChangeCommand.h"
 #include "ListOneMinuteChanges.h"
+#include "ShowWorstChange.h"
 
 namespace Main
 {
@@ -42,6 +43,10 @@ public:
       return std::make_unique<ListOneMinuteChanges>(ListOneMinuteChanges::ResultType::BEST);
     case CommandType::ListLastResults:
       return std::make_unique<ListOneMinuteChanges>(ListOneMinuteChanges::ResultType::LAST);
+    case CommandType::ShowWorstChange:
+      return std::make_unique<ShowWorstChange>(ShowWorstChange::ResultType::BEST);
+    case CommandType::ShowLastResultWorstChange:
+      return std::make_unique<ShowWorstChange>(ShowWorstChange::ResultType::LAST);
     throw InvalidCommand();
 
     }
