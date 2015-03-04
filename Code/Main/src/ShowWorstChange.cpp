@@ -25,9 +25,9 @@ OneMinuteChanges::OneMinuteChangesSet::Element ShowWorstChange::getWorstChange()
   switch (result_type)
   {
     case ResultType::BEST:
-      return omc_set.findWorstChord();
+      return omc_set.findFirstWorstChordByBestResult();
     case ResultType::LAST:
-      return omc_set.findLastWorstChord();
+      return omc_set.findFirstWorstChordByLastResult();
   }
   throw std::runtime_error("Invalid result type");
 }

@@ -46,20 +46,25 @@ TEST_F(OneMinuteChangesSetTest, AfterClearSizeShouldReturn0Elements)
 
 TEST_F(OneMinuteChangesSetTest, findWorstChordShouldThowNoElementsExceptionWhenNoElementsInSet)
 {
-  EXPECT_THROW(omcs.findWorstChord(), OneMinuteChanges::Exceptions::NoElements);
+  EXPECT_THROW(omcs.findFirstWorstChordByBestResult(), OneMinuteChanges::Exceptions::NoElements);
 }
 
 TEST_F(OneMinuteChangesSetTest, FindWorstChordShouldReturnElementWithLowestMaxValueForOneChange)
 {
   OneMinuteChangeMock *omcMockLowest = new OneMinuteChangeMock();
   OneMinuteChangesSet::Element omcLowest{omcMockLowest};
+  OneMinuteChangeMock *omcMockLowest2 = new OneMinuteChangeMock();
+  OneMinuteChangesSet::Element omcLowest2{omcMockLowest2};
 
   omcs.add(omcLowest);
+  omcs.add(omcLowest2);
   int min_result = 1;
 
   EXPECT_CALL(*omcMockLowest, bestResult()).WillRepeatedly(Return(min_result));
+  EXPECT_CALL(*omcMockLowest2, bestResult()).WillRepeatedly(Return(min_result));
 
-  EXPECT_EQ(min_result, omcs.findWorstChord()->bestResult());
+  EXPECT_EQ(min_result, omcs.findFirstWorstChordByBestResult()->bestResult());
+  EXPECT_EQ(omcLowest, omcs.findFirstWorstChordByBestResult());
 }
 
 TEST_F(OneMinuteChangesSetTest, FindWorstChordShouldReturnElementWithLowestMaxValue)
@@ -76,7 +81,7 @@ TEST_F(OneMinuteChangesSetTest, FindWorstChordShouldReturnElementWithLowestMaxVa
   EXPECT_CALL(*omcMockLowest, bestResult()).WillRepeatedly(Return(min_result));
   EXPECT_CALL(*omcMock, bestResult()).WillRepeatedly(Return(min_result + 1));
 
-  EXPECT_EQ(min_result, omcs.findWorstChord()->bestResult());
+  EXPECT_EQ(min_result, omcs.findFirstWorstChordByBestResult()->bestResult());
 }
 
 TEST_F(OneMinuteChangesSetTest, WhenChangeWasAddedShouldBePosibilityToAddNewResult)
@@ -93,7 +98,7 @@ TEST_F(OneMinuteChangesSetTest, WhenChangeWasAddedShouldBePosibilityToAddNewResu
   EXPECT_CALL(*omcMockLowest, bestResult()).WillRepeatedly(Return(min_result));
   EXPECT_CALL(*omcMock, bestResult()).WillRepeatedly(Return(min_result + 1));
 
-  EXPECT_EQ(min_result, omcs.findWorstChord()->bestResult());
+  EXPECT_EQ(min_result, omcs.findFirstWorstChordByBestResult()->bestResult());
 
   EXPECT_CALL(*omcMockLowest, getFirstChord()).WillRepeatedly(Return("A"));
   EXPECT_CALL(*omcMockLowest, getSecondChord()).WillRepeatedly(Return("B"));
@@ -104,7 +109,7 @@ TEST_F(OneMinuteChangesSetTest, WhenChangeWasAddedShouldBePosibilityToAddNewResu
 
   EXPECT_CALL(*omcMockLowest, bestResult()).WillRepeatedly(Return(min_result + 2));
   EXPECT_CALL(*omcMock, bestResult()).WillRepeatedly(Return(min_result + 1));
-  EXPECT_EQ(min_result + 1, omcs.findWorstChord()->bestResult());
+  EXPECT_EQ(min_result + 1, omcs.findFirstWorstChordByBestResult()->bestResult());
 }
 
 TEST_F(OneMinuteChangesSetTest, WhenChangeWasAddedShouldBePosibilityToAddNewResultWithInvertedChords)
@@ -121,7 +126,7 @@ TEST_F(OneMinuteChangesSetTest, WhenChangeWasAddedShouldBePosibilityToAddNewResu
   EXPECT_CALL(*omcMockLowest, bestResult()).WillRepeatedly(Return(min_result));
   EXPECT_CALL(*omcMock, bestResult()).WillRepeatedly(Return(min_result + 1));
 
-  EXPECT_EQ(min_result, omcs.findWorstChord()->bestResult());
+  EXPECT_EQ(min_result, omcs.findFirstWorstChordByBestResult()->bestResult());
 
   EXPECT_CALL(*omcMockLowest, getFirstChord()).WillRepeatedly(Return("A"));
   EXPECT_CALL(*omcMockLowest, getSecondChord()).WillRepeatedly(Return("B"));
@@ -132,7 +137,7 @@ TEST_F(OneMinuteChangesSetTest, WhenChangeWasAddedShouldBePosibilityToAddNewResu
 
   EXPECT_CALL(*omcMockLowest, bestResult()).WillRepeatedly(Return(min_result + 2));
   EXPECT_CALL(*omcMock, bestResult()).WillRepeatedly(Return(min_result + 1));
-  EXPECT_EQ(min_result + 1, omcs.findWorstChord()->bestResult());
+  EXPECT_EQ(min_result + 1, omcs.findFirstWorstChordByBestResult()->bestResult());
 }
 
 TEST_F(OneMinuteChangesSetTest, GetChangeShouldThrowNoChangeFoundWhenSearchingForNotPresentChange)
@@ -153,7 +158,7 @@ TEST_F(OneMinuteChangesSetTest, GetChangeShouldThrowNoChangeFoundWhenSearchingFo
 
 TEST_F(OneMinuteChangesSetTest, findLastWorstChordShouldThowNoElementsExceptionWhenNoElementsInSet)
 {
-  EXPECT_THROW(omcs.findLastWorstChord(), OneMinuteChanges::Exceptions::NoElements);
+  EXPECT_THROW(omcs.findFirstWorstChordByLastResult(), OneMinuteChanges::Exceptions::NoElements);
 }
 
 TEST_F(OneMinuteChangesSetTest, FindLastWorstChordShouldReturnElementWithLowestMaxValueForOneChange)
@@ -166,7 +171,7 @@ TEST_F(OneMinuteChangesSetTest, FindLastWorstChordShouldReturnElementWithLowestM
 
   EXPECT_CALL(*omcMockLowest, lastResult()).WillRepeatedly(Return(min_result));
 
-  EXPECT_EQ(min_result, omcs.findLastWorstChord()->lastResult());
+  EXPECT_EQ(min_result, omcs.findFirstWorstChordByLastResult()->lastResult());
 }
 
 TEST_F(OneMinuteChangesSetTest, FindLastWorstChordShouldReturnElementWithLowestMaxValue)
@@ -183,7 +188,7 @@ TEST_F(OneMinuteChangesSetTest, FindLastWorstChordShouldReturnElementWithLowestM
   EXPECT_CALL(*omcMockLowest, lastResult()).WillRepeatedly(Return(min_result));
   EXPECT_CALL(*omcMock, lastResult()).WillRepeatedly(Return(min_result + 1));
 
-  EXPECT_EQ(min_result, omcs.findLastWorstChord()->lastResult());
+  EXPECT_EQ(min_result, omcs.findFirstWorstChordByLastResult()->lastResult());
 }
 
 TEST_F(OneMinuteChangesSetTest, PrintShouldPrintAllChanges)
@@ -216,8 +221,8 @@ TEST_F(OneMinuteChangesSetTest, ChangesShoulBeRead)
   std::stringstream ss;
   ss << input;
   OneMinuteChangesSet omcs(ss);
-  EXPECT_EQ(omcs.findWorstChord()->bestResult(), 2);
-  EXPECT_EQ(omcs.findLastWorstChord()->lastResult(), 1);
+  EXPECT_EQ(omcs.findFirstWorstChordByBestResult()->bestResult(), 2);
+  EXPECT_EQ(omcs.findFirstWorstChordByLastResult()->lastResult(), 1);
 }
 
 TEST_F(OneMinuteChangesSetTest, RemoveAllContainingChordShouldRemoveAllAndOnlyChangesContainingChord)
@@ -249,7 +254,7 @@ TEST_F(OneMinuteChangesSetTest, RemoveAllContainingChordShouldRemoveAllAndOnlyCh
   omcs.removeAllContainingChord("A");
   EXPECT_EQ(1, omcs.size());
 
-  EXPECT_EQ(2, omcs.findLastWorstChord()->lastResult());
+  EXPECT_EQ(2, omcs.findFirstWorstChordByLastResult()->lastResult());
 }
 
 TEST_F(OneMinuteChangesSetTest, BeginAndEndShouldBeValid)

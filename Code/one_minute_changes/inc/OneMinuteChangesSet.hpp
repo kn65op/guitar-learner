@@ -38,8 +38,8 @@ public:
   void removeAllContainingChord(const Guitar::Chord::ChordNameType &chord);
   size_type size() const noexcept;
 
-  Element findWorstChord() const;
-  Element findLastWorstChord() const;
+  Element findFirstWorstChordByBestResult() const;
+  Element findFirstWorstChordByLastResult() const;
   Element getChange(const Guitar::Chord::ChordNameType &first_chord,
                     const Guitar::Chord::ChordNameType &second_chord) const;
   std::string print() const;

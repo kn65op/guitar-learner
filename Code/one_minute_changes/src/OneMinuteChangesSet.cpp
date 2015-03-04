@@ -36,7 +36,7 @@ void OneMinuteChangesSet::add(Element element)
   changes.push_back(element);
 }
 
-OneMinuteChangesSet::Element OneMinuteChangesSet::findWorstChord() const
+OneMinuteChangesSet::Element OneMinuteChangesSet::findFirstWorstChordByBestResult() const
 {
   if (!size())
   {
@@ -49,7 +49,7 @@ OneMinuteChangesSet::Element OneMinuteChangesSet::findWorstChord() const
   });
 }
 
-OneMinuteChangesSet::Element OneMinuteChangesSet::findLastWorstChord() const
+OneMinuteChangesSet::Element OneMinuteChangesSet::findFirstWorstChordByLastResult() const
 {
   if (!size())
   {
