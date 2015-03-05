@@ -2,6 +2,7 @@
 #include <TLogger.h>
 #include <iostream>
 #include <one_minute_changes/inc/OneMinuteChangesSet.hpp>
+#include <one_minute_changes/inc/Chord.hpp>
 
 using namespace Main;
 
@@ -14,6 +15,22 @@ void ShowWorstChange::process(const CommandOptions &)
 
   std::cout << "Worst change: " << worst_omc->getFirstChord() << "->" << worst_omc->getSecondChord() << "\n";
   std::cout << "Result: " << getResultFromChange(worst_omc) << "\n";
+
+  using Guitar::Chord;
+  try
+  {
+    std::cout << "Chords: \n";
+    std::cout << Chord::getChord(worst_omc->getFirstChord());
+    std::cout << "\n";
+    std::cout << Chord::getChord(worst_omc->getSecondChord());
+
+  }
+  catch (Chord::NotExist &ex)
+  {
+    std::cout << "Invalid database\n";
+    LOG << "Problem with database: missing chord " << ex.getChord();
+  }
+
 }
 
 OneMinuteChanges::OneMinuteChangesSet::Element ShowWorstChange::getWorstChange() const
