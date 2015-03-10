@@ -9,7 +9,7 @@
 int main(int argc, const char *argv[])
 {
 
-  TLogger::LoggerFacade logger(TLogger::LoggerType::STDERR);
+  TLogger::LoggerFacade logger(TLogger::LoggerType::FILE);
   LOG << "TEST LOG";
 //  const std::string default_name = std::string(std::getenv("HOME")) + "/.guitar_learner/default.glearn";
   const std::string default_name = std::string(std::getenv("HOMEDRIVE")) + std::string(std::getenv("HOMEPATH")) + "/.guitar_learner/default.glearn";
@@ -21,7 +21,7 @@ int main(int argc, const char *argv[])
   }
   catch (Guitar::DatabaseFileReader::VersionNotSupported &version)
   {
-    std::cerr << "Unable to read database file\n";
+    std::cerr << "Unable to read database file\n"; //TODO: Print user info and proceed
   }
 
   Main::ProgramOptions po(argc, argv);
