@@ -1,3 +1,6 @@
 [submodule "TLogger"]
 	path = TLogger
 	url = git@github.com:kn65op/TLogger.git
+[submodule "THelper"]
+	path = THelper
+	url = git@github.com:kn65op/THelper

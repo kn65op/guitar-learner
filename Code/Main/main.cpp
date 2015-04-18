@@ -5,14 +5,16 @@
 #include "Main/inc/ProgramOptions.h"
 #include "inc/CommandFactory.h"
 #include <TLogger.h>
+#include <Factory.hpp>
 
 int main(int argc, const char *argv[])
 {
 
   TLogger::LoggerFacade logger(TLogger::LoggerType::FILE);
   LOG << "TEST LOG";
-//  const std::string default_name = std::string(std::getenv("HOME")) + "/.guitar_learner/default.glearn";
-  const std::string default_name = std::string(std::getenv("HOMEDRIVE")) + std::string(std::getenv("HOMEPATH")) + "/.guitar_learner/default.glearn";
+  THelper::OS::Factory osFactory;
+  auto osPaths = osFactory.getPaths();
+  const std::string default_name = osPaths->getHomeDir() + "/.guitar_learner/default.glearn";
   LOG << "Using default file name: " << default_name;
   try
   {

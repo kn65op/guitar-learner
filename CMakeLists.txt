@@ -13,6 +13,7 @@ project (guitar-learner)
 #externial libs
 FIND_PACKAGE( Boost 1.53 COMPONENTS program_options REQUIRED )
 FIND_PACKAGE( TLogger REQUIRED PATHS TLogger)
+FIND_PACKAGE( THelper REQUIRED PATHS THelper)
 
 #compiler options
 set(CMAKE_CXX_FLAGS "-std=c++1y")
@@ -41,15 +42,17 @@ set(CTEST_MEMORYCHECK_COMMAND_OPTIONS "--trace-children=yes --quiet
 
 ##submodules
 link_directories(${CMAKE_BINARY_DIR}/${TLOGGER_LIBRARIES_DIR})
+link_directories(${CMAKE_BINARY_DIR}/${THELPER_LIBRARIES_DIR})
 
 #includes
 include_directories(${SRC_DIR})
 include_directories(${TLOGGER_INCLUDE_DIRS})
+include_directories(${THELPER_INCLUDE_DIRS})
 include_directories(${Boost_INCLUDE_DIR})
 
-set(NO_TESTS "YES")
+set(BUILD_TESTS "false")
 add_subdirectory(TLogger)
-set(NO_TESTS "")
+add_subdirectory(THelper)
 
 #files
 file(GLOB ONE_MINUTE_CHANGES_FILES ${SRC_DIR}/one_minute_changes/src/*.cpp)
@@ -74,7 +77,9 @@ add_executable(${EXE_FILE} ${MAIN_FILE} ${MAIN_FILES} ${ONE_MINUTE_CHANGES_FILES
 
 #dependencies
 add_dependencies(${EXE_FILE} ${TLOGGER_TARGET})
+add_dependencies(${EXE_FILE} ${THELPER_TARGET})
 
 #libraries
 TARGET_LINK_LIBRARIES(${EXE_FILE} ${Boost_LIBRARIES} ${TLOGGER_LIBRARIES} )
+TARGET_LINK_LIBRARIES(${EXE_FILE} ${Boost_LIBRARIES} ${THELPER_LIBRARIES} )
 
