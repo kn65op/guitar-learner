@@ -13,6 +13,7 @@ project (guitar-learner)
 #externial libs
 FIND_PACKAGE( Boost 1.53 COMPONENTS program_options REQUIRED )
 FIND_PACKAGE( TLogger REQUIRED PATHS TLogger)
+FIND_PACKAGE( THelper REQUIRED PATHS THelper)
 
 #compiler options
 set(CMAKE_CXX_FLAGS "-std=c++1y")
@@ -47,9 +48,9 @@ include_directories(${SRC_DIR})
 include_directories(${TLOGGER_INCLUDE_DIRS})
 include_directories(${Boost_INCLUDE_DIR})
 
-set(NO_TESTS "YES")
+set(BUILD_TESTS "false")
 add_subdirectory(TLogger)
-set(NO_TESTS "")
+add_subdirectory(THelper)
 
 #files
 file(GLOB ONE_MINUTE_CHANGES_FILES ${SRC_DIR}/one_minute_changes/src/*.cpp)
