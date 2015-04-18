@@ -20,6 +20,8 @@ install_manifest.txt
 *.cmake
 *.kate-swp
 .*.swp
+.project
+.cproject
 *.stackdump
 
 
