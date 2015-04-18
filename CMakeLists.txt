@@ -42,10 +42,12 @@ set(CTEST_MEMORYCHECK_COMMAND_OPTIONS "--trace-children=yes --quiet
 
 ##submodules
 link_directories(${CMAKE_BINARY_DIR}/${TLOGGER_LIBRARIES_DIR})
+link_directories(${CMAKE_BINARY_DIR}/${THELPER_LIBRARIES_DIR})
 
 #includes
 include_directories(${SRC_DIR})
 include_directories(${TLOGGER_INCLUDE_DIRS})
+include_directories(${THELPER_INCLUDE_DIRS})
 include_directories(${Boost_INCLUDE_DIR})
 
 set(BUILD_TESTS "false")
@@ -75,7 +77,9 @@ add_executable(${EXE_FILE} ${MAIN_FILE} ${MAIN_FILES} ${ONE_MINUTE_CHANGES_FILES
 
 #dependencies
 add_dependencies(${EXE_FILE} ${TLOGGER_TARGET})
+add_dependencies(${EXE_FILE} ${THELPER_TARGET})
 
 #libraries
 TARGET_LINK_LIBRARIES(${EXE_FILE} ${Boost_LIBRARIES} ${TLOGGER_LIBRARIES} )
+TARGET_LINK_LIBRARIES(${EXE_FILE} ${Boost_LIBRARIES} ${THELPER_LIBRARIES} )
 
