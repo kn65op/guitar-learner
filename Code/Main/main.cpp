@@ -6,10 +6,40 @@
 #include "inc/CommandFactory.h"
 #include <TLogger.h>
 #include <OS/Factory.hpp>
+#include <Configuration/EqualsSignConfiguratorIO.hpp>
 
-std::string getFileName()
+std::string getDBFileName()
 {
+  THelper::OS::Factory osFactory;
+  auto osPaths = osFactory.getPaths();
+  const std::string default_config_file = osPaths->getHomeDir() + "/.guitar_learner/config.config";
+  const std::string default_database_name = osPaths->getHomeDir() + "/.guitar_learner/default.glearn";
+  const std::string db_file_param = "database";
+  THelper::Configuration::EqualsSignConfiguratorIO configuratorIO;
+  THelper::Configuration::Configurator conf;
 
+  LOG << "Opening config file: " << default_config_file;
+
+  std::ifstream in(default_config_file);
+  if (!in.is_open())
+  {
+    conf.storeStringParameter(db_file_param, default_database_name);
+    std::ofstream out(default_config_file);
+    configuratorIO.save(conf, out);
+    return default_database_name;
+  }
+  configuratorIO.load(conf, in);
+  try
+  {
+    return conf.loadStringParameter(db_file_param);
+  }
+  catch (THelper::Configuration::Configurator::NoSuchParameter&)
+  {
+    conf.storeStringParameter(db_file_param, default_database_name);
+    std::ofstream out(default_config_file);
+    configuratorIO.save(conf, out);
+    return default_database_name;
+  }
 }
 
 void readDB(const std::string& filename)
@@ -23,6 +53,7 @@ void readDB(const std::string& filename)
   else
   {
     std::cerr << "Unable to read database file, does not exists, will be created\n";
+    std::cout << "Creation of file: " << filename << "\n";
   }
 }
 
@@ -37,13 +68,11 @@ int main(int argc, const char *argv[])
     return 0;
   }
 
-  THelper::OS::Factory osFactory;
-  auto osPaths = osFactory.getPaths();
-//  const std::string default_name = osPaths->getHomeDir() + "/.guitar_learner/default.glearn";
-  std::string default_name = "base.base";
+  std::string db_filename = getDBFileName();
+  LOG << "Reading db from file: " << db_filename;
   try
   {
-    readDB(default_name);
+    readDB(db_filename);
   }
   catch (Guitar::DatabaseFileReader::VersionNotSupported &version)
   {
@@ -67,7 +96,7 @@ int main(int argc, const char *argv[])
   Guitar::DatabaseFileWriterVer1 writer;
   LOG<< "Created DatabaseFileWriter";
   LOG<< "Opening default file";
-  std::ofstream out(default_name);
+  std::ofstream out(db_filename);
   LOG<< "Opened default file";
   LOG<< "Creating One minute changes set";
   OneMinuteChanges::OneMinuteChangesSet omc;
