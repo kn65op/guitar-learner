@@ -1,9 +1,11 @@
 #include "../inc/ConfigCommand.h"
-#include <iostream>
+#include <Configuration/EqualsSignConfiguratorIO.hpp>
+
 using namespace Main;
 
 void ConfigCommand::process(const CommandOptions& options)
 {
+  const std::string default_config_file = osPaths->getHomeDir() + "/.guitar_learner/config.config";
   if (options.size() == 1)
   {
 
@@ -12,5 +14,4 @@ void ConfigCommand::process(const CommandOptions& options)
   {
 
   }
-  std::cout << options.size() << "\n";
 }
