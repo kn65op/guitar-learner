@@ -1,4 +1,5 @@
 #pragma once
+
 #include "ProgramOptions.h"
 #include "ListChordsCommand.h"
 #include "AddChordCommand.h"
@@ -9,6 +10,7 @@
 #include "AddOneMinuteChangeCommand.h"
 #include "ListOneMinuteChanges.h"
 #include "ShowWorstChange.h"
+#include "ConfigCommand.h"
 
 namespace Main
 {
@@ -47,8 +49,8 @@ public:
       return std::make_unique<ShowWorstChange>(ShowWorstChange::ResultType::BEST);
     case CommandType::ShowLastResultWorstChange:
       return std::make_unique<ShowWorstChange>(ShowWorstChange::ResultType::LAST);
-    throw InvalidCommand();
-
+    case CommandType::Config:
+      return std::make_unique<ConfigCommand>();
     }
     throw InvalidCommand();
   }

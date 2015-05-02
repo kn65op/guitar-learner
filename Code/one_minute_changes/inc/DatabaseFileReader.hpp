@@ -14,8 +14,13 @@ public:
   {
   };
 
-  class VersionNotSupported
+  struct VersionNotSupported
   {
+    VersionNotSupported(const std::string &read_version = "not read any version") :
+      version_from_file(read_version)
+    { }
+
+    const std::string version_from_file;
   };
 
   static void read(std::istream &in);

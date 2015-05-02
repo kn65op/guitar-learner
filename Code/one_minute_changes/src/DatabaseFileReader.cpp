@@ -22,7 +22,7 @@ void DatabaseFileReader::read(std::istream &in)
   }
   else
   {
-    throw VersionNotSupported();
+    throw VersionNotSupported(version);
   }
 
 }

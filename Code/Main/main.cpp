@@ -14,16 +14,24 @@ int main(int argc, const char *argv[])
   LOG << "TEST LOG";
   THelper::OS::Factory osFactory;
   auto osPaths = osFactory.getPaths();
-  const std::string default_name = osPaths->getHomeDir() + "/.guitar_learner/default.glearn";
+//  const std::string default_name = osPaths->getHomeDir() + "/.guitar_learner/default.glearn";
+  std::string default_name = "base.base";
   LOG << "Using default file name: " << default_name;
   try
   {
     std::ifstream in(default_name);
-    Guitar::DatabaseFileReader::read(in);
+    if (in.is_open())
+    {
+      Guitar::DatabaseFileReader::read(in);
+    }
+    else
+    {
+      std::cerr << "Unable to read database file, does not exists, will be created\n";
+    }
   }
   catch (Guitar::DatabaseFileReader::VersionNotSupported &version)
   {
-    std::cerr << "Unable to read database file\n"; //TODO: Print user info and proceed
+    std::cerr << "Unable to read database file, not supported version: " << version.version_from_file << "\n";
   }
 
   Main::ProgramOptions po(argc, argv);
