@@ -4,7 +4,7 @@
 #include <cstdlib>
 #include "Main/inc/ProgramOptions.h"
 #include "inc/CommandFactory.h"
-#include "inc/main_helper.hpp"
+#include "main_helper.hpp"
 #include <TLogger.h>
 
 int main(int argc, const char *argv[])
@@ -33,7 +33,8 @@ int main(int argc, const char *argv[])
   try
   {
     LOG<< "Executing command";
-    Main::CommandFactory::createCommand(po.getCommand())->process(Main::GuitarLearnerCommand::CommandOptions());
+    auto command_options = createCommandOptions(argc, argv);
+    Main::CommandFactory::createCommand(po.getCommand())->process(command_options);
     LOG << "Command executed";
   }
   catch (Main::CommandFactory::InvalidCommand &ex)
