@@ -3,7 +3,6 @@ cmake_minimum_required (VERSION 2.8.4)
 #variables
 set(SRC_DIR "Code")
 set(MAIN_SRC_DIR "${SRC_DIR}/Main")
-set(MAIN_FILE "${MAIN_SRC_DIR}/main.cpp")
 set(DEBUG_BIN_DIR "Debug")
 set(RELEASE_BIN_DIR "Release")
 
@@ -56,7 +55,8 @@ add_subdirectory(THelper)
 
 #files
 file(GLOB ONE_MINUTE_CHANGES_FILES ${SRC_DIR}/one_minute_changes/src/*.cpp)
-file(GLOB MAIN_FILES ONE_MINUTE_CHANGES_FILES ${SRC_DIR}/Main/src/*.cpp)
+file(GLOB MAIN_FILES ${SRC_DIR}/Main/src/*.cpp)
+file(GLOB GLOBAL_MAIN_FILES "${MAIN_SRC_DIR}/*.cpp")
 
 #executables
 if (${CMAKE_BUILD_TYPE} STREQUAL "Debug")
@@ -73,13 +73,14 @@ endif (${CMAKE_BUILD_TYPE} STREQUAL "Debug")
 
 set(EXE_FILE ${PROJECT_NAME})
 
-add_executable(${EXE_FILE} ${MAIN_FILE} ${MAIN_FILES} ${ONE_MINUTE_CHANGES_FILES})
+add_executable(${EXE_FILE} ${GLOBAL_MAIN_FILES} ${MAIN_FILES} ${ONE_MINUTE_CHANGES_FILES})
 
 #dependencies
 add_dependencies(${EXE_FILE} ${TLOGGER_TARGET})
 add_dependencies(${EXE_FILE} ${THELPER_TARGET})
 
 #libraries
-TARGET_LINK_LIBRARIES(${EXE_FILE} ${Boost_LIBRARIES} ${TLOGGER_LIBRARIES} )
-TARGET_LINK_LIBRARIES(${EXE_FILE} ${Boost_LIBRARIES} ${THELPER_LIBRARIES} )
+TARGET_LINK_LIBRARIES(${EXE_FILE} ${Boost_LIBRARIES} )
+TARGET_LINK_LIBRARIES(${EXE_FILE} ${TLOGGER_LIBRARIES} )
+TARGET_LINK_LIBRARIES(${EXE_FILE} ${THELPER_LIBRARIES} )
 

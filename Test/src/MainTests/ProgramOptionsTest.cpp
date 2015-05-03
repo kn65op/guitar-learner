@@ -120,3 +120,11 @@ TEST_F(ProgramOptionsTest, ForShowLastResultWorstChangeOptionGetCommandShouldRet
   ProgramOptions po(argc, args);
   EXPECT_EQ(CommandType::ShowLastResultWorstChange, po.getCommand());
 }
+
+TEST_F(ProgramOptionsTest, ForConfigGetCommandShouldReturnConfig)
+{
+  int argc = 2;
+  const char *args[] = {"program", "--config"};
+  ProgramOptions po(argc, args);
+  EXPECT_EQ(CommandType::Config, po.getCommand());
+}
