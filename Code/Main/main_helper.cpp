@@ -25,6 +25,7 @@ std::string getDBFileName()
     configuratorIO.save(conf, out);
     return default_database_name;
   }
+
   configuratorIO.load(conf, in);
   try
   {

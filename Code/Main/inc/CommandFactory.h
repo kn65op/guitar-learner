@@ -21,8 +21,8 @@ public:
 
   class InvalidCommand
   {
-  public:
   };
+
   using CommandPtr = std::unique_ptr<GuitarLearnerCommand>;
 
   static CommandPtr createCommand(CommandType command)
@@ -54,6 +54,7 @@ public:
     }
     throw InvalidCommand();
   }
+
 };
 
 }

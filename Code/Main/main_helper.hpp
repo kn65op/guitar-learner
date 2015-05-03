@@ -6,6 +6,3 @@
 std::string getDBFileName();
 void readDB(const std::string& filename);
 Main::GuitarLearnerCommand::CommandOptions createCommandOptions(int argc, const char *argv[]);
-
-
-
