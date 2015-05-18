@@ -8,27 +8,32 @@ using namespace Main;
 
 void ShowWorstChange::process(const CommandOptions &)
 {
-  LOG << "Showing worst change for: " << result_type;
-
-  auto worst_omc = getWorstChange();
-  LOG << "Worst change: " << worst_omc->print();
-
-  std::cout << "Worst change: " << worst_omc->getFirstChord() << "->" << worst_omc->getSecondChord() << "\n";
-  std::cout << "Result: " << getResultFromChange(worst_omc) << "\n";
-
   using Guitar::Chord;
+  LOG<< "Showing worst change for: " << result_type;
+
   try
   {
+    auto worst_omc = getWorstChange();
+    LOG<< "Worst change: " << worst_omc->print();
+
+    std::cout << "Worst change: " << worst_omc->getFirstChord() << "->" << worst_omc->getSecondChord() << "\n";
+    std::cout << "Result: " << getResultFromChange(worst_omc) << "\n";
+
     std::cout << "Chords: \n";
     std::cout << Chord::getChord(worst_omc->getFirstChord());
     std::cout << "\n";
     std::cout << Chord::getChord(worst_omc->getSecondChord());
 
   }
+  catch (OneMinuteChanges::Exceptions::NoElements&)
+  {
+    std::cout << "There is no one minute changes in database at all\n";
+    LOG<< "There is no changes at all, exiting";
+  }
   catch (Chord::NotExist &ex)
   {
     std::cout << "Invalid database\n";
-    LOG << "Problem with database: missing chord " << ex.getChord();
+    LOG<< "Problem with database: missing chord " << ex.getChord();
   }
 
 }
