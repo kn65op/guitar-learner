@@ -13,7 +13,7 @@ void ListOneMinuteChanges::process(const CommandOptions &)
 
   OneMinuteChangesSet omc_set;
 
-  std::cout << "Changes: ";
+  std::cout << "Changes:\n";
   for (const auto & omc : omc_set)
   {
     std::cout << "Change: " << omc->getFirstChord() << "->" << omc->getSecondChord() << ":\t";
