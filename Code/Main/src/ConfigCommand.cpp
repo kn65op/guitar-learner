@@ -16,6 +16,11 @@ void ConfigCommand::process(const CommandOptions& options)
     std::ifstream config_file(default_config_file);
     confIO.load(conf, config_file);
   }
+  if (options.empty())
+  {
+    std::cout << "For information about possible configuration please take a look at docs/man_config.txt\n";
+    return;
+  }
   if (options.size() == 1)
   {
     try
