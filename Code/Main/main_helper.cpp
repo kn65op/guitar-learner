@@ -40,6 +40,13 @@ std::string getDBFileName()
   }
 }
 
+std::string getLogFileName()
+{
+  THelper::OS::Factory osFactory;
+  auto osPaths = osFactory.getPaths();
+  return osPaths->getTmpDir() + "/GuitarLearner";
+}
+
 void readDB(const std::string& filename)
 {
   LOG<< "Reading database from file: " << filename;
