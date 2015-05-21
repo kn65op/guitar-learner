@@ -39,15 +39,12 @@ set(ONE_MINUTE_CHANGES_MOCKS_DIR one_minute_changes${MOCKS_POSTFIX})
 set(MAIN_TESTS_DIR Main${TESTS_POSTFIX})
 
 #project includes
-include_directories(${PROJECT_SOURCE_DIR}/${SRC2_DIR}/GmockTest)
 include_directories(${TEST_INC_DIR}/${ONE_MINUTE_CHANGES_MOCKS_DIR}/)
 
-#externial libs
+#external libs
 
 set(CMAKE_CXX_FLAGS_DEBUG "${NORMAL_WARNING_FLAGS}")
-
 add_subdirectory(${GMOCK_SUB_DIR} gmock)
-
 set(CMAKE_CXX_FLAGS_DEBUG "${EXTRA_WARNING_FLAGS}")
 
 #test files
@@ -64,9 +61,9 @@ file(MAKE_DIRECTORY ${TEST_EXE_DIR})
 add_executable(${TEST_EXE} ${TEST_MAIN} ${MAIN_FILES} ${MAIN_TEST_FILES} ${ONE_MINUTE_CHANGES_FILES} ${ONE_MINUTE_CHANGES_TEST_FILES})
 add_dependencies(${TEST_EXE} ${TLOGGER_TARGET})
 TARGET_LINK_LIBRARIES(${TEST_EXE} ${THELPER_LIBRARIES} )
-target_link_libraries(${TEST_EXE} ${LIB_GMOCK})
 TARGET_LINK_LIBRARIES(${TEST_EXE} ${Boost_LIBRARIES})
 TARGET_LINK_LIBRARIES(${TEST_EXE} ${TLOGGER_LIBRARIES})
+target_link_libraries(${TEST_EXE} ${LIB_GMOCK})
 add_test(gtests ${TEST_EXE}) 
 
 set(COVERAGE_DIR coverage)
