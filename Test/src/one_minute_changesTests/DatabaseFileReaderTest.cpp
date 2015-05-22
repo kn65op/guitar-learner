@@ -64,8 +64,8 @@ TEST_F(DatabaseFileReaderTest, DatabaseFileReaderShouldReadVer1File)
   EXPECT_EQ(2, Chord::size());
   EXPECT_NO_THROW(Chord::getChords().at("A"));
   EXPECT_NO_THROW(Chord::getChords().at("B"));
-  EXPECT_EQ(omcs.findFirstWorstChordByBestResult()->bestResult(), 2);
-  EXPECT_EQ(omcs.findFirstWorstChordByLastResult()->lastResult(), 1);
+  EXPECT_EQ(omcs.findFirstWorstChordByBestResult()->bestResult().first, 2);
+  EXPECT_EQ(omcs.findFirstWorstChordByLastResult()->lastResult().first, 1);
 }
 
 TEST_F(DatabaseFileReaderTest, DatabaseFileReaderShouldReadVer1FileInDosFormat)
@@ -104,6 +104,6 @@ TEST_F(DatabaseFileReaderTest, DatabaseFileReaderShouldReadVer1FileInDosFormat)
   EXPECT_EQ(2, Chord::size());
   EXPECT_NO_THROW(Chord::getChords().at("A"));
   EXPECT_NO_THROW(Chord::getChords().at("B"));
-  EXPECT_EQ(omcs.findFirstWorstChordByBestResult()->bestResult(), 2);
-  EXPECT_EQ(omcs.findFirstWorstChordByLastResult()->lastResult(), 1);
+  EXPECT_EQ(omcs.findFirstWorstChordByBestResult()->bestResult().first, 2);
+  EXPECT_EQ(omcs.findFirstWorstChordByLastResult()->lastResult().first, 1);
 }

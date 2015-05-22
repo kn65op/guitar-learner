@@ -17,7 +17,7 @@ void ShowWorstChange::process(const CommandOptions &)
     LOG<< "Worst change: " << worst_omc->print();
 
     std::cout << "Worst change: " << worst_omc->getFirstChord() << "->" << worst_omc->getSecondChord() << "\n";
-    std::cout << "Result: " << getResultFromChange(worst_omc) << "\n";
+    std::cout << "Result: " << getResultFromChange(worst_omc).first << "\n";
 
     std::cout << "Chords: \n";
     std::cout << Chord::getChord(worst_omc->getFirstChord());
@@ -63,5 +63,5 @@ OneMinuteChanges::OneMinuteChange::ResultType ShowWorstChange::getResultFromChan
     case ResultType::LAST:
       return change->lastResult();
   }
-  return 0;
+  throw std::runtime_error{"Invalid ResultType"};
 }

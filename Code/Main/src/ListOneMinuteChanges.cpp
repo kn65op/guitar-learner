@@ -17,7 +17,7 @@ void ListOneMinuteChanges::process(const CommandOptions &)
   for (const auto & omc : omc_set)
   {
     std::cout << "Change: " << omc->getFirstChord() << "->" << omc->getSecondChord() << ":\t";
-    std::cout << getResultFromChange(omc) << "\n";
+    std::cout << getResultFromChange(omc).first << "\n";
   }
 }
 
@@ -30,5 +30,5 @@ OneMinuteChanges::OneMinuteChange::ResultType ListOneMinuteChanges::getResultFro
     case ResultType::LAST:
       return change->lastResult();
   }
-  return 0;
+  throw std::runtime_error{"Invalid ResultType"};
 }
