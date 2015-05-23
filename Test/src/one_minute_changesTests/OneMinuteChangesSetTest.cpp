@@ -220,9 +220,9 @@ TEST_F(OneMinuteChangesSetTest, ChangesShoulBeRead)
 {
   std::string input = "2\n"
       "A\nD\n"
-      "2\n1\n2\n"
+      "2\n1 1\n2 2\n"
       "A\nE\n"
-      "3\n5\n2\n1\n";
+      "3\n5 1\n2 2\n1 3\n";
   std::stringstream ss;
   ss << input;
   OneMinuteChangesSet omcs(ss);
