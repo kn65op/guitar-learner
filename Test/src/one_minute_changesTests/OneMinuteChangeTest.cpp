@@ -63,7 +63,7 @@ TEST_F(OneMinuteChangeTest, AfterAddedOneResultBestResultShouldBeThisResultAndSh
   auto now = std::chrono::system_clock::now();
 
   std::chrono::microseconds allowed_difference{100};
-  auto actual_difference = std::chrono::duration_cast<std::chrono::microseconds>(now - omc.bestResult().second());
+  auto actual_difference = std::chrono::duration_cast<std::chrono::microseconds>(now - omc.bestResult().second);
 
   EXPECT_EQ(bestRes, omc.bestResult().first);
   EXPECT_GE(allowed_difference.count(), actual_difference.count());
