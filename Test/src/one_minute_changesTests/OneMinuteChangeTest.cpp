@@ -55,11 +55,19 @@ TEST_F(OneMinuteChangeTest, WithoutAnyResultsBestResultShouldBe0)
   EXPECT_EQ(0, omc.bestResult().first);
 }
 
-TEST_F(OneMinuteChangeTest, AfterAddedOneResultBestResultShouldBeThisResult)
+TEST_F(OneMinuteChangeTest, AfterAddedOneResultBestResultShouldBeThisResultAndShouldBeAddedNow)
 {
   const int bestRes = 44;
   omc.addResult(bestRes);
+
+  auto now = std::chrono::system_clock::now();
+
+  std::chrono::microseconds allowed_difference{100};
+  auto actual_difference = std::chrono::duration_cast<std::chrono::microseconds>(now - omc.getAddedDate());
+
   EXPECT_EQ(bestRes, omc.bestResult().first);
+  EXPECT_GE(allowed_difference.count(), actual_difference.count());
+
 }
 
 TEST_F(OneMinuteChangeTest, AfterAddedTwoResultsBestResultShouldBeHighestNumber)
@@ -97,6 +105,7 @@ TEST_F(OneMinuteChangeTest, GetLastResultShouldReturnLastResult)
   omc.addResult(bestRes);
   omc.addResult(lowRes);
 
+  EXPECT_EQ(lowRes, omc.lastResult().first);
   EXPECT_EQ(lowRes, omc.lastResult().first);
 }
 
