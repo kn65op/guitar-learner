@@ -14,14 +14,6 @@ TEST_F(OneMinuteChangeTest, OneMinuteChangeShouldReturnChordsAndTimeAddedCloseTo
 {
   EXPECT_EQ("A", omc.getFirstChord());
   EXPECT_EQ("D", omc.getSecondChord());
-
-/*  auto now = std::chrono::system_clock::now();
-
-  std::chrono::microseconds allowed_difference{100};
-  auto actual_difference = std::chrono::duration_cast<std::chrono::microseconds>(now - omc.getAddedDate());
-
-  EXPECT_GE(allowed_difference.count(), actual_difference.count());
-  */
 }
 
 TEST_F(OneMinuteChangeTest, OneMinuteChangeShouldReturnChordsAlphabetical)
