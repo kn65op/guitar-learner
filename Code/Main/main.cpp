@@ -9,7 +9,7 @@
 
 int main(int argc, const char *argv[])
 {
-  TLogger::LoggerFacade logger(TLogger::LoggerType::FILE, TLogger::LogFileOnEntry::CREATE_WITH_DATE, TLogger::LogFileOnExit::REMOVE, getLogFileName());
+  TLogger::LoggerFacade logger(TLogger::LoggerType::STDERR, TLogger::LogFileOnEntry::CREATE_WITH_DATE, TLogger::LogFileOnExit::REMOVE, getLogFileName());
 
   Main::ProgramOptions po(argc, argv);
   if (po.isHelp())

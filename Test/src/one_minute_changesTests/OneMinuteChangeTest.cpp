@@ -117,13 +117,16 @@ TEST_F(OneMinuteChangeTest, OneMinuteChangeShouldBePrinted)
 
   ss << omc;
 
+  auto now = std::chrono::system_clock::now();
+  auto secs = std::chrono::duration_cast<std::chrono::seconds>(now.time_since_epoch());
+
   std::string resultString = omc.getFirstChord() + "\n" +
       omc.getSecondChord() + "\n" +
       std::to_string(resSize) + "\n" +
-      std::to_string(firstRes) + "\n" +
-      std::to_string(secondRes) + "\n" +
-      std::to_string(bestRes) + "\n" +
-      std::to_string(fourthRes) + "\n";
+      std::to_string(firstRes) + " " + std::to_string(secs.count()) + "\n" +
+      std::to_string(secondRes) + " " + std::to_string(secs.count()) +  "\n" +
+      std::to_string(bestRes) + " " + std::to_string(secs.count()) + "\n" +
+      std::to_string(fourthRes) + " " + std::to_string(secs.count()) + "\n";
 
   EXPECT_EQ(resultString, ss.str());
 }
