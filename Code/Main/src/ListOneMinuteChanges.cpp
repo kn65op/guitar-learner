@@ -21,7 +21,7 @@ void ListOneMinuteChanges::process(const CommandOptions &)
     std::cout << "Change: " << omc->getFirstChord() << "->" << omc->getSecondChord() << ":\t";
     const auto result = getResultFromChange(omc);
     auto datetime = std::chrono::system_clock::to_time_t(result.second);
-    std::cout << result.first << "\ton: " << date.getDateStringInFormat(std::localtime(&datetime), "%A %c") << "\n";
+    std::cout << result.first << "\ton: " << date.getDateStringInFormat(std::localtime(&datetime), "%c") << "\n";
   }
 }
 

@@ -3,6 +3,7 @@
 #include <iostream>
 #include <one_minute_changes/inc/OneMinuteChangesSet.hpp>
 #include <one_minute_changes/inc/Chord.hpp>
+#include "DateTime/DateIO.hpp"
 
 using namespace Main;
 
@@ -17,7 +18,10 @@ void ShowWorstChange::process(const CommandOptions &)
     LOG<< "Worst change: " << worst_omc->print();
 
     std::cout << "Worst change: " << worst_omc->getFirstChord() << "->" << worst_omc->getSecondChord() << "\n";
-    std::cout << "Result: " << getResultFromChange(worst_omc).first << "\n";
+    auto worst_result = getResultFromChange(worst_omc);
+    auto datetime = std::chrono::system_clock::to_time_t(worst_result.second);
+    DateTime::DateIO date;
+    std::cout << "Result: " << worst_result.first << "\nWhen: " << date.getDateStringInFormat(std::localtime(&datetime), "%c") << "\n";
 
     std::cout << "Chords: \n";
     std::cout << Chord::getChord(worst_omc->getFirstChord());
