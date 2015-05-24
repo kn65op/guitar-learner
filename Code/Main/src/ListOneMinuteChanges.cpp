@@ -3,6 +3,7 @@
 #include <TLogger.h>
 #include <one_minute_changes/inc/OneMinuteChangesSet.hpp>
 #include <iostream>
+#include "DateTime/DateIO.hpp"
 
 using namespace Main;
 
@@ -13,11 +14,14 @@ void ListOneMinuteChanges::process(const CommandOptions &)
 
   OneMinuteChangesSet omc_set;
 
-  std::cout << "Changes: ";
+  DateTime::DateIO date;
+  std::cout << "Changes:\n";
   for (const auto & omc : omc_set)
   {
     std::cout << "Change: " << omc->getFirstChord() << "->" << omc->getSecondChord() << ":\t";
-    std::cout << getResultFromChange(omc) << "\n";
+    const auto result = getResultFromChange(omc);
+    auto datetime = std::chrono::system_clock::to_time_t(result.second);
+    std::cout << result.first << "\ton: " << date.getDateStringInFormat(std::localtime(&datetime), "%c") << "\n";
   }
 }
 
@@ -30,5 +34,5 @@ OneMinuteChanges::OneMinuteChange::ResultType ListOneMinuteChanges::getResultFro
     case ResultType::LAST:
       return change->lastResult();
   }
-  return 0;
+  throw std::runtime_error{"Invalid ResultType"};
 }

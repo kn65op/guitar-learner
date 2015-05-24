@@ -14,22 +14,14 @@ namespace ut
 class OneMinuteChangeMock : public IOneMinuteChange
 {
 public:
-  MOCK_METHOD1(addResult,
-               void(int result));
-  MOCK_CONST_METHOD0(bestResult,
-                     int());
-  MOCK_CONST_METHOD0(lastResult,
-                     int());
-  MOCK_CONST_METHOD0(getResults,
-                     const Results&());
-  MOCK_CONST_METHOD0(getFirstChord,
-                     std::string());
-  MOCK_CONST_METHOD0(getSecondChord,
-                     std::string());
-  MOCK_CONST_METHOD0(print,
-                     std::string());
-  MOCK_CONST_METHOD1(compare,
-                     bool(const IOneMinuteChange &));
+  MOCK_METHOD1(addResult, void(ResultValue result));
+  MOCK_CONST_METHOD0(bestResult, ResultType());
+  MOCK_CONST_METHOD0(lastResult, ResultType());
+  MOCK_CONST_METHOD0(getResults, const Results&());
+  MOCK_CONST_METHOD0(getFirstChord, std::string());
+  MOCK_CONST_METHOD0(getSecondChord, std::string());
+  MOCK_CONST_METHOD0(print, std::string());
+  MOCK_CONST_METHOD1(compare, bool(const IOneMinuteChange &));
 
   bool operator==(const IOneMinuteChange &other) const override
   {

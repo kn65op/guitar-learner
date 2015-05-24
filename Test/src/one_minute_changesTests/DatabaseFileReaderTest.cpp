@@ -1,4 +1,4 @@
-#include "one_minute_changes/inc/DatabaseFileReader.hpp"       
+#include "one_minute_changes/inc/DatabaseFileReader.hpp"
 #include <one_minute_changes/inc/OneMinuteChangesSet.hpp>
 #include "TabMock.hpp"
 #include <gtest/gtest.h>
@@ -50,8 +50,8 @@ TEST_F(DatabaseFileReaderTest, DatabaseFileReaderShouldReadVer1File)
       "E |---|---|---|---|---|---|---|---|---|---\n";
 
   const std::string format_changes_size = "2\n";
-  const std::string format_change1 = "A\nD\n" "2\n1\n2\n";
-  const std::string format_change2 = "A\nE\n" "3\n5\n2\n1\n";
+  const std::string format_change1 = "A\nD\n" "2\n1 1\n2 2\n";
+  const std::string format_change2 = "A\nE\n" "3\n5 1\n2 2\n1 3\n";
 
   const std::string format = format_header + format_chords_size + format_chord1 + format_tab1 + format_chord2 + format_tab2 + format_changes_size + format_change1 + format_change2;
 
@@ -64,6 +64,46 @@ TEST_F(DatabaseFileReaderTest, DatabaseFileReaderShouldReadVer1File)
   EXPECT_EQ(2, Chord::size());
   EXPECT_NO_THROW(Chord::getChords().at("A"));
   EXPECT_NO_THROW(Chord::getChords().at("B"));
-  EXPECT_EQ(omcs.findFirstWorstChordByBestResult()->bestResult(), 2);
-  EXPECT_EQ(omcs.findFirstWorstChordByLastResult()->lastResult(), 1);
+  EXPECT_EQ(omcs.findFirstWorstChordByBestResult()->bestResult().first, 2);
+  EXPECT_EQ(omcs.findFirstWorstChordByLastResult()->lastResult().first, 1);
+}
+
+TEST_F(DatabaseFileReaderTest, DatabaseFileReaderShouldReadVer1FileInDosFormat)
+{
+  const std::string format_header = "Ver: 1\r\n";
+  const std::string format_chords_size = "2\r\n";
+  const std::string format_chord1 = "A\r\n";
+  const std::string format_tab1 = "    1   2   3   4   5   6   7   8   9  10 \r\n"
+      "E |---|---|---|---|---|-0-|---|---|---|---\r\n"
+      "H |---|---|---|---|-0-|---|---|---|---|---\r\n"
+      "G |---|---|---|-0-|---|---|---|---|---|---\r\n"
+      "D |---|---|---|---|---|---|---|---|---|---\r\n"
+      "A |---|---|---|---|---|---|---|---|---|---\r\n"
+      "E |---|---|-0-|---|---|---|---|---|---|---\r\n";
+  const std::string format_chord2 = "B\r\n";
+  const std::string format_tab2 = "    1   2   3   4   5   6   7   8   9  10 \r\n"
+      "E |-X-|---|---|---|---|---|---|---|---|---\r\n"
+      "H |---|---|---|---|---|---|---|---|---|---\r\n"
+      "G |---|---|---|---|---|---|---|---|---|-0-\r\n"
+      "D |---|---|-0-|---|---|---|---|---|---|---\r\n"
+      "A |---|---|---|---|---|---|---|---|---|-0-\r\n"
+      "E |---|---|---|---|---|---|---|---|---|---\r\n";
+
+  const std::string format_changes_size = "2\r\n";
+  const std::string format_change1 = "A\r\nD\n" "2\r\n1 1\n2 3\r\n";
+  const std::string format_change2 = "A\r\nE\n" "3\r\n5 1\n2 2\r\n1 3\n";
+
+  const std::string format = format_header + format_chords_size + format_chord1 + format_tab1 + format_chord2 + format_tab2 + format_changes_size + format_change1 + format_change2;
+
+  std::stringstream oss;
+  oss << format;
+
+  DatabaseFileReader::read(oss);
+  OneMinuteChangesSet omcs;
+
+  EXPECT_EQ(2, Chord::size());
+  EXPECT_NO_THROW(Chord::getChords().at("A"));
+  EXPECT_NO_THROW(Chord::getChords().at("B"));
+  EXPECT_EQ(omcs.findFirstWorstChordByBestResult()->bestResult().first, 2);
+  EXPECT_EQ(omcs.findFirstWorstChordByLastResult()->lastResult().first, 1);
 }

@@ -9,7 +9,7 @@ set(RELEASE_BIN_DIR "Release")
 #project
 project (guitar-learner)
 
-#externial libs
+#external libs
 FIND_PACKAGE( Boost 1.53 COMPONENTS program_options REQUIRED )
 FIND_PACKAGE( TLogger REQUIRED PATHS TLogger)
 FIND_PACKAGE( THelper REQUIRED PATHS THelper)

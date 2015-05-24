@@ -7,7 +7,7 @@ using OneMinuteChanges::OneMinuteChange;
 OneMinuteChange::OneMinuteChange(const Guitar::Chord::ChordNameType &chordA, const Guitar::Chord::ChordNameType &chordB) :
     first(std::min(chordA, chordB)),
     second(std::max(chordA, chordB)),
-    results() { }
+    results() {}
 
 OneMinuteChange::OneMinuteChange(std::istream &is)
 {
@@ -17,9 +17,13 @@ OneMinuteChange::OneMinuteChange(std::istream &is)
   is >> size;
   for (Results::size_type i = 0; i < size; ++i)
   {
-    Results::value_type res;
+    ResultValue res;
     is >> res;
-    results.push_back(res);
+    StoredDuration::rep read_rep;
+    is >> read_rep;
+    StoredDuration dur{read_rep};
+//    std::chrono::duration<StoredDuration> duration{dur};
+    results.push_back(std::make_pair(res, DateType{dur}));
   }
 
 }
@@ -34,9 +38,9 @@ bool OneMinuteChanges::operator!=(const OneMinuteChange &first, const OneMinuteC
   return !(first == other);
 }
 
-void OneMinuteChange::addResult(ResultType result)
+void OneMinuteChange::addResult(ResultValue result)
 {
-  results.push_back(result);
+  results.push_back(std::make_pair(result, getNow()));
 }
 
 OneMinuteChange::ResultType OneMinuteChange::bestResult() const
@@ -46,7 +50,7 @@ OneMinuteChange::ResultType OneMinuteChange::bestResult() const
   {
     return *max;
   }
-  return 0;
+  return {0, getNow()};
 }
 
 const OneMinuteChange::Results& OneMinuteChange::getResults() const
@@ -58,7 +62,7 @@ OneMinuteChange::ResultType OneMinuteChange::lastResult() const
 {
   if (results.empty())
   {
-    return 0;
+    return {0, getNow()};
   }
   return results.back();
 }
@@ -78,10 +82,13 @@ std::string OneMinuteChange::print() const
   std::stringstream ss;
   ss << first << "\n";
   ss << second << "\n";
+  //ss << std::chrono::duration_cast<StoredDuration>(add_date.time_since_epoch()).count() << "\n";
+ // ss << add_date.time_since_epoch().count() << "\n";
   ss << results.size() << "\n";
   for (auto res : results)
   {
-    ss << res << "\n";
+    ss << res.first << " "  <<
+        std::chrono::duration_cast<StoredDuration>(res.second.time_since_epoch()).count() << "\n";
   }
   return ss.str();
 }
@@ -90,4 +97,9 @@ std::ostream& OneMinuteChanges::operator<<(std::ostream &os, const OneMinuteChan
 {
   os << omc.print();
   return os;
+}
+
+OneMinuteChange::DateType OneMinuteChange::getNow()
+{
+  return std::chrono::system_clock::now();
 }
