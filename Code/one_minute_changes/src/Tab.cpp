@@ -3,6 +3,7 @@
 #include <string>
 #include <sstream>
 #include <iomanip>
+#include "Stream/StreamOperations.hpp"
 
 using Guitar::Tab;
 
@@ -84,14 +85,13 @@ std::string Tab::print() const
 
 void Tab::parseInputStream(std::istream & in)
 {
-  std::string line;
-  std::getline(in, line);
+  std::string line = Stream::StreamOperations::getLineRegardlessLineEnding(in);
   std::string::size_type num_start = line.rfind(' ', line.size() - 2);
   int frets_count = std::atoi(line.substr(num_start).c_str());
 
   for (size_t string = 0; string < frets.size(); ++string)
   {
-    std::getline(in, line);
+    line = Stream::StreamOperations::getLineRegardlessLineEnding(in);
     const std::streamoff string_header_size = 2;
     const int fret_size = 4;
     for (int i = 1; i < frets_count + 1; ++i)
