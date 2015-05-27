@@ -59,6 +59,29 @@ TEST_F(TabTest, TabShouldBeReadFromInput)
   EXPECT_EQ(format, oss.str());
 }
 
+TEST_F(TabTest, TabShouldBeReadFromInputWithCarriageReturn)
+{
+  std::string format = "    1   2   3   4   5   6   7   8   9  10 \r\n"
+      "E |-X-|---|---|---|---|---|---|---|---|---\r\n"
+      "H |-0-|---|---|---|---|---|---|---|---|---\r\n"
+      "G |---|---|---|---|---|---|---|---|---|---\r\n"
+      "D |---|---|---|---|---|---|-0-|---|---|---\r\n"
+      "A |---|---|---|-0-|---|---|---|---|---|---\r\n"
+      "E |---|---|-0-|---|---|---|---|---|---|---\r\n";
+  std::string format_without_carriage{format};
+  std::string::size_type pos;
+  while ((pos = format_without_carriage.find('\r')) != std::string::npos)
+  {
+    format_without_carriage.replace(pos, 1, "");
+  }
+  std::stringstream iss;
+  iss << format;
+  Tab tab{iss};
+  std::stringstream oss;
+  oss << tab;
+  EXPECT_EQ(format_without_carriage, oss.str());
+}
+
 TEST_F(TabTest, TwoTabsShouldBeReadFromInput)
 {
   std::string format1 = "    1   2   3   4   5   6   7   8   9  10 \n"
