@@ -17,6 +17,17 @@ struct DatabaseFileReaderTest : public Test
     Chord::clear();
     OneMinuteChangesSet().clear();
   }
+
+  bool expectTabPrintedAsReadedWithoutCarriageReturn(const std::string& expected, const Guitar::Tab& actual)
+  {
+    std::string expected_without_carriage{expected};
+    std::string::size_type pos;
+    while ((pos = expected_without_carriage.find('\r')) != std::string::npos)
+    {
+      expected_without_carriage.replace(pos, 1, "");
+    }
+    return expected_without_carriage == actual.print();
+  }
 };
 
 TEST_F(DatabaseFileReaderTest, DatabaseFileReaderShouldThrowIfNotSupportedVersion)
@@ -64,6 +75,8 @@ TEST_F(DatabaseFileReaderTest, DatabaseFileReaderShouldReadVer1File)
   EXPECT_EQ(2, Chord::size());
   EXPECT_NO_THROW(Chord::getChords().at("A"));
   EXPECT_NO_THROW(Chord::getChords().at("B"));
+  EXPECT_TRUE(expectTabPrintedAsReadedWithoutCarriageReturn(format_tab1, Chord::getChord("A").getTab()));
+  EXPECT_TRUE(expectTabPrintedAsReadedWithoutCarriageReturn(format_tab2, Chord::getChord("B").getTab()));
   EXPECT_EQ(omcs.findFirstWorstChordByBestResult()->bestResult().first, 2);
   EXPECT_EQ(omcs.findFirstWorstChordByLastResult()->lastResult().first, 1);
 }
@@ -104,6 +117,8 @@ TEST_F(DatabaseFileReaderTest, DatabaseFileReaderShouldReadVer1FileInDosFormat)
   EXPECT_EQ(2, Chord::size());
   EXPECT_NO_THROW(Chord::getChords().at("A"));
   EXPECT_NO_THROW(Chord::getChords().at("B"));
+  EXPECT_TRUE(expectTabPrintedAsReadedWithoutCarriageReturn(format_tab1, Chord::getChord("A").getTab()));
+  EXPECT_TRUE(expectTabPrintedAsReadedWithoutCarriageReturn(format_tab2, Chord::getChord("B").getTab()));
   EXPECT_EQ(omcs.findFirstWorstChordByBestResult()->bestResult().first, 2);
   EXPECT_EQ(omcs.findFirstWorstChordByLastResult()->lastResult().first, 1);
 }
