@@ -1,1 +1,0 @@
- -D GMOCK_DIR=../gmock/ -D NO_COVERAGE=true -DCMAKE_CXX_COMPILER=/usr/bin/clang
