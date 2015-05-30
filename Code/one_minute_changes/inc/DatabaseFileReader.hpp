@@ -27,8 +27,6 @@ public:
 protected:
   virtual void readChords(std::istream &in) const = 0;
   virtual void readOneMinuteChanges(std::istream &in) const = 0;
-
-  static std::string cleanCarriageReturn(const std::string &text);
 };
 
 }
