@@ -8,6 +8,7 @@ before_script:
   - cd _build
   
 script:
-  cmake .. -DCMAKE_BUILD_TYPE=Debug
-  make -j 16 && Test/Tester
+  cmake .. -DCMAKE_BUILD_TYPE=Debug &&
+  make -j 16 &&
+  Test/Tester
   
