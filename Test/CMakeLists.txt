@@ -8,9 +8,10 @@ if ("${GMOCK_DIR}" STREQUAL "")
 	message(STATUS "No GMOCK_DIR variable set, trying to use system gmock")
 	set(GMOCK_DIR "/usr/src")
 	set(GMOCK_H_INCLUDE_DIR /usr/include/gmock)
-	set(GMOCK_SUB_DIR /usr/src/gmock)
+	set(GMOCK_MAIN_DIR /usr/src/gmock)
 else ("${GMOCK_DIR}" STREQUAL "")
-	set(GMOCK_SUB_DIR "../${GMOCK_DIR}")
+	set(GMOCK_SUB_DIR "${GMOCK_DIR}")
+	set(GMOCK_MAIN_DIR "${GMOCK_DIR}")
 	set(GMOCK_INCLUDE_DIR "${GMOCK_SUB_DIR}/include")
 	set(GMOCK_H_INCLUDE_DIR "${GMOCK_DIR}/include/gmock")
 	set(GTEST_INCLUDE_DIR "${GMOCK_SUB_DIR}/gtest/include")
@@ -44,7 +45,7 @@ include_directories(${TEST_INC_DIR}/${ONE_MINUTE_CHANGES_MOCKS_DIR}/)
 #external libs
 
 set(CMAKE_CXX_FLAGS_DEBUG "${NORMAL_WARNING_FLAGS}")
-add_subdirectory(${GMOCK_DIR} gmock)
+add_subdirectory(${GMOCK_MAIN_DIR} gmock)
 set(CMAKE_CXX_FLAGS_DEBUG "${EXTRA_WARNING_FLAGS}")
 
 #test files
