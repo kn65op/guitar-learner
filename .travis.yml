@@ -14,7 +14,23 @@ before_script:
   - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.9 90
   
 script:
+  if [ ${COVERITY_SCAN_BRANCH} == 1 ]; then exit ; fi &&
   cmake .. -DCMAKE_BUILD_TYPE=Debug  -DGMOCK_DIR=../gmock-1.7.0 &&
   make -j 16 &&
   Test/Tester
-  
+
+env:
+  global:
+   # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
+   #   via the "travis encrypt" command using the project repo's public key
+   - secure: "t00P0yY8PzBw4K/0OtMTNMjUaB85Jv3m1qPYZxyW9Txd5Gh2lhR+vzcTV/t7+ASWtVE9FNroWp03Rmj+ja9+A7pJnSGXDYB0KVPDGsQ8hDott9qlPyDL5AdZEoNCO8q92vGZEnhOuEjOzb8ngBDfVXIUgY1TeDSiQ2Wx1O2cEHkMWjKT+aBko0FhqcSLTbzS5S/KUc0KZGkWf5nuB4aZ0NCAVThaX0uFQdaePeV3vZrQ0PnK+TpTsCtiHnQU4SduMwW/VHvA5ZEMm3APoQdyU8cYrmB1N8F/KRGMxEXCJ5wQNcOlzLB6MWNCXtG0ta59C9fRklr/K7tA9MUOYPY65rsFOmTWCzPH1XATu73KU5TavAf5l/0v3S5RizJtpyRT5g+a771Er396abqoppevI/y7feTvp0kMrtVvY33t8xefhrQAy5fZ3jIlyiQmNvWyY7nXDxXmdpgnIOJ+thTL4k5UVXluvVNsTkO9ix41ql4oUN1KeTaMFP3PHtwID80kGMHL8DjCNgjBrDJhbzTsKIbl9sCcvyiV/SW3MGPYThp1ClvQhm7Gfm/TYzOYfd9RRuf5Uf8K8xGGsvub/jJZL0hs1IFORQmq7a3l+P8geoxNCkE8gFidHpQyn5i7s3tCfbq8Yz9PzuMJC1rv5CqPkZUMjQ/TGW7SRcQa2iMNfKg="
+
+addons:
+  coverity_scan:
+    project:
+      name: "kn65op/guitar-learner"
+      description: "<Your project description here>"
+    notification_email: kn65op+github@gmail.com
+    build_command_prepend: cmake .. -DCMAKE_BUILD_TYPE=Debug  -DGMOCK_DIR=../gmock-1.7.0
+    build_command: make -j 4
+    branch_pattern: coverity_scan
