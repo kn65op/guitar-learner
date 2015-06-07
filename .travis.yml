@@ -12,7 +12,7 @@ before_script:
   - cd _build
   - sudo apt-get update -qq
   - sudo apt-get install libboost-dev libboost-date-time-dev libboost-program-options-dev google-mock gcc-4.9 g++-4.9
-  - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.8 90
+  - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.9 90
   
 script:
   cmake .. -DCMAKE_BUILD_TYPE=Debug  -DGMOCK_DIR=../gmock-1.7.0 &&
