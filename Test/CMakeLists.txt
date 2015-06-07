@@ -16,7 +16,7 @@ else ("${GMOCK_DIR}" STREQUAL "")
 	set(GMOCK_H_INCLUDE_DIR "${GMOCK_DIR}/include/gmock")
 	set(GTEST_INCLUDE_DIR "${GMOCK_SUB_DIR}/gtest/include")
 	include_directories(${GMOCK_DIR})
-	#	include_directories(${GTEST_INCLUDE_DIR})
+	include_directories(${GTEST_INCLUDE_DIR})
 endif ("${GMOCK_DIR}" STREQUAL "")
 
 set(GMOCK_INCLUDE "${GMOCK_H_INCLUDE_DIR}/gmock.h")
