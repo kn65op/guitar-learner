@@ -14,8 +14,8 @@ else ("${GMOCK_DIR}" STREQUAL "")
 	set(GMOCK_INCLUDE_DIR "${GMOCK_SUB_DIR}/include")
 	set(GMOCK_H_INCLUDE_DIR "${GMOCK_DIR}/include/gmock")
 	set(GTEST_INCLUDE_DIR "${GMOCK_SUB_DIR}/gtest/include")
-	include_directories(${GMOCK_INCLUDE_DIR})
-	include_directories(${GTEST_INCLUDE_DIR})
+	include_directories(${GMOCK_DIR})
+	#	include_directories(${GTEST_INCLUDE_DIR})
 endif ("${GMOCK_DIR}" STREQUAL "")
 
 set(GMOCK_INCLUDE "${GMOCK_H_INCLUDE_DIR}/gmock.h")
@@ -44,7 +44,7 @@ include_directories(${TEST_INC_DIR}/${ONE_MINUTE_CHANGES_MOCKS_DIR}/)
 #external libs
 
 set(CMAKE_CXX_FLAGS_DEBUG "${NORMAL_WARNING_FLAGS}")
-add_subdirectory(${GMOCK_SUB_DIR} gmock)
+add_subdirectory(${GMOCK_DIR} gmock)
 set(CMAKE_CXX_FLAGS_DEBUG "${EXTRA_WARNING_FLAGS}")
 
 #test files

@@ -4,13 +4,15 @@ compiler:
   - gcc
   
 before_script:
+  - curl -O https://googlemock.googlecode.com/files/gmock-1.7.0.zip
+  - unzip gmock-1.7.0.zip
   - mkdir _build
   - cd _build
   - sudo apt-get update -qq
   - sudo apt-get install libboost-dev libboost-date-time-dev libboost-program-options-dev google-mock
   
 script:
-  cmake .. -DCMAKE_BUILD_TYPE=Debug &&
+  cmake .. -DCMAKE_BUILD_TYPE=Debug  -DGMOK_DRI=../gmock-1.7.0 &&
   make -j 16 &&
   Test/Tester
   
