@@ -14,7 +14,7 @@ void ListOneMinuteChanges::process(const CommandOptions &)
 
   OneMinuteChangesSet omc_set;
 
-  DateTime::DateIO date;
+  THelper::DateTime::DateIO date;
   std::cout << "Changes:\n";
   for (const auto & omc : omc_set)
   {

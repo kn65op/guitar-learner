@@ -20,7 +20,7 @@ void ShowWorstChange::process(const CommandOptions &)
     std::cout << "Worst change: " << worst_omc->getFirstChord() << "->" << worst_omc->getSecondChord() << "\n";
     auto worst_result = getResultFromChange(worst_omc);
     auto datetime = std::chrono::system_clock::to_time_t(worst_result.second);
-    DateTime::DateIO date;
+    THelper::DateTime::DateIO date;
     std::cout << "Result: " << worst_result.first << "\nWhen: " << date.getDateStringInFormat(std::localtime(&datetime), "%c") << "\n";
 
     std::cout << "Chords: \n";
