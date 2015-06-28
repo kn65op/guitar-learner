@@ -22,7 +22,6 @@ OneMinuteChange::OneMinuteChange(std::istream &is)
     StoredDuration::rep read_rep;
     is >> read_rep;
     StoredDuration dur{read_rep};
-//    std::chrono::duration<StoredDuration> duration{dur};
     results.push_back(std::make_pair(res, DateType{dur}));
   }
 
@@ -82,8 +81,6 @@ std::string OneMinuteChange::print() const
   std::stringstream ss;
   ss << first << "\n";
   ss << second << "\n";
-  //ss << std::chrono::duration_cast<StoredDuration>(add_date.time_since_epoch()).count() << "\n";
- // ss << add_date.time_since_epoch().count() << "\n";
   ss << results.size() << "\n";
   for (auto res : results)
   {
