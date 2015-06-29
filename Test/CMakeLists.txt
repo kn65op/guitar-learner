@@ -8,13 +8,14 @@ if ("${GMOCK_DIR}" STREQUAL "")
 	message(STATUS "No GMOCK_DIR variable set, trying to use system gmock")
 	set(GMOCK_DIR "/usr/src")
 	set(GMOCK_H_INCLUDE_DIR /usr/include/gmock)
-	set(GMOCK_SUB_DIR /usr/src/gmock)
+	set(GMOCK_MAIN_DIR /usr/src/gmock)
 else ("${GMOCK_DIR}" STREQUAL "")
-	set(GMOCK_SUB_DIR "../${GMOCK_DIR}")
+	set(GMOCK_SUB_DIR "${GMOCK_DIR}")
+	set(GMOCK_MAIN_DIR "${GMOCK_DIR}")
 	set(GMOCK_INCLUDE_DIR "${GMOCK_SUB_DIR}/include")
 	set(GMOCK_H_INCLUDE_DIR "${GMOCK_DIR}/include/gmock")
 	set(GTEST_INCLUDE_DIR "${GMOCK_SUB_DIR}/gtest/include")
-	include_directories(${GMOCK_INCLUDE_DIR})
+	include_directories(${GMOCK_DIR})
 	include_directories(${GTEST_INCLUDE_DIR})
 endif ("${GMOCK_DIR}" STREQUAL "")
 
@@ -44,7 +45,7 @@ include_directories(${TEST_INC_DIR}/${ONE_MINUTE_CHANGES_MOCKS_DIR}/)
 #external libs
 
 set(CMAKE_CXX_FLAGS_DEBUG "${NORMAL_WARNING_FLAGS}")
-add_subdirectory(${GMOCK_SUB_DIR} gmock)
+add_subdirectory(${GMOCK_MAIN_DIR} gmock)
 set(CMAKE_CXX_FLAGS_DEBUG "${EXTRA_WARNING_FLAGS}")
 
 #test files
@@ -68,9 +69,7 @@ add_test(gtests ${TEST_EXE})
 
 set(COVERAGE_DIR coverage)
 set(SOURCE_RAW_FILES_DIR "${CMAKE_BINARY_DIR}/Test/CMakeFiles/Tester.dir/__/Code")
-set(ONE_MINUTE_CHANGES_COVERAGE_RAW_FILES_DIR "${CMAKE_BINARY_DIR}/Test/CMakeFiles/Tester.dir/__/Code/one_minute_changes/src")
-set(ONE_MINUTE_CHANGES_COVERAGE_RAW_FILES "${CMAKE_BINARY_DIR}/Test/CMakeFiles/Tester.dir/__/Code/one_minute_changes/src/*.gcda")
-set(ONE_MINUTE_CHANGES_O_FILES "${ONE_MINUTE_CHANGES_COVERAGE_RAW_FILES_DIR}/*.o")
+set(COVERAGE_INFO guitar_learner.info)
 
 add_custom_target(coverage)
 add_custom_command(TARGET coverage
@@ -78,8 +77,8 @@ add_custom_command(TARGET coverage
 	WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
 
 add_custom_command(TARGET coverage
-	COMMAND rm -rf ${ONE_MINUTE_CHANGES_COVERAGE_RAW_FILES} && ../${TEST_EXE}  && lcov -d  ${SOURCE_RAW_FILES_DIR} --capture --output-file one_minute_changes.info && genhtml one_minute_changes.info 
-	WORKING_DIRECTORY ${COVERAGE_DIR})
+		COMMAND find ${CMAKE_BINARY_DIR} -name *.gcda -exec rm {} "\;" && ../${TEST_EXE}  && lcov -d  ${SOURCE_RAW_FILES_DIR} --capture --output-file ${COVERAGE_INFO} && genhtml ${COVERAGE_INFO}
+			WORKING_DIRECTORY ${COVERAGE_DIR})
 
 add_dependencies(coverage ${TEST_EXE})
 

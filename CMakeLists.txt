@@ -10,7 +10,7 @@ set(RELEASE_BIN_DIR "Release")
 project (guitar-learner)
 
 #external libs
-FIND_PACKAGE( Boost 1.53 COMPONENTS program_options REQUIRED )
+FIND_PACKAGE( Boost 1.46 COMPONENTS program_options REQUIRED )
 FIND_PACKAGE( TLogger REQUIRED PATHS TLogger)
 FIND_PACKAGE( THelper REQUIRED PATHS THelper)
 

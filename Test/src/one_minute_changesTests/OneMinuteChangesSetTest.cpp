@@ -254,10 +254,10 @@ TEST_F(OneMinuteChangesSetTest, RemoveAllContainingChordShouldRemoveAllAndOnlyCh
   omcs.add(omc2);
   omcs.add(omc3);
 
-  ASSERT_EQ(3, omcs.size());
+  ASSERT_EQ(3U, omcs.size());
 
   omcs.removeAllContainingChord("A");
-  EXPECT_EQ(1, omcs.size());
+  EXPECT_EQ(1U, omcs.size());
 
   EXPECT_EQ(2, omcs.findFirstWorstChordByLastResult()->lastResult().first);
 }

@@ -9,7 +9,7 @@ using Guitar::Chord;
 
 void DatabaseFileReader::read(std::istream &in)
 {
-  std::string version = Stream::StreamOperations::getLineRegardlessLineEnding(in);
+  std::string version = THelper::Stream::StreamOperations::getLineRegardlessLineEnding(in);
   std::unique_ptr<DatabaseFileReader> reader;
   if (version == "Ver: 1")
   {
