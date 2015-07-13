@@ -17,7 +17,6 @@ addons:
   
 before_script:
   # We need this line to have g++4.8 available in apt
-  - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
   - curl -O https://googlemock.googlecode.com/files/gmock-1.7.0.zip
   - unzip gmock-1.7.0.zip
   - mkdir _build
