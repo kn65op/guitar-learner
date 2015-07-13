@@ -14,10 +14,10 @@ before_script:
   - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.9 90
   
 script:
-  if [ ${COVERITY_SCAN_BRANCH} == 1 ]; then exit ; fi &&
-  cmake .. -DCMAKE_BUILD_TYPE=Debug  -DGMOCK_DIR=../gmock-1.7.0 &&
-  make -j `nproc` &&
-  Test/Tester
+  - if [ ${COVERITY_SCAN_BRANCH} == 1 ]; then exit ; fi
+  - cmake .. -DCMAKE_BUILD_TYPE=Debug  -DGMOCK_DIR=../gmock-1.7.0
+  - make -j `nproc`
+  - Test/Tester
 
 env:
   global:
