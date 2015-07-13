@@ -21,12 +21,11 @@ before_script:
   - unzip gmock-1.7.0.zip
   - mkdir _build
   - cd _build
-  - update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.9 90
   - cmake --version
   
 script:
   - if [ ${COVERITY_SCAN_BRANCH} == 1 ]; then exit ; fi
-  - cmake .. -DCMAKE_BUILD_TYPE=Debug  -DGMOCK_DIR=../gmock-1.7.0
+  - cmake -DCMAKE_BUILD_TYPE=Debug  -DGMOCK_DIR=../gmock-1.7.0 -DCCMAKE_CXX_COMPILER=g++-4.9 ..
   - make -j `nproc`
   - Test/Tester
 
