@@ -4,7 +4,7 @@ compiler:
   - gcc
 
 addons:
-  - apt:
+  apt:
     sources:
     - ubuntu-toolchain-r-test
     packages:
@@ -25,7 +25,7 @@ before_script:
   
 script:
   - if [ ${COVERITY_SCAN_BRANCH} == 1 ]; then exit ; fi
-  - cmake -DCMAKE_BUILD_TYPE=Debug  -DGMOCK_DIR=../gmock-1.7.0 -DCCMAKE_CXX_COMPILER=g++-4.9 ..
+  - cmake -DCMAKE_BUILD_TYPE=Debug  -DGMOCK_DIR=../gmock-1.7.0 -DCMAKE_CXX_COMPILER=g++-4.9 ..
   - make -j `nproc`
   - Test/Tester
 
