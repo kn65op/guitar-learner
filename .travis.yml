@@ -1,6 +1,19 @@
+sudo: false
 language: cpp
 compiler:
   - gcc
+
+addons:
+  - apt:
+    sources:
+    - ubuntu-toolchain-r-test
+    packages:
+    - libboost-dev
+    - libboost-date-time-dev
+    - libboost-program-options-dev
+    - google-mock
+    - gcc-4.9 
+    - g++-4.9
   
 before_script:
   # We need this line to have g++4.8 available in apt
@@ -9,9 +22,7 @@ before_script:
   - unzip gmock-1.7.0.zip
   - mkdir _build
   - cd _build
-  - sudo apt-get update -qq
-  - sudo apt-get install libboost-dev libboost-date-time-dev libboost-program-options-dev google-mock gcc-4.9 g++-4.9
-  - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.9 90
+  - update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.9 90
   - cmake --version
   
 script:
