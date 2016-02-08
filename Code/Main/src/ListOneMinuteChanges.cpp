@@ -21,12 +21,14 @@ void ListOneMinuteChanges::process(const CommandOptions &)
     std::cout << "Change: " << omc->getFirstChord() << "->" << omc->getSecondChord() << ":\t";
     try
     {
+      LOG << "Getting inforamtion about change result";
       const auto result = getResultFromChange(omc);
       auto datetime = std::chrono::system_clock::to_time_t(result.second);
       std::cout << result.first << "\ton: " << date.getDateStringInFormat(std::localtime(&datetime), "%c") << "\n";
     }
     catch (const OneMinuteChanges::IOneMinuteChange::NoResultsError noResults)
     {
+      LOG << "Change has no results";
       std::cout << "No results for this change\n";
     }
   }
@@ -41,5 +43,6 @@ OneMinuteChanges::OneMinuteChange::ResultType ListOneMinuteChanges::getResultFro
     case ResultType::LAST:
       return change->lastResult();
   }
+  LOG << "Invalid result type";
   throw std::runtime_error{"Invalid ResultType"};
 }
