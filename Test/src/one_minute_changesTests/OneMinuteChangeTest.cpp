@@ -42,9 +42,9 @@ TEST_F(OneMinuteChangeTest, OneMinuteChangesShouldBeNotEqualWithDifferentChords)
   EXPECT_NE(omc, omc2);
 }
 
-TEST_F(OneMinuteChangeTest, WithoutAnyResultsBestResultShouldBe0)
+TEST_F(OneMinuteChangeTest, WithoutAnyResultsBestResultShouldThrowNoResults)
 {
-  EXPECT_EQ(0, omc.bestResult().first);
+  EXPECT_THROW(omc.bestResult(), OneMinuteChange::NoResultsError);
 }
 
 TEST_F(OneMinuteChangeTest, AfterAddedOneResultBestResultShouldBeThisResultAndShouldBeAddedNow)
@@ -84,9 +84,9 @@ TEST_F(OneMinuteChangeTest, AfterAddedTwoResultAllResultsShouldReturnChronolgica
   EXPECT_EQ(secondRes, results[1].first);
 }
 
-TEST_F(OneMinuteChangeTest, GetLastResultShouldReturn0)
+TEST_F(OneMinuteChangeTest, WithoutAnyResultsGetLastResultShouldThrowNoResults)
 {
-  EXPECT_EQ(0, omc.lastResult().first);
+  EXPECT_THROW(omc.lastResult(), OneMinuteChange::NoResultsError);
 }
 
 TEST_F(OneMinuteChangeTest, GetLastResultShouldReturnLastResult)
@@ -165,8 +165,8 @@ TEST_F(OneMinuteChangeTest, OneMinuteChangeCanBeReaded)
   }
 
   std::chrono::seconds allowed_difference {0};
-  auto actual_best_difference = std::chrono::duration_cast < std::chrono::seconds > (now - omc.bestResult().second);
-  auto actual_last_difference = std::chrono::duration_cast < std::chrono::seconds > ((now + std::chrono::seconds {1}) - omc.lastResult().second);
+  auto actual_best_difference = std::chrono::duration_cast < std::chrono::seconds > (now - omc2.bestResult().second);
+  auto actual_last_difference = std::chrono::duration_cast < std::chrono::seconds > ((now + std::chrono::seconds {1}) - omc2.lastResult().second);
 
   EXPECT_EQ(bestRes, omc2.bestResult().first);
   EXPECT_GE(allowed_difference.count(), actual_best_difference.count());

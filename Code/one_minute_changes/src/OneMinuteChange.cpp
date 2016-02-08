@@ -49,7 +49,7 @@ OneMinuteChange::ResultType OneMinuteChange::bestResult() const
   {
     return *max;
   }
-  return {0, getNow()};
+  throw NoResultsError("No results to search best result");
 }
 
 const OneMinuteChange::Results& OneMinuteChange::getResults() const
@@ -61,7 +61,7 @@ OneMinuteChange::ResultType OneMinuteChange::lastResult() const
 {
   if (results.empty())
   {
-    return {0, getNow()};
+    throw NoResultsError("No results to get last result");
   }
   return results.back();
 }

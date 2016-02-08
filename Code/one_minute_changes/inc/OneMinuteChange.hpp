@@ -5,6 +5,7 @@
 #include <vector>
 #include <iostream>
 #include <chrono>
+#include <stdexcept>
 
 #include "Chord.hpp"
 
@@ -21,9 +22,14 @@ public:
   using ResultType = std::pair<ResultValue, DateType>;
   using Results = std::vector<ResultType>;
 
-  virtual ~IOneMinuteChange()
+  class NoResultsError : public std::logic_error
   {
-  }
+  public:
+    NoResultsError(const std::string& message) : std::logic_error(message) {}
+
+  };
+
+  virtual ~IOneMinuteChange() = default;
 
   virtual bool operator==(const IOneMinuteChange &other) const = 0;
   virtual void addResult(ResultValue result) = 0;

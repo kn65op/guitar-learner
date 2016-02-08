@@ -19,9 +19,16 @@ void ListOneMinuteChanges::process(const CommandOptions &)
   for (const auto & omc : omc_set)
   {
     std::cout << "Change: " << omc->getFirstChord() << "->" << omc->getSecondChord() << ":\t";
-    const auto result = getResultFromChange(omc);
-    auto datetime = std::chrono::system_clock::to_time_t(result.second);
-    std::cout << result.first << "\ton: " << date.getDateStringInFormat(std::localtime(&datetime), "%c") << "\n";
+    try
+    {
+      const auto result = getResultFromChange(omc);
+      auto datetime = std::chrono::system_clock::to_time_t(result.second);
+      std::cout << result.first << "\ton: " << date.getDateStringInFormat(std::localtime(&datetime), "%c") << "\n";
+    }
+    catch (const OneMinuteChanges::IOneMinuteChange::NoResultsError noResults)
+    {
+      std::cout << "No results for this change\n";
+    }
   }
 }
 
