@@ -33,7 +33,18 @@ protected:
     for (unsigned i = 0; i < fret_count; ++i)
     {
       istream >> frets[i];
-      LOG << "read frets[" << i << "] = " << frets[i];
+      if (istream.good())
+      {
+        LOG << "read frets[" << i << "] = " << frets[i];
+      }
+      else
+      {
+        ostream << "Invalid input, please write only numbers, start again with " << i + 1 << " fret:\n";
+        LOG << "Input was not a number";
+        istream.clear();
+        istream.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        --i;
+      }
     }
     return Tab{frets[0], frets[1], frets[2], frets[3], frets[4], frets[5]};
   }
