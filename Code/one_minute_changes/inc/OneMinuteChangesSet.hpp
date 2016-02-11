@@ -61,6 +61,8 @@ private:
     });
     return changesFiltered;
   }
+
+  ContainerType getAllChangesWithResults() const;
 };
 
 }

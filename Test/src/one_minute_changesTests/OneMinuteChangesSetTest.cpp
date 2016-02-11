@@ -195,7 +195,6 @@ TEST_F(OneMinuteChangesSetTest, WhenChangeWasAddedShouldBePosibilityToAddNewResu
   auto omcMockLowest = addOmcToSetWithBestResult(min_result);
   auto omcMock = addOmcToSetWithBestResult(better_result);
 
-
   EXPECT_EQ(min_result, omcs.findFirstWorstChangeByBestResult()->bestResult().first);
 
   EXPECT_CALL(*omcMockLowest, getFirstChord()).WillRepeatedly(Return("A"));
@@ -216,7 +215,6 @@ TEST_F(OneMinuteChangesSetTest, WhenChangeWasAddedShouldBePosibilityToAddNewResu
   int better_result = 2;
   auto omcMockLowest = addOmcToSetWithBestResult(min_result);
   auto omcMock = addOmcToSetWithBestResult(better_result);
-
 
   EXPECT_EQ(min_result, omcs.findFirstWorstChangeByBestResult()->bestResult().first);
 
@@ -260,28 +258,18 @@ TEST_F(OneMinuteChangesSetTest, findWorstChangesByLastResultShouldThowNoElements
 
 TEST_F(OneMinuteChangesSetTest, FindLastWorstChangeShouldReturnElementWithLowestMaxValueForOneChange)
 {
-  auto omcMockLowest = std::make_shared<OneMinuteChangeMock>();
-  OneMinuteChangesSet::Element omcLowest{omcMockLowest};
-
-  omcs.add(omcLowest);
   int min_result = 1;
-
-  EXPECT_CALL(*omcMockLowest, lastResult()).WillRepeatedly(Return(std::make_pair(min_result, getNow())));
+  auto omcMockLowest = addOmcToSetWithLastResult(min_result);
 
   EXPECT_EQ(min_result, omcs.findFirstWorstChangeByLastResult()->lastResult().first);
 }
 
 TEST_F(OneMinuteChangesSetTest, FindLastWorstChangeShouldReturnElementWithLowestMaxValue)
 {
-  auto omcLowest = std::make_shared<OneMinuteChangeMock>();
-  auto omc = std::make_shared<OneMinuteChangeMock>();
-
-  omcs.add(omcLowest);
-  omcs.add(omc);
   int min_result = 1;
-
-  EXPECT_CALL(*omcLowest, lastResult()).WillRepeatedly(Return(std::make_pair(min_result, getNow())));
-  EXPECT_CALL(*omc, lastResult()).WillRepeatedly(Return(std::make_pair(min_result + 1, getNow())));
+  int betterResult = 2;
+  auto omcMockLowest = addOmcToSetWithLastResult(min_result);
+  auto omcMock= addOmcToSetWithLastResult(betterResult);
 
   EXPECT_EQ(min_result, omcs.findFirstWorstChangeByLastResult()->lastResult().first);
 }
@@ -320,12 +308,12 @@ TEST_F(OneMinuteChangesSetTest, ChangesShoulBeRead)
 
 TEST_F(OneMinuteChangesSetTest, RemoveAllContainingChordShouldRemoveAllAndOnlyChangesContainingChord)
 {
-  OneMinuteChangeMock *omc1Mock = new OneMinuteChangeMock();
-  OneMinuteChangesSet::Element omc1{omc1Mock};
-  OneMinuteChangeMock *omc2Mock = new OneMinuteChangeMock();
-  OneMinuteChangesSet::Element omc2{omc2Mock};
-  OneMinuteChangeMock *omc3Mock = new OneMinuteChangeMock();
-  OneMinuteChangesSet::Element omc3{omc3Mock};
+  int resultOne{1};
+  int resultTwo{2};
+  int resultThree{3};
+  auto omc1Mock = addOmcToSetWithLastResult(resultOne);
+  auto omc2Mock = addOmcToSetWithLastResult(resultTwo);
+  auto omc3Mock = addOmcToSetWithLastResult(resultThree);
 
   EXPECT_CALL(*omc1Mock, getFirstChord()).WillRepeatedly(Return("A"));
   EXPECT_CALL(*omc1Mock, getSecondChord()).WillRepeatedly(Return("B"));
@@ -333,14 +321,8 @@ TEST_F(OneMinuteChangesSetTest, RemoveAllContainingChordShouldRemoveAllAndOnlyCh
   EXPECT_CALL(*omc2Mock, getSecondChord()).WillRepeatedly(Return("C"));
   EXPECT_CALL(*omc3Mock, getFirstChord()).WillRepeatedly(Return("C"));
   EXPECT_CALL(*omc3Mock, getSecondChord()).WillRepeatedly(Return("A"));
-  EXPECT_CALL(*omc1Mock, lastResult()).WillRepeatedly(Return(std::make_pair(1, getNow())));
-  EXPECT_CALL(*omc2Mock, lastResult()).WillRepeatedly(Return(std::make_pair(2, getNow())));
-  EXPECT_CALL(*omc3Mock, lastResult()).WillRepeatedly(Return(std::make_pair(3, getNow())));
 
   OneMinuteChangesSet omcs;
-  omcs.add(omc1);
-  omcs.add(omc2);
-  omcs.add(omc3);
 
   ASSERT_EQ(3U, omcs.size());
 
