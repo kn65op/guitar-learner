@@ -22,6 +22,7 @@ public:
   MOCK_CONST_METHOD0(getSecondChord, std::string());
   MOCK_CONST_METHOD0(print, std::string());
   MOCK_CONST_METHOD1(compare, bool(const IOneMinuteChange &));
+  MOCK_CONST_METHOD0(hasResults, bool());
 
   bool operator==(const IOneMinuteChange &other) const override
   {

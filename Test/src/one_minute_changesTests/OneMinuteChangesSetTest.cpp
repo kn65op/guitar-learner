@@ -28,6 +28,7 @@ struct OneMinuteChangesSetTest : public Test
   {
     auto omc = std::make_shared<OneMinuteChangeMock>();
     omcs.add(omc);
+    EXPECT_CALL(*omc, hasResults()).WillRepeatedly(Return(true));
     EXPECT_CALL(*omc, bestResult()).WillRepeatedly(Return(std::make_pair(bestResult, getNow())));
     return omc;
   }
@@ -44,6 +45,7 @@ struct OneMinuteChangesSetTest : public Test
   {
     auto omc = std::make_shared<OneMinuteChangeMock>();
     omcs.add(omc);
+    EXPECT_CALL(*omc, hasResults()).WillRepeatedly(Return(false));
     EXPECT_CALL(*omc, bestResult()).WillRepeatedly(Throw(OneMinuteChanges::IOneMinuteChange::NoResultsError{"no res"}));
     return omc;
   }
@@ -92,20 +94,12 @@ TEST_F(OneMinuteChangesSetTest, findWorstChangesShouldThowNoElementsExceptionWhe
 
 TEST_F(OneMinuteChangesSetTest, FindWorstChangeShouldReturnElementWithLowestMaxValueForOneChange)
 {
-  OneMinuteChangeMock *omcMockLowest = new OneMinuteChangeMock();
-  OneMinuteChangesSet::Element omcLowest{omcMockLowest};
-  OneMinuteChangeMock *omcMockLowest2 = new OneMinuteChangeMock();
-  OneMinuteChangesSet::Element omcLowest2{omcMockLowest2};
-
-  omcs.add(omcLowest);
-  omcs.add(omcLowest2);
   int min_result = 1;
-
-  EXPECT_CALL(*omcMockLowest, bestResult()).WillRepeatedly(Return(std::make_pair(min_result, getNow())));
-  EXPECT_CALL(*omcMockLowest2, bestResult()).WillRepeatedly(Return(std::make_pair(min_result, getNow())));
+  auto omcMockLowest = addOmcToSetWithBestResult(min_result);
+  auto omcMockLowest2 = addOmcToSetWithBestResult(min_result);
 
   EXPECT_EQ(min_result, omcs.findFirstWorstChangeByBestResult()->bestResult().first);
-  EXPECT_EQ(omcLowest, omcs.findFirstWorstChangeByBestResult());
+  EXPECT_EQ(omcMockLowest, omcs.findFirstWorstChangeByBestResult());
 }
 
 TEST_F(OneMinuteChangesSetTest, FindWorstChangesShouldReturnOneElementWhenThereIsOnlyOneChange)
@@ -184,34 +178,21 @@ TEST_F(OneMinuteChangesSetTest, WhenNotAllResultsHasResultsShouldReturnWorstLast
 
 TEST_F(OneMinuteChangesSetTest, FindWorstChangeShouldReturnElementWithLowestMaxValue)
 {
-  OneMinuteChangeMock *omcMockLowest = new OneMinuteChangeMock();
-  OneMinuteChangesSet::Element omcLowest{omcMockLowest};
-  OneMinuteChangeMock *omcMock = new OneMinuteChangeMock();
-  OneMinuteChangesSet::Element omc{omcMock};
-
-  omcs.add(omcLowest);
-  omcs.add(omc);
   int min_result = 1;
-
-  EXPECT_CALL(*omcMockLowest, bestResult()).WillRepeatedly(Return(std::make_pair(min_result, getNow())));
-  EXPECT_CALL(*omcMock, bestResult()).WillRepeatedly(Return(std::make_pair(min_result + 1, getNow())));
+  int better_result = 2;
+  auto omcMockLowest = addOmcToSetWithBestResult(min_result);
+  auto omcMock = addOmcToSetWithBestResult(better_result);
 
   EXPECT_EQ(min_result, omcs.findFirstWorstChangeByBestResult()->bestResult().first);
 }
 
 TEST_F(OneMinuteChangesSetTest, WhenChangeWasAddedShouldBePosibilityToAddNewResult)
 {
-  OneMinuteChangeMock *omcMockLowest = new OneMinuteChangeMock();
-  OneMinuteChangesSet::Element omcLowest{omcMockLowest};
-  OneMinuteChangeMock *omcMock = new OneMinuteChangeMock();
-  OneMinuteChangesSet::Element omc{omcMock};
-
-  omcs.add(omcLowest);
-  omcs.add(omc);
   int min_result = 1;
+  int better_result = 2;
+  auto omcMockLowest = addOmcToSetWithBestResult(min_result);
+  auto omcMock = addOmcToSetWithBestResult(better_result);
 
-  EXPECT_CALL(*omcMockLowest, bestResult()).WillRepeatedly(Return(std::make_pair(min_result, getNow())));
-  EXPECT_CALL(*omcMock, bestResult()).WillRepeatedly(Return(std::make_pair(min_result + 1, getNow())));
 
   EXPECT_EQ(min_result, omcs.findFirstWorstChangeByBestResult()->bestResult().first);
 
@@ -229,17 +210,11 @@ TEST_F(OneMinuteChangesSetTest, WhenChangeWasAddedShouldBePosibilityToAddNewResu
 
 TEST_F(OneMinuteChangesSetTest, WhenChangeWasAddedShouldBePosibilityToAddNewResultWithInvertedChords)
 {
-  OneMinuteChangeMock *omcMockLowest = new OneMinuteChangeMock();
-  OneMinuteChangesSet::Element omcLowest{omcMockLowest};
-  OneMinuteChangeMock *omcMock = new OneMinuteChangeMock();
-  OneMinuteChangesSet::Element omc{omcMock};
-
-  omcs.add(omcLowest);
-  omcs.add(omc);
   int min_result = 1;
+  int better_result = 2;
+  auto omcMockLowest = addOmcToSetWithBestResult(min_result);
+  auto omcMock = addOmcToSetWithBestResult(better_result);
 
-  EXPECT_CALL(*omcMockLowest, bestResult()).WillRepeatedly(Return(std::make_pair(min_result, getNow())));
-  EXPECT_CALL(*omcMock, bestResult()).WillRepeatedly(Return(std::make_pair(min_result + 1, getNow())));
 
   EXPECT_EQ(min_result, omcs.findFirstWorstChangeByBestResult()->bestResult().first);
 

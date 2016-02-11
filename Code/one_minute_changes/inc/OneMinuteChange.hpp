@@ -39,6 +39,7 @@ public:
   virtual std::string getFirstChord() const = 0;
   virtual std::string getSecondChord() const = 0;
   virtual std::string print() const = 0;
+  virtual bool hasResults() const = 0;
 };
 
 class OneMinuteChange : public IOneMinuteChange
@@ -55,6 +56,7 @@ public:
   std::string getFirstChord() const override;
   std::string getSecondChord() const override;
   std::string print() const override;
+  bool hasResults() const override;
 
 private:
   std::string first;

@@ -47,6 +47,17 @@ TEST_F(OneMinuteChangeTest, WithoutAnyResultsBestResultShouldThrowNoResults)
   EXPECT_THROW(omc.bestResult(), OneMinuteChange::NoResultsError);
 }
 
+TEST_F(OneMinuteChangeTest, WithoutAnyResultsHasResultsShouldReturnFalse)
+{
+  EXPECT_FALSE(omc.hasResults());
+}
+
+TEST_F(OneMinuteChangeTest, WithResultsHasResultsShouldReturnTrue)
+{
+  omc.addResult(0);
+  EXPECT_TRUE(omc.hasResults());
+}
+
 TEST_F(OneMinuteChangeTest, AfterAddedOneResultBestResultShouldBeThisResultAndShouldBeAddedNow)
 {
   const int bestRes = 44;

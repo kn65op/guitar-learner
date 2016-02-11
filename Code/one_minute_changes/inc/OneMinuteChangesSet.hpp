@@ -52,7 +52,7 @@ private:
   typedef ContainerType::iterator SetIterator;
   static ContainerType changes;
 
-  template <typename Rule> ContainerType getAllChangesWitRule(const Rule& rule)
+  template <typename Rule> ContainerType getAllChangesWitRule(const Rule& rule) const
   {
     ContainerType changesFiltered;
     std::copy_if(changes.begin(), changes.end(), std::back_inserter(changesFiltered), [=](const Element &element)

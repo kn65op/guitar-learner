@@ -104,3 +104,8 @@ OneMinuteChange::DateType OneMinuteChange::getNow()
 {
   return std::chrono::system_clock::now();
 }
+
+bool OneMinuteChange::hasResults() const
+{
+  return !results.empty();
+}
