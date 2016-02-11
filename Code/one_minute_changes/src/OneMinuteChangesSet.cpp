@@ -36,23 +36,51 @@ void OneMinuteChangesSet::add(Element element)
   changes.push_back(element);
 }
 
-OneMinuteChangesSet::Element OneMinuteChangesSet::findFirstWorstChordByBestResult() const
+OneMinuteChangesSet::Element OneMinuteChangesSet::findFirstWorstChangeByBestResult() const
 {
-  if (!size())
+  if (changes.empty())
   {
+    LOG << "Changes are empty";
     throw Exceptions::NoElements();
   }
 
-  return *std::min_element(changes.begin(), changes.end(), [](const Element &first, const Element & second)
-  {
-    return first->bestResult() < second->bestResult();
-  });
+    return *std::min_element(changes.begin(), changes.end(), [](const Element &first, const Element & second)
+    {
+      try
+      {
+        first->bestResult();
+      }
+      catch (IOneMinuteChange::NoResultsError &)
+      {
+        return false;
+      }
+      return first->bestResult() < second->bestResult();
+    });
 }
 
-OneMinuteChangesSet::Element OneMinuteChangesSet::findFirstWorstChordByLastResult() const
+OneMinuteChangesSet::ContainerType OneMinuteChangesSet::findWorstChangesByBestResult() const
 {
-  if (!size())
+  auto worstValue = findFirstWorstChangeByBestResult()->bestResult().first;
+  OneMinuteChangesSet::ContainerType worstChanges;
+  std::copy_if(changes.begin(), changes.end(), std::back_inserter(worstChanges), [=](const Element &element)
   {
+    try
+    {
+      return element->bestResult().first == worstValue;
+    }
+    catch (const OneMinuteChanges::IOneMinuteChange::NoResultsError &)
+    {
+      return false;
+    }
+  });
+  return worstChanges;
+}
+
+OneMinuteChangesSet::Element OneMinuteChangesSet::findFirstWorstChangeByLastResult() const
+{
+  if (changes.empty())
+  {
+    LOG << "Changes are empty";
     throw Exceptions::NoElements();
   }
 
@@ -60,6 +88,24 @@ OneMinuteChangesSet::Element OneMinuteChangesSet::findFirstWorstChordByLastResul
   {
     return first->lastResult() < second->lastResult();
   });
+}
+
+OneMinuteChangesSet::ContainerType OneMinuteChangesSet::findWorstChangesByLastResult() const
+{
+  auto worstValue = findFirstWorstChangeByLastResult()->lastResult().first;
+  OneMinuteChangesSet::ContainerType worstChanges;
+  std::copy_if(changes.begin(), changes.end(), std::back_inserter(worstChanges), [=](const Element &element)
+  {
+    try
+    {
+      return element->lastResult().first == worstValue;
+    }
+    catch (const OneMinuteChanges::IOneMinuteChange::NoResultsError &)
+    {
+      return false;
+    }
+  });
+  return worstChanges;
 }
 
 std::string OneMinuteChangesSet::print() const

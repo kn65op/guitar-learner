@@ -1,6 +1,7 @@
 #include "../inc/OneMinuteChange.hpp"
 #include <algorithm>
 #include <sstream>
+#include "TLogger.h"
 
 using OneMinuteChanges::OneMinuteChange;
 
@@ -49,6 +50,7 @@ OneMinuteChange::ResultType OneMinuteChange::bestResult() const
   {
     return *max;
   }
+  LOG << "No results found";
   throw NoResultsError("No results to search best result");
 }
 
@@ -61,6 +63,7 @@ OneMinuteChange::ResultType OneMinuteChange::lastResult() const
 {
   if (results.empty())
   {
+    LOG << "No results found";
     throw NoResultsError("No results to get last result");
   }
   return results.back();
@@ -68,6 +71,7 @@ OneMinuteChange::ResultType OneMinuteChange::lastResult() const
 
 std::string OneMinuteChange::getFirstChord() const
 {
+  LOG << "Results: " << results.size();
   return first;
 }
 

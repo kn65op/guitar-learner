@@ -1,10 +1,10 @@
-#ifndef ONEMINUTECHANGESSET_H
-#define ONEMINUTECHANGESSET_H
+#pragma once
 
 #include "OneMinuteChange.hpp"
 #include <set>
 #include <memory>
 #include <istream>
+#include <algorithm>
 
 namespace OneMinuteChanges
 {
@@ -38,8 +38,10 @@ public:
   void removeAllContainingChord(const Guitar::Chord::ChordNameType &chord);
   size_type size() const noexcept;
 
-  Element findFirstWorstChordByBestResult() const;
-  Element findFirstWorstChordByLastResult() const;
+  ContainerType findWorstChangesByBestResult() const;
+  ContainerType findWorstChangesByLastResult() const;
+  Element findFirstWorstChangeByBestResult() const;
+  Element findFirstWorstChangeByLastResult() const;
   Element getChange(const Guitar::Chord::ChordNameType &first_chord,
                     const Guitar::Chord::ChordNameType &second_chord) const;
   std::string print() const;
@@ -49,8 +51,16 @@ public:
 private:
   typedef ContainerType::iterator SetIterator;
   static ContainerType changes;
+
+  template <typename Rule> ContainerType getAllChangesWitRule(const Rule& rule)
+  {
+    ContainerType changesFiltered;
+    std::copy_if(changes.begin(), changes.end(), std::back_inserter(changesFiltered), [=](const Element &element)
+    {
+      return rule(element);
+    });
+    return changesFiltered;
+  }
 };
 
 }
-
-#endif // ONEMINUTECHANGESSET_H

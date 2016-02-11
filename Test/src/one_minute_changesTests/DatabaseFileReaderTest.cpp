@@ -77,8 +77,8 @@ TEST_F(DatabaseFileReaderTest, DatabaseFileReaderShouldReadVer1File)
   EXPECT_NO_THROW(Chord::getChords().at("B"));
   EXPECT_TRUE(expectTabPrintedAsReadedWithoutCarriageReturn(format_tab1, Chord::getChord("A").getTab()));
   EXPECT_TRUE(expectTabPrintedAsReadedWithoutCarriageReturn(format_tab2, Chord::getChord("B").getTab()));
-  EXPECT_EQ(omcs.findFirstWorstChordByBestResult()->bestResult().first, 2);
-  EXPECT_EQ(omcs.findFirstWorstChordByLastResult()->lastResult().first, 1);
+  EXPECT_EQ(omcs.findFirstWorstChangeByBestResult()->bestResult().first, 2);
+  EXPECT_EQ(omcs.findFirstWorstChangeByLastResult()->lastResult().first, 1);
 }
 
 TEST_F(DatabaseFileReaderTest, DatabaseFileReaderShouldReadVer1FileInDosFormat)
@@ -119,6 +119,6 @@ TEST_F(DatabaseFileReaderTest, DatabaseFileReaderShouldReadVer1FileInDosFormat)
   EXPECT_NO_THROW(Chord::getChords().at("B"));
   EXPECT_TRUE(expectTabPrintedAsReadedWithoutCarriageReturn(format_tab1, Chord::getChord("A").getTab()));
   EXPECT_TRUE(expectTabPrintedAsReadedWithoutCarriageReturn(format_tab2, Chord::getChord("B").getTab()));
-  EXPECT_EQ(omcs.findFirstWorstChordByBestResult()->bestResult().first, 2);
-  EXPECT_EQ(omcs.findFirstWorstChordByLastResult()->lastResult().first, 1);
+  EXPECT_EQ(omcs.findFirstWorstChangeByBestResult()->bestResult().first, 2);
+  EXPECT_EQ(omcs.findFirstWorstChangeByLastResult()->lastResult().first, 1);
 }

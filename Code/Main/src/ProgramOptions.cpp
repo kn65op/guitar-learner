@@ -13,8 +13,8 @@ const std::string ProgramOptions::REMOVE_CHORD_STRING = "remove_chord";
 const std::string ProgramOptions::ADD_ONE_MINUTE_CHANGE_STRING = "add_one_minute_change";
 const std::string ProgramOptions::LIST_BEST_RESULTS_STRING = "list_best_results";
 const std::string ProgramOptions::LIST_LAST_RESULTS_STRING = "list_last_results";
-const std::string ProgramOptions::SHOW_WORST_CHANGE_STRING = "show_worst_change";
-const std::string ProgramOptions::SHOW_LAST_RESULT_WORST_CHANGE_STRING = "show_last_result_worst_change";
+const std::string ProgramOptions::SHOW_WORST_CHANGES_STRING = "show_worst_changes";
+const std::string ProgramOptions::SHOW_LAST_RESULT_WORST_CHANGES_STRING = "show_last_result_worst_changes";
 const std::string ProgramOptions::CONFIG  = "config";
 
 ProgramOptions::ProgramOptions(int argc, const char *argv[]) :
@@ -31,8 +31,8 @@ ProgramOptions::ProgramOptions(int argc, const char *argv[]) :
           (ADD_ONE_MINUTE_CHANGE_STRING.c_str(), "Add one minute change. Specify chords and result when prompted")
           (LIST_BEST_RESULTS_STRING.c_str(), "List all one minute changes with best result")
           (LIST_LAST_RESULTS_STRING.c_str(), "List all one minute changes with last result")
-          (SHOW_WORST_CHANGE_STRING.c_str(), "Show worst change based on best result")
-          (SHOW_LAST_RESULT_WORST_CHANGE_STRING.c_str(), "Show worst change based on last result")
+          (SHOW_WORST_CHANGES_STRING.c_str(), "Show worst changes based on best result")
+          (SHOW_LAST_RESULT_WORST_CHANGES_STRING.c_str(), "Show worst changes based on last result")
           (CONFIG.c_str(), "Configuration, for possible parameters read man_config.txt:\nparameter value - sets value to parameter, \nparameter - read parameter");
   try
   {
@@ -97,11 +97,11 @@ void ProgramOptions::findFirstCommand()
   {
     command = CommandType::ListLastResults;
   }
-  else if(vm.count(SHOW_LAST_RESULT_WORST_CHANGE_STRING))
+  else if(vm.count(SHOW_LAST_RESULT_WORST_CHANGES_STRING))
   {
     command = CommandType::ShowLastResultWorstChange;
   }
-  else if(vm.count(SHOW_WORST_CHANGE_STRING))
+  else if(vm.count(SHOW_WORST_CHANGES_STRING))
   {
     command = CommandType::ShowWorstChange;
   }
