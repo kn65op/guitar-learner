@@ -37,6 +37,7 @@ struct OneMinuteChangesSetTest : public Test
   {
     auto omc = std::make_shared<OneMinuteChangeMock>();
     omcs.add(omc);
+    EXPECT_CALL(*omc, hasResults()).WillRepeatedly(Return(true));
     EXPECT_CALL(*omc, lastResult()).WillRepeatedly(Return(std::make_pair(lastResult, getNow())));
     return omc;
   }
@@ -54,6 +55,7 @@ struct OneMinuteChangesSetTest : public Test
   {
     auto omc = std::make_shared<OneMinuteChangeMock>();
     omcs.add(omc);
+    EXPECT_CALL(*omc, hasResults()).WillRepeatedly(Return(false));
     EXPECT_CALL(*omc, lastResult()).WillRepeatedly(Throw(OneMinuteChanges::IOneMinuteChange::NoResultsError{"no res"}));
     return omc;
   }
