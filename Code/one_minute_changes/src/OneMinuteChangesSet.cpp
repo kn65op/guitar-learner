@@ -46,17 +46,21 @@ OneMinuteChangesSet::Element OneMinuteChangesSet::findFirstWorstChangeByBestResu
 
   const auto changesWithResults = getAllChangesWithResults();
 
-  return *std::min_element(changesWithResults.begin(), changesWithResults.end(), [](const Element &first, const Element & second)
+  auto worstChange = std::min_element(changesWithResults.begin(), changesWithResults.end(), [](const Element &first, const Element & second)
   {
     return first->bestResult() < second->bestResult();
   });
+  if (worstChange != changesWithResults.end())
+  {
+    return *worstChange;
+  }
+  throw Exceptions::NoValidElements();
 }
 
 OneMinuteChangesSet::ContainerType OneMinuteChangesSet::findWorstChangesByBestResult() const
 {
   auto worstValue = findFirstWorstChangeByBestResult()->bestResult().first;
-  OneMinuteChangesSet::ContainerType worstChanges;
-  std::copy_if(changes.begin(), changes.end(), std::back_inserter(worstChanges), [=](const Element &element)
+  return getAllChangesWitRule([=](const Element &element)
   {
     try
     {
@@ -67,7 +71,6 @@ OneMinuteChangesSet::ContainerType OneMinuteChangesSet::findWorstChangesByBestRe
       return false;
     }
   });
-  return worstChanges;
 }
 
 OneMinuteChangesSet::Element OneMinuteChangesSet::findFirstWorstChangeByLastResult() const
@@ -80,10 +83,15 @@ OneMinuteChangesSet::Element OneMinuteChangesSet::findFirstWorstChangeByLastResu
 
   const auto changesWithResults = getAllChangesWithResults();
 
-  return *std::min_element(changesWithResults.begin(), changesWithResults.end(), [](const Element &first, const Element & second)
+  auto worstChange = std::min_element(changesWithResults.begin(), changesWithResults.end(), [](const Element &first, const Element & second)
   {
     return first->lastResult() < second->lastResult();
   });
+  if (worstChange != changesWithResults.end())
+  {
+    return *worstChange;
+  }
+  throw Exceptions::NoValidElements();
 }
 
 OneMinuteChangesSet::ContainerType OneMinuteChangesSet::findWorstChangesByLastResult() const

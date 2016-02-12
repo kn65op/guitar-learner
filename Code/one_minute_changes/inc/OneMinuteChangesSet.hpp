@@ -20,6 +20,8 @@ struct NoChangeFound
 {
 };
 
+struct NoValidElements
+{};
 }
 
 class OneMinuteChangesSet
@@ -49,6 +51,7 @@ public:
   iterator_type end() const;
 
 private:
+
   typedef ContainerType::iterator SetIterator;
   static ContainerType changes;
 

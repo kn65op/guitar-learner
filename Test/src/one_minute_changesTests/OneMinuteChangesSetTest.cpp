@@ -343,3 +343,17 @@ TEST_F(OneMinuteChangesSetTest, BeginAndEndShouldBeValid)
   omcs.add(omc1);
   EXPECT_NE(omcs.end(), omcs.begin());
 }
+
+TEST_F(OneMinuteChangesSetTest, ShouldReturnEmptyWorstResultsWhenThereIsNoResultForEachChange)
+{
+  auto omc = addOmcToSetWithoutBestResult();
+
+  EXPECT_THROW(omcs.findWorstChangesByBestResult(), OneMinuteChanges::Exceptions::NoValidElements);
+}
+
+TEST_F(OneMinuteChangesSetTest, ShouldReturnEmptyLastWorstResultsWhenThereIsNoResultForEachChange)
+{
+  auto omc = addOmcToSetWithoutLastResult();
+
+  EXPECT_THROW(omcs.findWorstChangesByLastResult(), OneMinuteChanges::Exceptions::NoValidElements);
+}

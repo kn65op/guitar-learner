@@ -39,6 +39,11 @@ void ShowWorstChanges::process(const CommandOptions &)
     std::cout << "There is no one minute changes in database at all\n";
     LOG << "There is no changes at all, exiting";
   }
+  catch (OneMinuteChanges::Exceptions::NoValidElements&)
+  {
+    std::cout << "There is no one minute changes with results in database at all\n";
+    LOG << "There is no changes with results at all, exiting";
+  }
   catch (Chord::NotExist &ex)
   {
     std::cout << "Invalid database\n";
