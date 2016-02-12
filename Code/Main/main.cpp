@@ -46,9 +46,9 @@ int main(int argc, const char *argv[])
   LOG<< "Creating DatabaseFileWriter";
   Guitar::DatabaseFileWriterVer1 writer;
   LOG<< "Created DatabaseFileWriter";
-  LOG<< "Opening default file";
+  LOG<< "Opening database file";
   std::ofstream out(db_filename);
-  LOG<< "Opened default file";
+  LOG<< "Opened database  file";
   LOG<< "Creating One minute changes set";
   OneMinuteChanges::OneMinuteChangesSet omc;
   LOG<< "Created One minute changes set";
