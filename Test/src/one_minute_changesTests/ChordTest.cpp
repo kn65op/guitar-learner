@@ -124,3 +124,16 @@ TEST_F(ChordTest, ChordShouldThrowWhenTryToRemoveNotExistingChordAndSomeOtherCho
   EXPECT_THROW(Chord::removeChord("b"), Chord::NotExist);
   ASSERT_EQ(1, Chord::size());
 }
+
+TEST_F(ChordTest, ShouldNotFindNotExistingChord)
+{
+  EXPECT_FALSE(Chord::exists("A"));
+}
+
+TEST_F(ChordTest, whenAvailable_ShouldFindNotExistingChord)
+{
+  Tab tab;
+  Chord::add("A", tab);
+  EXPECT_TRUE(Chord::exists("A"));
+  EXPECT_FALSE(Chord::exists("W"));
+}

@@ -82,3 +82,8 @@ void Chord::removeChord(const ChordNameType &name)
     throw NotExist{name};
   }
 }
+
+bool Chord::exists(const ChordNameType &name)
+{
+  return chords.find(name) != chords.end();
+}

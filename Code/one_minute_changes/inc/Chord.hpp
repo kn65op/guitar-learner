@@ -37,6 +37,7 @@ public:
   static void changeChords(const ChordNameType &name, const Tab &tab);
   static const Chord& getChord(const ChordNameType &name);
   static void removeChord(const ChordNameType &name);
+  static bool exists(const ChordNameType &name);
 
   Chord() = delete;
   ChordNameType getName() const;
