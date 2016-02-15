@@ -1,7 +1,5 @@
 #include <one_minute_changes/inc/DatabaseFileReader.hpp>
 #include <one_minute_changes/inc/DatabaseFileWriterVer1.hpp>
-#include <fstream>
-#include <cstdlib>
 #include "Main/inc/ProgramOptions.h"
 #include "inc/CommandFactory.h"
 #include "main_helper.hpp"
