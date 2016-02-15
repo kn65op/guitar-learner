@@ -1,4 +1,4 @@
-#include "../inc/DatabaseFileWriterVer1.hpp"
+#include "DatabaseFileWriterVer1.hpp"
 #include <TLogger.h>
 
 using Guitar::DatabaseFileWriterVer1;

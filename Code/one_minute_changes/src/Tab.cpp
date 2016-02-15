@@ -1,4 +1,4 @@
-#include "../inc/Tab.hpp"
+#include "Tab.hpp"
 
 #include <string>
 #include <sstream>

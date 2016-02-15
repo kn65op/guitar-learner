@@ -1,4 +1,4 @@
-#include "../inc/ChangeChordCommand.h"
+#include "ChangeChordCommand.h"
 
 #include <iostream>
 #include <TLogger.h>

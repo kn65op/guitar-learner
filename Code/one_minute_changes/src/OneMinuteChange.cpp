@@ -1,4 +1,4 @@
-#include "../inc/OneMinuteChange.hpp"
+#include "OneMinuteChange.hpp"
 #include <algorithm>
 #include <sstream>
 #include "TLogger.h"

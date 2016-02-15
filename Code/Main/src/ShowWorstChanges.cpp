@@ -1,4 +1,4 @@
-#include "../inc/ShowWorstChanges.h"
+#include "ShowWorstChanges.h"
 
 #include <TLogger.h>
 #include <iostream>

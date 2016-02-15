@@ -1,4 +1,4 @@
-#include "../inc/ProgramOptions.h"
+#include "ProgramOptions.h"
 #include <sstream>
 #include <TLogger.h>
 

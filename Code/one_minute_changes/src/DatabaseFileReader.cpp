@@ -1,5 +1,5 @@
-#include "../inc/DatabaseFileReader.hpp"
-#include "../inc/DatabaseFileReaderVer1.hpp"
+#include "DatabaseFileReader.hpp"
+#include "DatabaseFileReaderVer1.hpp"
 #include <memory>
 #include "Stream/StreamOperations.hpp"
 

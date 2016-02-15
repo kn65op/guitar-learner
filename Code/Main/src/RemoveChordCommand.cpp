@@ -1,4 +1,4 @@
-#include "../inc/RemoveChordCommand.h"
+#include "RemoveChordCommand.h"
 #include <one_minute_changes/inc/OneMinuteChangesSet.hpp>
 #include <TLogger.h>
 

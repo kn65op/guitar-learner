@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../inc/GuitarLearnerCommand.h"
+#include "GuitarLearnerCommand.h"
 
 namespace Main
 {

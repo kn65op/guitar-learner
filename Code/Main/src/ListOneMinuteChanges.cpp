@@ -1,4 +1,4 @@
-#include "../inc/ListOneMinuteChanges.h"
+#include "ListOneMinuteChanges.h"
 
 #include <TLogger.h>
 #include <one_minute_changes/inc/OneMinuteChangesSet.hpp>

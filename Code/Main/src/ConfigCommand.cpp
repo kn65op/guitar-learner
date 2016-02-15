@@ -1,4 +1,4 @@
-#include "../inc/ConfigCommand.h"
+#include "ConfigCommand.h"
 #include <Configuration/EqualsSignConfiguratorIO.hpp>
 #include <OS/Factory.hpp>
 #include <fstream>

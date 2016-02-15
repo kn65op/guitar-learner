@@ -1,4 +1,4 @@
-#include "../inc/AddChordCommand.h"
+#include "AddChordCommand.h"
 #include <one_minute_changes/inc/Chord.hpp>
 #include <one_minute_changes/inc/Tab.hpp>
 #include <one_minute_changes/inc/OneMinuteChangesSet.hpp>

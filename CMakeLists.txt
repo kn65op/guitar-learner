@@ -46,7 +46,7 @@ link_directories(${CMAKE_BINARY_DIR}/${THELPER_LIBRARIES_DIR})
 #includes
 include_directories(${SRC_DIR})
 include_directories(${SRC_DIR}/one_minute_changes/inc/)
-include_directories(${SRC_DIR}/main/inc)
+include_directories(${SRC_DIR}/Main/inc/)
 include_directories(${TLOGGER_INCLUDE_DIRS})
 include_directories(${THELPER_INCLUDE_DIRS})
 include_directories(${Boost_INCLUDE_DIR})

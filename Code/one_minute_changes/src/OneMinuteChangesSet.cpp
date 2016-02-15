@@ -1,4 +1,4 @@
-#include "../inc/OneMinuteChangesSet.hpp"
+#include "OneMinuteChangesSet.hpp"
 
 #include <algorithm>
 #include <tuple>

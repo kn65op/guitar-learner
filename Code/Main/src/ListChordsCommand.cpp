@@ -1,4 +1,4 @@
-#include "../inc/ListChordsCommand.h"
+#include "ListChordsCommand.h"
 #include <one_minute_changes/inc/Chord.hpp>
 #include <iostream>
 

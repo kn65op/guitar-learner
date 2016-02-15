@@ -1,4 +1,4 @@
-#include "../inc/Chord.hpp"
+#include "Chord.hpp"
 
 using Guitar::Chord;
 using Guitar::ITab;
