@@ -42,7 +42,8 @@ void ListOneMinuteChanges::process(const CommandOptions &)
       LOG << "Getting inforamtion about change result";
       const auto result = getResultFromChange(omc);
       auto datetime = std::chrono::system_clock::to_time_t(result.second);
-      std::cout << result.first << "\ton: " << date.getDateStringInFormat(std::localtime(&datetime), "%c") << "\n";
+      const FillWith spacesBeforeResult{4};
+      std::cout << spacesBeforeResult << result.first << "   on: " << date.getDateStringInFormat(std::localtime(&datetime), "%c") << "\n";
     }
     catch (const OneMinuteChanges::IOneMinuteChange::NoResultsError noResults)
     {
