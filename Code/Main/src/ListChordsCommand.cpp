@@ -14,6 +14,9 @@ void ListChordsCommand::process(const Main::GuitarLearnerCommand::CommandOptions
   }
   else
   {
-
+    for (const auto & chordName : chords)
+    {
+      showChord(Chord::getChord(chordName));
+    }
   }
 }

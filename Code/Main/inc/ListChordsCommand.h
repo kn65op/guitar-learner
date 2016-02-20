@@ -14,13 +14,13 @@ private:
     std::cout << "Number of chords: " << chords.size() << "\n\n";
     for (auto chord : chords)
     {
-      showChord(chord);
+      showChord(chord.second);
     }
   }
 
   template <typename Chord> void showChord(const Chord & chord)
   {
-      std::cout << "Chord: " << chord.second << "\n";
+      std::cout << "Chord: " << chord << "\n";
   }
 };
 }
