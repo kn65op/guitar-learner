@@ -4,12 +4,16 @@
 
 using namespace Main;
 
-void ListChordsCommand::process(const Main::GuitarLearnerCommand::CommandOptions&)
+void ListChordsCommand::process(const Main::GuitarLearnerCommand::CommandOptions& chords)
 {
   using Guitar::Chord;
-  std::cout << "Number of chords: " << Chord::size() << "\n\n";
-  for (auto c : Chord::getChords())
+
+  if (chords.empty())
   {
-    std::cout << "Chord: " << c.second << "\n";
+    showChords(Chord::getChords());
+  }
+  else
+  {
+
   }
 }
