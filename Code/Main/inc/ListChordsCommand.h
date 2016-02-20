@@ -12,10 +12,15 @@ private:
   template <typename Chords> void showChords(const Chords &chords)
   {
     std::cout << "Number of chords: " << chords.size() << "\n\n";
-    for (auto c : chords)
+    for (auto chord : chords)
     {
-      std::cout << "Chord: " << c.second << "\n";
+      showChord(chord);
     }
+  }
+
+  template <typename Chord> void showChord(const Chord & chord)
+  {
+      std::cout << "Chord: " << chord.second << "\n";
   }
 };
 }
