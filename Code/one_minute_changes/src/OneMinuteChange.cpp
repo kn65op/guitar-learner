@@ -71,7 +71,6 @@ OneMinuteChange::ResultType OneMinuteChange::lastResult() const
 
 std::string OneMinuteChange::getFirstChord() const
 {
-  LOG << "Results: " << results.size();
   return first;
 }
 

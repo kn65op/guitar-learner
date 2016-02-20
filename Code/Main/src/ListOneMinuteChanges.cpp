@@ -7,6 +7,21 @@
 
 using namespace Main;
 
+struct FillWith
+{
+  FillWith(unsigned size) :size(size)
+  {
+  }
+
+  const unsigned size;
+  const char character = ' ';
+};
+
+std::ostream& operator<<(std::ostream & out, FillWith filler)
+{
+  return out << std::setw(filler.size) << std::setfill(filler.character);
+}
+
 void ListOneMinuteChanges::process(const CommandOptions &)
 {
   LOG << "Start listing best one minute changes";
@@ -18,7 +33,10 @@ void ListOneMinuteChanges::process(const CommandOptions &)
   std::cout << "Changes:\n";
   for (const auto & omc : omc_set)
   {
-    std::cout << "Change: " << omc->getFirstChord() << "->" << omc->getSecondChord() << ":\t";
+    const std::string delimeter = "\t";
+    const FillWith spacesBeforeChord{6};
+    const FillWith spacesBeforeArrow{4};
+    std::cout << "Change: " << spacesBeforeChord << omc->getFirstChord() << spacesBeforeArrow << "->" << spacesBeforeChord << omc->getSecondChord() << " :  ";
     try
     {
       LOG << "Getting inforamtion about change result";
