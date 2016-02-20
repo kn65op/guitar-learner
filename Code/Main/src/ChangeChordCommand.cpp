@@ -27,8 +27,8 @@ void ChangeChordCommand::process(const CommandOptions &)
     }
     catch (Chord::NotExist &ex)
     {
-      LOG << "Not found chord: " << ex.getChord();
-      std::cout << "Not existing chord: " << ex.getChord() << "\n";
+      LOG << ex.what();
+      std::cout << ex.what() << "\n";
     }
     catch(NoChordPassed &)
     {

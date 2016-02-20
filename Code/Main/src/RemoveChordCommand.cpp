@@ -32,8 +32,8 @@ void RemoveChordCommand::process(const GuitarLearnerCommand::CommandOptions& )
     }
     catch (Chord::NotExist &ex)
     {
-      std::cout << "Trying to remove not existing chord: " << ex.getChord() << "\n";
-      LOG << "Trying to remove not existing chord: " << ex.getChord();
+      LOG << ex.what();
+      std::cout << ex.what() << "\n";
     }
   }
 }

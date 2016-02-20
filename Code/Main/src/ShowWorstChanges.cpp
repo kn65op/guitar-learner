@@ -46,8 +46,8 @@ void ShowWorstChanges::process(const CommandOptions &)
   }
   catch (Chord::NotExist &ex)
   {
-    std::cout << "Invalid database\n";
-    LOG << "Problem with database: missing chord " << ex.getChord();
+    std::cout << "Invalid database, please contact author\n";
+    LOG << "Problem with database: missing chord " << ex.what();
   }
 
 }

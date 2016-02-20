@@ -1,6 +1,7 @@
 #include "ListChordsCommand.h"
 #include <one_minute_changes/inc/Chord.hpp>
 #include <iostream>
+#include "TLogger.h"
 
 using namespace Main;
 
@@ -16,7 +17,15 @@ void ListChordsCommand::process(const Main::GuitarLearnerCommand::CommandOptions
   {
     for (const auto & chordName : chords)
     {
-      showChord(Chord::getChord(chordName));
+      try
+      {
+        showChord(Chord::getChord(chordName));
+      }
+      catch(Chord::NotExist &ex)
+      {
+        std::cout << ex.what() << "\n";
+        LOG << ex.what();
+      }
     }
   }
 }

@@ -2,6 +2,7 @@
 
 #include <string>
 #include <map>
+#include <stdexcept>
 #include "Tab.hpp"
 
 namespace Guitar
@@ -16,17 +17,11 @@ public:
   class AlreadyAdded
   {
   };
-  class NotExist
+  class NotExist : public std::logic_error
   {
-    ChordNameType chord;
   public:
-    NotExist(const ChordNameType &name) :
-        chord(name)
+    NotExist(const ChordNameType &name) : std::logic_error("There is no chord: " + name)
     {
-    }
-    ChordNameType getChord() const noexcept
-    {
-      return chord;
     }
   };
 
