@@ -42,6 +42,7 @@ public:
 
   ContainerType findWorstChangesByBestResult() const;
   ContainerType findWorstChangesByLastResult() const;
+  ContainerType findChangesWithoutResults() const;
   Element findFirstWorstChangeByBestResult() const;
   Element findFirstWorstChangeByLastResult() const;
   Element getChange(const Guitar::Chord::ChordNameType &first_chord,

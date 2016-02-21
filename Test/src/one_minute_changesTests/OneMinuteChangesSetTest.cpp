@@ -24,6 +24,14 @@ struct OneMinuteChangesSetTest : public Test
     return std::chrono::system_clock::now();
   }
 
+  std::shared_ptr<OneMinuteChangeMock> addOmcToSetWithResult()
+  {
+    auto omc = std::make_shared<OneMinuteChangeMock>();
+    omcs.add(omc);
+    EXPECT_CALL(*omc, hasResults()).WillRepeatedly(Return(true));
+    return omc;
+  }
+
   std::shared_ptr<OneMinuteChangeMock> addOmcToSetWithoutResult()
   {
     auto omc = std::make_shared<OneMinuteChangeMock>();
@@ -34,18 +42,14 @@ struct OneMinuteChangesSetTest : public Test
 
   std::shared_ptr<OneMinuteChangeMock> addOmcToSetWithBestResult(OneMinuteChangeMock::ResultValue bestResult)
   {
-    auto omc = std::make_shared<OneMinuteChangeMock>();
-    omcs.add(omc);
-    EXPECT_CALL(*omc, hasResults()).WillRepeatedly(Return(true));
+    auto omc = addOmcToSetWithResult();
     EXPECT_CALL(*omc, bestResult()).WillRepeatedly(Return(std::make_pair(bestResult, getNow())));
     return omc;
   }
 
   std::shared_ptr<OneMinuteChangeMock> addOmcToSetWithLastResult(OneMinuteChangeMock::ResultValue lastResult)
   {
-    auto omc = std::make_shared<OneMinuteChangeMock>();
-    omcs.add(omc);
-    EXPECT_CALL(*omc, hasResults()).WillRepeatedly(Return(true));
+    auto omc = addOmcToSetWithResult();
     EXPECT_CALL(*omc, lastResult()).WillRepeatedly(Return(std::make_pair(lastResult, getNow())));
     return omc;
   }
@@ -360,4 +364,32 @@ TEST_F(OneMinuteChangesSetTest, ShouldReturnEmptyLastWorstResultsWhenThereIsNoRe
   auto omc = addOmcToSetWithoutLastResult();
 
   EXPECT_THROW(omcs.findWorstChangesByLastResult(), OneMinuteChanges::Exceptions::NoValidElements);
+}
+
+TEST_F(OneMinuteChangesSetTest, ShouldReturnEmptySetWhenThereIsNoChanges)
+{
+  EXPECT_TRUE(omcs.findChangesWithoutResults().empty());
+}
+
+TEST_F(OneMinuteChangesSetTest, ShouldReturnEmptySetWhenThereAreChangesWithResults)
+{
+  addOmcToSetWithResult();
+  EXPECT_TRUE(omcs.findChangesWithoutResults().empty());
+}
+
+TEST_F(OneMinuteChangesSetTest, ShouldReturnNotEmptySetWhenThereAreChangesWithoutResults)
+{
+  addOmcToSetWithoutResult();
+  EXPECT_FALSE(omcs.findChangesWithoutResults().empty());
+}
+
+TEST_F(OneMinuteChangesSetTest, ShouldReturnTwoElementsWhenThereAreTwoChangesWithoutResults)
+{
+  addOmcToSetWithoutResult();
+  addOmcToSetWithResult();
+  addOmcToSetWithResult();
+  addOmcToSetWithoutResult();
+  addOmcToSetWithResult();
+  constexpr auto expectedSize = 2u;
+  EXPECT_EQ(expectedSize, omcs.findChangesWithoutResults().size());
 }

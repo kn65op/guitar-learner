@@ -161,3 +161,13 @@ OneMinuteChangesSet::ContainerType OneMinuteChangesSet::getAllChangesWithResults
     return change->hasResults();
   });
 }
+
+OneMinuteChangesSet::ContainerType OneMinuteChangesSet::findChangesWithoutResults() const
+{
+  ContainerType changesWithoutResults;
+  std::copy_if(changes.begin(), changes.end(), std::back_inserter(changesWithoutResults), [](const auto &change)
+  {
+    return !change->hasResults();
+  });
+  return changesWithoutResults;
+}
