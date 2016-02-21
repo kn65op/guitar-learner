@@ -24,7 +24,7 @@ std::ostream& operator<<(std::ostream & out, FillWith filler)
 
 void ListOneMinuteChanges::process(const CommandOptions &)
 {
-  LOG << "Start listing best one minute changes";
+  LOG << "Start listing one minute changes";
   using OneMinuteChanges::OneMinuteChangesSet;
 
   OneMinuteChangesSet omc_set;

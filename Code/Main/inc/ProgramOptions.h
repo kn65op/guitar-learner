@@ -18,7 +18,8 @@ enum class CommandType
   ListLastResults,
   ShowLastResultWorstChange,
   ShowWorstChange,
-  Config
+  Config,
+  ShowChangesWithoutResults
 };
 
 class ProgramOptions
@@ -47,5 +48,6 @@ private:
   const static std::string SHOW_WORST_CHANGES_STRING;
   const static std::string SHOW_LAST_RESULT_WORST_CHANGES_STRING;
   const static std::string CONFIG;
+  const static std::string SHOW_CHANGES_WITHOUT_RESULTS;
 };
 }

@@ -51,6 +51,8 @@ public:
       return std::make_unique<ShowWorstChanges>(ShowWorstChanges::ResultType::LAST);
     case CommandType::Config:
       return std::make_unique<ConfigCommand>();
+    case CommandType::ShowChangesWithoutResults:
+      return std::make_unique<ListOneMinuteChanges>(ListOneMinuteChanges::ResultType::NO_RESULTS);
     }
     throw InvalidCommand();
   }

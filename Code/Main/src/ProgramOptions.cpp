@@ -16,6 +16,7 @@ const std::string ProgramOptions::LIST_LAST_RESULTS_STRING = "list_last_results"
 const std::string ProgramOptions::SHOW_WORST_CHANGES_STRING = "show_worst_changes";
 const std::string ProgramOptions::SHOW_LAST_RESULT_WORST_CHANGES_STRING = "show_last_result_worst_changes";
 const std::string ProgramOptions::CONFIG  = "config";
+const std::string ProgramOptions::SHOW_CHANGES_WITHOUT_RESULTS  = "show_changes_without_results";
 
 ProgramOptions::ProgramOptions(int argc, const char *argv[]) :
     description("Options"),
@@ -33,7 +34,8 @@ ProgramOptions::ProgramOptions(int argc, const char *argv[]) :
           (LIST_LAST_RESULTS_STRING.c_str(), "List all one minute changes with last result")
           (SHOW_WORST_CHANGES_STRING.c_str(), "Show worst changes based on best result")
           (SHOW_LAST_RESULT_WORST_CHANGES_STRING.c_str(), "Show worst changes based on last result")
-          (CONFIG.c_str(), "Configuration, for possible parameters read man_config.txt:\nparameter value - sets value to parameter, \nparameter - read parameter");
+          (CONFIG.c_str(), "Configuration, for possible parameters read man_config.txt:\nparameter value - sets value to parameter, \nparameter - read parameter")
+          (SHOW_CHANGES_WITHOUT_RESULTS.c_str(), "Show changes that has not result recorded");
   try
   {
     store(parse_command_line(argc, argv, description), vm);
@@ -108,5 +110,9 @@ void ProgramOptions::findFirstCommand()
   else if(vm.count(CONFIG))
   {
     command = CommandType::Config;
+  }
+  else if(vm.count(SHOW_CHANGES_WITHOUT_RESULTS))
+  {
+    command = CommandType::ShowChangesWithoutResults;
   }
 }

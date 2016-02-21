@@ -1,7 +1,7 @@
 #pragma once
 
 #include "GuitarLearnerCommand.h"
-#include <one_minute_changes/inc/OneMinuteChangesSet.hpp>
+#include "one_minute_changes/inc/OneMinuteChangesSet.hpp"
 
 namespace Main
 {
@@ -12,7 +12,8 @@ public:
   enum class ResultType
   {
     BEST,
-    LAST
+    LAST,
+    NO_RESULTS
   };
   ListOneMinuteChanges(ResultType result) : result_type(result)
   {}
