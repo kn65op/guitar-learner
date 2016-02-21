@@ -24,6 +24,14 @@ struct OneMinuteChangesSetTest : public Test
     return std::chrono::system_clock::now();
   }
 
+  std::shared_ptr<OneMinuteChangeMock> addOmcToSetWithoutResult()
+  {
+    auto omc = std::make_shared<OneMinuteChangeMock>();
+    omcs.add(omc);
+    EXPECT_CALL(*omc, hasResults()).WillRepeatedly(Return(false));
+    return omc;
+  }
+
   std::shared_ptr<OneMinuteChangeMock> addOmcToSetWithBestResult(OneMinuteChangeMock::ResultValue bestResult)
   {
     auto omc = std::make_shared<OneMinuteChangeMock>();
@@ -44,18 +52,14 @@ struct OneMinuteChangesSetTest : public Test
 
   std::shared_ptr<OneMinuteChangeMock> addOmcToSetWithoutBestResult()
   {
-    auto omc = std::make_shared<OneMinuteChangeMock>();
-    omcs.add(omc);
-    EXPECT_CALL(*omc, hasResults()).WillRepeatedly(Return(false));
+    auto omc = addOmcToSetWithoutResult();
     EXPECT_CALL(*omc, bestResult()).WillRepeatedly(Throw(OneMinuteChanges::IOneMinuteChange::NoResultsError{"no res"}));
     return omc;
   }
 
   std::shared_ptr<OneMinuteChangeMock> addOmcToSetWithoutLastResult()
   {
-    auto omc = std::make_shared<OneMinuteChangeMock>();
-    omcs.add(omc);
-    EXPECT_CALL(*omc, hasResults()).WillRepeatedly(Return(false));
+    auto omc = addOmcToSetWithoutResult();
     EXPECT_CALL(*omc, lastResult()).WillRepeatedly(Throw(OneMinuteChanges::IOneMinuteChange::NoResultsError{"no res"}));
     return omc;
   }
