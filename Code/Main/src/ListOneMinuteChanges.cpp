@@ -22,6 +22,14 @@ std::ostream& operator<<(std::ostream & out, FillWith filler)
   return out << std::setw(filler.size) << std::setfill(filler.character);
 }
 
+void showChange(std::ostream& out, const auto& change)
+{
+    const std::string delimeter = "\t";
+    const FillWith spacesBeforeChord{6};
+    const FillWith spacesBeforeArrow{4};
+    out << "Change: " << spacesBeforeChord << change->getFirstChord() << spacesBeforeArrow << "->" << spacesBeforeChord << change->getSecondChord() << " :  ";
+}
+
 void ListOneMinuteChanges::process(const CommandOptions &)
 {
   switch (result_type)
@@ -36,7 +44,7 @@ void ListOneMinuteChanges::process(const CommandOptions &)
 
 void ListOneMinuteChanges::showChangesWithResults() const
 {
-  LOG << "Start listing one minute changes";
+  LOG << "Start listing one minute changes with results";
   using OneMinuteChanges::OneMinuteChangesSet;
 
   OneMinuteChangesSet omc_set;
@@ -45,10 +53,7 @@ void ListOneMinuteChanges::showChangesWithResults() const
   std::cout << "Changes:\n";
   for (const auto & omc : omc_set)
   {
-    const std::string delimeter = "\t";
-    const FillWith spacesBeforeChord{6};
-    const FillWith spacesBeforeArrow{4};
-    std::cout << "Change: " << spacesBeforeChord << omc->getFirstChord() << spacesBeforeArrow << "->" << spacesBeforeChord << omc->getSecondChord() << " :  ";
+    showChange(std::cout, omc);
     try
     {
       LOG << "Getting inforamtion about change result";
@@ -73,7 +78,22 @@ OneMinuteChanges::OneMinuteChange::ResultType ListOneMinuteChanges::getResultFro
       return change->bestResult();
     case ResultType::LAST:
       return change->lastResult();
+    case ResultType::NO_RESULTS:
+      break;
   }
   LOG << "Invalid result type";
   throw std::runtime_error{"Invalid ResultType"};
+}
+
+void ListOneMinuteChanges::showChangesWithoutResults() const
+{
+  LOG << "Start listing one minute changes without results";
+  OneMinuteChanges::OneMinuteChangesSet omc_set;
+
+  for (const auto & omc : omc_set.findChangesWithoutResults())
+  {
+    LOG << "Showing change";
+    showChange(std::cout, omc);
+    std::cout << "has no results\n";
+  }
 }
