@@ -24,6 +24,18 @@ std::ostream& operator<<(std::ostream & out, FillWith filler)
 
 void ListOneMinuteChanges::process(const CommandOptions &)
 {
+  switch (result_type)
+  {
+    case ResultType::BEST:
+    case ResultType::LAST:
+      return showChangesWithResults();
+    case ResultType::NO_RESULTS:
+      return showChangesWithoutResults();
+  }
+}
+
+void ListOneMinuteChanges::showChangesWithResults() const
+{
   LOG << "Start listing one minute changes";
   using OneMinuteChanges::OneMinuteChangesSet;
 

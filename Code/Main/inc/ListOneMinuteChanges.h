@@ -22,6 +22,8 @@ private:
   const ResultType result_type;
 
   OneMinuteChanges::OneMinuteChange::ResultType getResultFromChange(const OneMinuteChanges::OneMinuteChangesSet::Element& change) const;
+  void showChangesWithResults() const;
+  void showChangesWithoutResults() const;
 };
 
 }
