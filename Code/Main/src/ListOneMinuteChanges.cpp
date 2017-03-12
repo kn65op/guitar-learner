@@ -86,7 +86,7 @@ void ListOneMinuteChanges::showChangesWithResults() const
       LOG << "Getting inforamtion about change result";
       const auto result = getResultFromChange(omc);
       auto datetime = std::chrono::system_clock::to_time_t(result.second);
-      const FillWith spacesBeforeResult{4};
+      const FillWith spacesBeforeResult{16};
       std::cout << spacesBeforeResult << getColoredResult(result.first)
                 << "   on: " << date.getDateStringInFormat(std::localtime(&datetime), "%c") << "\n";
     }
