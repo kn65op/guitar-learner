@@ -16,14 +16,17 @@ public:
     NO_RESULTS
   };
   ListOneMinuteChanges(ResultType result) : result_type(result)
-  {}
+  {
+  }
   virtual void process(const CommandOptions &) override;
+
 private:
   const ResultType result_type;
 
-  OneMinuteChanges::OneMinuteChange::ResultType getResultFromChange(const OneMinuteChanges::OneMinuteChangesSet::Element& change) const;
+  OneMinuteChanges::OneMinuteChange::ResultType
+  getResultFromChange(const OneMinuteChanges::OneMinuteChangesSet::Element &change) const;
   void showChangesWithResults() const;
   void showChangesWithoutResults() const;
+  std::string getColoredResult(int result) const;
 };
-
 }
