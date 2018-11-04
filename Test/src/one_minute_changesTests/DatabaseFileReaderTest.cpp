@@ -72,7 +72,7 @@ TEST_F(DatabaseFileReaderTest, DatabaseFileReaderShouldReadVer1File)
   DatabaseFileReader::read(oss);
   OneMinuteChangesSet omcs;
 
-  EXPECT_EQ(2, Chord::size());
+  EXPECT_EQ(2u, Chord::size());
   EXPECT_NO_THROW(Chord::getChords().at("A"));
   EXPECT_NO_THROW(Chord::getChords().at("B"));
   EXPECT_TRUE(expectTabPrintedAsReadedWithoutCarriageReturn(format_tab1, Chord::getChord("A").getTab()));
@@ -114,7 +114,7 @@ TEST_F(DatabaseFileReaderTest, DatabaseFileReaderShouldReadVer1FileInDosFormat)
   DatabaseFileReader::read(oss);
   OneMinuteChangesSet omcs;
 
-  EXPECT_EQ(2, Chord::size());
+  EXPECT_EQ(2u, Chord::size());
   EXPECT_NO_THROW(Chord::getChords().at("A"));
   EXPECT_NO_THROW(Chord::getChords().at("B"));
   EXPECT_TRUE(expectTabPrintedAsReadedWithoutCarriageReturn(format_tab1, Chord::getChord("A").getTab()));

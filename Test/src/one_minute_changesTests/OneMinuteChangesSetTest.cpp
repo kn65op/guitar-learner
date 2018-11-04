@@ -115,7 +115,7 @@ TEST_F(OneMinuteChangesSetTest, FindWorstChangeShouldReturnElementWithLowestMaxV
 TEST_F(OneMinuteChangesSetTest, FindWorstChangesShouldReturnOneElementWhenThereIsOnlyOneChange)
 {
   constexpr OneMinuteChangeMock::ResultValue bestResult{1};
-  constexpr int numberOfWorstChanges = 1;
+  constexpr auto numberOfWorstChanges = 1u;
   auto omc = addOmcToSetWithBestResult(bestResult);
 
   const auto worstChanges = omcs.findWorstChangesByBestResult();
@@ -127,7 +127,7 @@ TEST_F(OneMinuteChangesSetTest, FindWorstChangesShouldReturnTwoElementWhenThereI
 {
   constexpr OneMinuteChangeMock::ResultValue bestResultMax{3};
   constexpr OneMinuteChangeMock::ResultValue bestResultMin{1};
-  constexpr int numberOfWorstChanges = 2;
+  constexpr auto numberOfWorstChanges = 2u;
   auto firstOmc = addOmcToSetWithBestResult(bestResultMin);
   addOmcToSetWithBestResult(bestResultMax);
   auto secondOmc = addOmcToSetWithBestResult(bestResultMin);
@@ -140,7 +140,7 @@ TEST_F(OneMinuteChangesSetTest, FindWorstChangesShouldReturnTwoElementWhenThereI
 TEST_F(OneMinuteChangesSetTest, WhenNotAllResultsHasBestResultsShouldReturnWorstChangeWithResult)
 {
   constexpr OneMinuteChangeMock::ResultValue bestResultMin{1};
-  constexpr int numberOfWorstChanges = 1;
+  constexpr auto numberOfWorstChanges = 1u;
   auto firstOmc = addOmcToSetWithBestResult(bestResultMin);
   auto secondOmc = addOmcToSetWithoutBestResult();
 
@@ -152,7 +152,7 @@ TEST_F(OneMinuteChangesSetTest, WhenNotAllResultsHasBestResultsShouldReturnWorst
 TEST_F(OneMinuteChangesSetTest, FindLastWorstChangesShouldReturnOneElementWhenThereIsOnlyOneChange)
 {
   constexpr OneMinuteChangeMock::ResultValue lastResult{1};
-  constexpr int numberOfWorstChanges = 1;
+  constexpr auto numberOfWorstChanges = 1u;
   auto omc = addOmcToSetWithLastResult(lastResult);
 
   const auto worstChanges = omcs.findWorstChangesByLastResult();
@@ -164,7 +164,7 @@ TEST_F(OneMinuteChangesSetTest, FindLastWorstChangesShouldReturnTwoElementWhenTh
 {
   constexpr OneMinuteChangeMock::ResultValue lastResultMax{3};
   constexpr OneMinuteChangeMock::ResultValue lastResultMin{1};
-  constexpr int numberOfWorstChanges = 2;
+  constexpr auto numberOfWorstChanges = 2u;
   auto firstOmc = addOmcToSetWithLastResult(lastResultMin);
   addOmcToSetWithLastResult(lastResultMax);
   auto secondOmc = addOmcToSetWithLastResult(lastResultMin);
@@ -177,7 +177,7 @@ TEST_F(OneMinuteChangesSetTest, FindLastWorstChangesShouldReturnTwoElementWhenTh
 TEST_F(OneMinuteChangesSetTest, WhenNotAllResultsHasResultsShouldReturnWorstLastChangeWithResult)
 {
   constexpr OneMinuteChangeMock::ResultValue lastResultMin{1};
-  constexpr int numberOfWorstChanges = 1;
+  constexpr auto numberOfWorstChanges = 1u;
   auto firstOmc = addOmcToSetWithLastResult(lastResultMin);
   auto secondOmc = addOmcToSetWithoutLastResult();
 

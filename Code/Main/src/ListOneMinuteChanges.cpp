@@ -22,7 +22,7 @@ std::ostream &operator<<(std::ostream &out, FillWith filler)
   return out << std::setw(filler.size) << std::setfill(filler.character);
 }
 
-void showChange(std::ostream &out, const auto &change)
+void showChange(std::ostream &out, const OneMinuteChanges::IOneMinuteChange *change)
 {
   const std::string delimeter = "\t";
   const FillWith spacesBeforeChord{6};
@@ -80,7 +80,7 @@ void ListOneMinuteChanges::showChangesWithResults() const
   std::cout << "Changes:\n";
   for (const auto &omc : omc_set)
   {
-    showChange(std::cout, omc);
+    showChange(std::cout, omc.get());
     try
     {
       LOG << "Getting inforamtion about change result";
@@ -122,7 +122,7 @@ void ListOneMinuteChanges::showChangesWithoutResults() const
   for (const auto &omc : omc_set.findChangesWithoutResults())
   {
     LOG << "Showing change";
-    showChange(std::cout, omc);
+    showChange(std::cout, omc.get());
     std::cout << "has no results\n";
   }
 }
