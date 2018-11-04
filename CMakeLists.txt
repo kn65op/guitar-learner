@@ -15,7 +15,7 @@ FIND_PACKAGE( TLogger REQUIRED PATHS TLogger)
 FIND_PACKAGE( THelper REQUIRED PATHS THelper)
 
 #compiler options
-set(CMAKE_CXX_FLAGS "-std=c++14")
+set(CMAKE_CXX_FLAGS "-std=c++2a")
 
 if ("${NO_COVERAGE}" STREQUAL "true")
 	set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG}")
