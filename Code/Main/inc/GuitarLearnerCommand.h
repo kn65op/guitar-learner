@@ -14,10 +14,7 @@ namespace Main
 class GuitarLearnerCommand
 {
 public:
-
-  virtual ~GuitarLearnerCommand()
-  {
-  }
+  virtual ~GuitarLearnerCommand() = default;
   typedef std::vector<std::string> CommandOptions;
 
   virtual void process(const CommandOptions &) = 0;

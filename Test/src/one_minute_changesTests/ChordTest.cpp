@@ -18,23 +18,23 @@ struct ChordTest : public Test
 
 TEST_F(ChordTest, ChordListShouldBeEmptyAtStart)
 {
-  EXPECT_EQ(Chord::size(), 0);
+  EXPECT_EQ(Chord::size(), 0u);
 }
 
 TEST_F(ChordTest, AfterChordAdditionShouldHaveOneElement)
 {
   Tab tab;
   Chord::add("A", tab);
-  EXPECT_EQ(1, Chord::size());
+  EXPECT_EQ(1u, Chord::size());
 }
 
 TEST_F(ChordTest, AfterClearChordsShouldBeEmpty)
 {
   Tab tab;
   Chord::add("A", tab);
-  ASSERT_EQ(1, Chord::size());
+  ASSERT_EQ(1u, Chord::size());
   Chord::clear();
-  EXPECT_EQ(0, Chord::size());
+  EXPECT_EQ(0u, Chord::size());
 }
 
 TEST_F(ChordTest, GetChordsShouldReturnAddedChords)
@@ -42,7 +42,7 @@ TEST_F(ChordTest, GetChordsShouldReturnAddedChords)
   Tab tab;
   Chord::add("A", tab);
   Chord::add("B", tab);
-  ASSERT_EQ(2, Chord::size());
+  ASSERT_EQ(2u, Chord::size());
 
   Chord::Chords chords = Chord::getChords();
   EXPECT_EQ("A", chords.at("A").getName());
@@ -106,9 +106,9 @@ TEST_F(ChordTest, ChordShouldRemoveChordWhenPrompted)
 {
   Tab tab;
   Chord::add("A", tab);
-  ASSERT_EQ(1, Chord::size());
+  ASSERT_EQ(1u, Chord::size());
   Chord::removeChord("A");
-  EXPECT_EQ(0, Chord::size());
+  EXPECT_EQ(0u, Chord::size());
 }
 
 TEST_F(ChordTest, ChordShouldThrowWhenTryToRemoveNotExistingChord)
@@ -120,9 +120,9 @@ TEST_F(ChordTest, ChordShouldThrowWhenTryToRemoveNotExistingChordAndSomeOtherCho
 {
   Tab tab;
   Chord::add("A", tab);
-  ASSERT_EQ(1, Chord::size());
+  ASSERT_EQ(1u, Chord::size());
   EXPECT_THROW(Chord::removeChord("b"), Chord::NotExist);
-  ASSERT_EQ(1, Chord::size());
+  ASSERT_EQ(1u, Chord::size());
 }
 
 TEST_F(ChordTest, ShouldNotFindNotExistingChord)

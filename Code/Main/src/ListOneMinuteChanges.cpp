@@ -90,7 +90,7 @@ void ListOneMinuteChanges::showChangesWithResults() const
       std::cout << spacesBeforeResult << getColoredResult(result.first)
                 << "   on: " << date.getDateStringInFormat(std::localtime(&datetime), "%c") << "\n";
     }
-    catch (const OneMinuteChanges::IOneMinuteChange::NoResultsError noResults)
+    catch (const OneMinuteChanges::IOneMinuteChange::NoResultsError& noResults)
     {
       LOG << "Change has no results";
       std::cout << "No results for this change\n";
